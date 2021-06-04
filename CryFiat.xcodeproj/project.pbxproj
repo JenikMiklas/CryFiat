@@ -1,0 +1,401 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7F66A241265E6A6800B891DD /* CryptoAssetSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66A240265E6A6800B891DD /* CryptoAssetSelection.swift */; };
+		7F66A243265E901500B891DD /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66A242265E901500B891DD /* AppViewModel.swift */; };
+		7F66A245265ED84B00B891DD /* CryptoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66A244265ED84B00B891DD /* CryptoDetail.swift */; };
+		7F782F1326579EC700A358D2 /* CryFiatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F782F1226579EC700A358D2 /* CryFiatApp.swift */; };
+		7F782F1526579EC700A358D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F782F1426579EC700A358D2 /* ContentView.swift */; };
+		7F782F1726579EC900A358D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F782F1626579EC900A358D2 /* Assets.xcassets */; };
+		7F782F1A26579EC900A358D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F782F1926579EC900A358D2 /* Preview Assets.xcassets */; };
+		7F782F252657A1BB00A358D2 /* APICryptoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F782F242657A1BB00A358D2 /* APICryptoService.swift */; };
+		7F782F272657C30600A358D2 /* DataStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F782F262657C30600A358D2 /* DataStoreModel.swift */; };
+		7F782F292657EAF400A358D2 /* CryptocurrencyStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F782F282657EAF400A358D2 /* CryptocurrencyStructures.swift */; };
+		7F946CF826590DD9004DBB35 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F946CF726590DD9004DBB35 /* FileManager+Extension.swift */; };
+		7F946CFA265915ED004DBB35 /* JsonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F946CF9265915ED004DBB35 /* JsonFile.swift */; };
+		7FDB1F8B266005A200403135 /* DetailContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDB1F8A266005A200403135 /* DetailContent.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7F66A240265E6A6800B891DD /* CryptoAssetSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoAssetSelection.swift; sourceTree = "<group>"; };
+		7F66A242265E901500B891DD /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		7F66A244265ED84B00B891DD /* CryptoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetail.swift; sourceTree = "<group>"; };
+		7F782F0F26579EC700A358D2 /* CryFiat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryFiat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F782F1226579EC700A358D2 /* CryFiatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryFiatApp.swift; sourceTree = "<group>"; };
+		7F782F1426579EC700A358D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7F782F1626579EC900A358D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7F782F1926579EC900A358D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7F782F1B26579EC900A358D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F782F242657A1BB00A358D2 /* APICryptoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICryptoService.swift; sourceTree = "<group>"; };
+		7F782F262657C30600A358D2 /* DataStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreModel.swift; sourceTree = "<group>"; };
+		7F782F282657EAF400A358D2 /* CryptocurrencyStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocurrencyStructures.swift; sourceTree = "<group>"; };
+		7F946CF726590DD9004DBB35 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		7F946CF9265915ED004DBB35 /* JsonFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFile.swift; sourceTree = "<group>"; };
+		7FDB1F8A266005A200403135 /* DetailContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContent.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7F782F0C26579EC700A358D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7F782F0626579EC700A358D2 = {
+			isa = PBXGroup;
+			children = (
+				7F782F1226579EC700A358D2 /* CryFiatApp.swift */,
+				7F782F1126579EC700A358D2 /* CryFiat */,
+				7F782F1026579EC700A358D2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7F782F1026579EC700A358D2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7F782F0F26579EC700A358D2 /* CryFiat.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7F782F1126579EC700A358D2 /* CryFiat */ = {
+			isa = PBXGroup;
+			children = (
+				7F946CF626590D93004DBB35 /* Extensions */,
+				7F782F232657A09500A358D2 /* ViewModels */,
+				7F782F222657A04D00A358D2 /* Models */,
+				7F782F212657A03C00A358D2 /* Views */,
+				7F782F1626579EC900A358D2 /* Assets.xcassets */,
+				7F782F1B26579EC900A358D2 /* Info.plist */,
+				7F782F1826579EC900A358D2 /* Preview Content */,
+			);
+			path = CryFiat;
+			sourceTree = "<group>";
+		};
+		7F782F1826579EC900A358D2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				7F782F1926579EC900A358D2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7F782F212657A03C00A358D2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7F782F1426579EC700A358D2 /* ContentView.swift */,
+				7F66A244265ED84B00B891DD /* CryptoDetail.swift */,
+				7FDB1F8A266005A200403135 /* DetailContent.swift */,
+				7F66A240265E6A6800B891DD /* CryptoAssetSelection.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7F782F222657A04D00A358D2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7F782F242657A1BB00A358D2 /* APICryptoService.swift */,
+				7F782F282657EAF400A358D2 /* CryptocurrencyStructures.swift */,
+				7F946CF9265915ED004DBB35 /* JsonFile.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7F782F232657A09500A358D2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7F782F262657C30600A358D2 /* DataStoreModel.swift */,
+				7F66A242265E901500B891DD /* AppViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7F946CF626590D93004DBB35 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7F946CF726590DD9004DBB35 /* FileManager+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7F782F0E26579EC700A358D2 /* CryFiat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F782F1E26579EC900A358D2 /* Build configuration list for PBXNativeTarget "CryFiat" */;
+			buildPhases = (
+				7F782F0B26579EC700A358D2 /* Sources */,
+				7F782F0C26579EC700A358D2 /* Frameworks */,
+				7F782F0D26579EC700A358D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CryFiat;
+			productName = CryFiat;
+			productReference = 7F782F0F26579EC700A358D2 /* CryFiat.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7F782F0726579EC700A358D2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					7F782F0E26579EC700A358D2 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+				};
+			};
+			buildConfigurationList = 7F782F0A26579EC700A358D2 /* Build configuration list for PBXProject "CryFiat" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7F782F0626579EC700A358D2;
+			productRefGroup = 7F782F1026579EC700A358D2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7F782F0E26579EC700A358D2 /* CryFiat */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7F782F0D26579EC700A358D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F782F1A26579EC900A358D2 /* Preview Assets.xcassets in Resources */,
+				7F782F1726579EC900A358D2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7F782F0B26579EC700A358D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F782F252657A1BB00A358D2 /* APICryptoService.swift in Sources */,
+				7F782F1526579EC700A358D2 /* ContentView.swift in Sources */,
+				7F66A243265E901500B891DD /* AppViewModel.swift in Sources */,
+				7F66A245265ED84B00B891DD /* CryptoDetail.swift in Sources */,
+				7F782F1326579EC700A358D2 /* CryFiatApp.swift in Sources */,
+				7F782F292657EAF400A358D2 /* CryptocurrencyStructures.swift in Sources */,
+				7F66A241265E6A6800B891DD /* CryptoAssetSelection.swift in Sources */,
+				7F782F272657C30600A358D2 /* DataStoreModel.swift in Sources */,
+				7F946CF826590DD9004DBB35 /* FileManager+Extension.swift in Sources */,
+				7FDB1F8B266005A200403135 /* DetailContent.swift in Sources */,
+				7F946CFA265915ED004DBB35 /* JsonFile.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7F782F1C26579EC900A358D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7F782F1D26579EC900A358D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7F782F1F26579EC900A358D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"CryFiat/Preview Content\"";
+				DEVELOPMENT_TEAM = J57U5HP4K7;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = CryFiat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cz.jenikmiklas.CryFiat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7F782F2026579EC900A358D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"CryFiat/Preview Content\"";
+				DEVELOPMENT_TEAM = J57U5HP4K7;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = CryFiat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cz.jenikmiklas.CryFiat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7F782F0A26579EC700A358D2 /* Build configuration list for PBXProject "CryFiat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F782F1C26579EC900A358D2 /* Debug */,
+				7F782F1D26579EC900A358D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F782F1E26579EC900A358D2 /* Build configuration list for PBXNativeTarget "CryFiat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F782F1F26579EC900A358D2 /* Debug */,
+				7F782F2026579EC900A358D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7F782F0726579EC700A358D2 /* Project object */;
+}
