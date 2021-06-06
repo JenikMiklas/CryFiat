@@ -11,6 +11,7 @@ import SwiftUI
 
 class DataStoreModel: ObservableObject {
 
+    @Published var tokenFind = ""
     @Published var tokenList = [Cryptocurrency]()
     @Published var tokenDetails = [CryptoTokenDetail]() {
         didSet {
@@ -94,6 +95,16 @@ class DataStoreModel: ObservableObject {
                 }
                 .store(in: &subscriptions)
         }
+        
+        $tokenFind
+            .debounce(for: .seconds(1), scheduler: RunLoop.main)
+            .removeDuplicates()
+            .sink { _ in
+                
+            } receiveValue: { [unowned self] token in
+                self.findCryptoToken(token: token)
+            }
+            .store(in: &subscriptions)
     }
     
     public func findCryptoToken(token t: String) {

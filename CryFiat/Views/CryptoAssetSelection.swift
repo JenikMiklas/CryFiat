@@ -19,11 +19,8 @@ struct CryptoAssetSelection: View {
             VStack {
                 //if search {
                     HStack {
-                        TextField("search token", text: $token)
+                        TextField("search token", text: $cfVM.tokenFind)
                             .textFieldStyle(PlainTextFieldStyle())
-                            .onChange(of: token) {
-                                cfVM.findCryptoToken(token: $0)
-                            }
                         Button(action: {
                            cfVM.findCryptoToken(token: token)
                         }, label: {
