@@ -47,7 +47,18 @@ public class APICryptoService {
             .map { $0.data }
             .decode(type: CryptoTokenDetail.self, decoder: JSONDecoder())
             .mapError({ error in
-                APIError.error("Decoding error")
+                APIError.error("Decoding error CryptoTokenDetail")
+            })
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchCryptocurrenciesMarket(for id: String) -> AnyPublisher<[CryptoTokenMarket], APIError> {
+        return URLSession.shared.dataTaskPublisher(for: URLRequest(url: URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=\(id)&order=market_cap_desc&per_page=100&page=1&sparkline=false")!))
+            .map { return $0.data }
+            .decode(type: [CryptoTokenMarket].self, decoder: JSONDecoder())
+            .mapError({ error in
+                APIError.error("Decoding error Market CryptoTokenMarket")
             })
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

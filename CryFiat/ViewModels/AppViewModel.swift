@@ -12,12 +12,17 @@ class AppViewModel: ObservableObject {
     @Published var cryptoTokens = [Cryptocurrency]() {
         didSet {
             storeCryptoTokens()
+            self.downloadMarket()
         }
     }
+    
+    @Published var cryptoTokensMarket = [CryptoTokenMarket]()
     
     private var loadCryptoTokens = Just(FileManager.dataDirURL.appendingPathComponent(JsonFile.userCryptoData.rawValue))
     
     private var subscriptions = Set<AnyCancellable>()
+    
+    private let APIService = APICryptoService.shared
     
     init() {
         loadCryptoTokens
@@ -34,9 +39,34 @@ class AppViewModel: ObservableObject {
                 case .failure(_):
                     print("Tokens Not loaded")
                 }
-            } receiveValue: { data in
+            } receiveValue: {[unowned self] data in
                 print(data)
                 self.cryptoTokens = data
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func downloadMarket() {
+        cryptoTokens.publisher
+            .flatMap { [unowned self] in
+                self.APIService.fetchCryptocurrenciesMarket(for: $0.id)
+            }
+            .scan([CryptoTokenMarket]()) { (all, next) in
+                all + next
+            }
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("Fetch success")
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { [unowned self] data in
+                self.cryptoTokensMarket = data
+                self.cryptoTokensMarket.sort {
+                    $0.marketCapRank < $1.marketCapRank
+                }
+                print(data)
             }
             .store(in: &subscriptions)
     }

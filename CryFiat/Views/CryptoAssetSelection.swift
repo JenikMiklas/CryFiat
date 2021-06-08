@@ -14,37 +14,35 @@ struct CryptoAssetSelection: View {
     @State private var token = ""
     @Binding var sheet: Bool
     
+    let columns: [GridItem] = Array(repeating: .init(.fixed(10)), count: 1)
+    
     var body: some View {
         NavigationView {
             VStack {
-                //if search {
-                    HStack {
-                        TextField("search token", text: $cfVM.tokenFind)
-                            .textFieldStyle(PlainTextFieldStyle())
-                        Button(action: {
-                           cfVM.findCryptoToken(token: token)
-                        }, label: {
-                            Image(systemName: "magnifyingglass.circle.fill")
-                                .font(.title)
-                        })
-                    }
-                    .padding()
-                //}
+                HStack {
+                    TextField("search token", text: $cfVM.tokenFind)
+                        .textFieldStyle(PlainTextFieldStyle())
+                    Button(action: {
+                       cfVM.findCryptoToken(token: token)
+                    }, label: {
+                        Image(systemName: "magnifyingglass.circle.fill")
+                            .font(.title)
+                    })
+                }
+                .padding()
                 if !cfVM.tokenList.isEmpty {
-                    List(cfVM.tokenList.indices, id: \.self) { index in
-                        if cfVM.tokenList.count == cfVM.tokenImages.count {
-                            TokenCard(cfVM: cfVM, token: cfVM.tokenList[index], image: cfVM.tokenImages[index])
-                        } else {
-                            TokenCard(cfVM: cfVM, token: cfVM.tokenList[index], image: UIImage(systemName: "questionmark")!)
+                    ScrollView {
+                        LazyVGrid(columns: columns) {
+                            ForEach(cfVM.tokenList.indices, id: \.self) { index in
+                                if cfVM.tokenList.count == cfVM.tokenImages.count {
+                                    TokenCard(cfVM: cfVM, tokenDetail: cfVM.tokenDetails[index], token: cfVM.tokenList[index], image: cfVM.tokenImages[index])
+                                } else if cfVM.tokenList.count == cfVM.tokenImages.count {
+                                    TokenCard(cfVM: cfVM, tokenDetail: cfVM.tokenDetails[index], token: cfVM.tokenList[index], image: UIImage(systemName: "questionmark")!)
+                                }
+                            }
                         }
                     }
-                    .listStyle(PlainListStyle())
-                }/* else {
-                    List(cfVM.tokens, id: \.id) { token in
-                        TokenCard(token: token)
-                    }
-                    .listStyle(PlainListStyle())
-                }*/
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing: Button(action: { sheet.toggle() }, label: {
@@ -78,37 +76,71 @@ struct TokenCard: View {
     
     @EnvironmentObject var appVM: AppViewModel
     @ObservedObject var cfVM: DataStoreModel
+    let tokenDetail: CryptoTokenDetail
     let token: Cryptocurrency
     let image: UIImage
     
     var body: some View {
-        Button(action: {
-            //cfVM.getCryptoDetail(cryptoID: token.id)
-            if !appVM.cryptoTokens.contains(token) {
-                appVM.cryptoTokens.append(token)
-                cfVM.saveImageToken(image: image, name: token.id)
-            }
-        }, label: {
-            HStack {
-                Image(uiImage:image)
-                    .resizable()
-                    .frame(width: 75, height: 75)
-                    .padding(.trailing, 10)
-                Spacer()
-                VStack(alignment: .center, spacing: 11) {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(.secondary.opacity(0.5))
+            VStack {
+                HStack {
                     Text(token.name)
                         .font(.title)
-                    HStack(alignment: .lastTextBaseline) {
-                        Text("id:")
-                            .font(.caption)
-                        Text(token.id)
-                        Text("symbol:")
-                            .font(.caption)
-                        Text(token.symbol)
-                    }.font(.title3)
+                        .padding(.leading)
+                    Button(action: {
+                        //cfVM.getCryptoDetail(cryptoID: token.id)
+                        if !appVM.cryptoTokens.contains(token) {
+                                        appVM.cryptoTokens.append(token)
+                                        cfVM.saveImageToken(image: image, name: token.id)
+                        }
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                    })
+                    Spacer()
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                        .cornerRadius(50)
+                        .padding([.top, .trailing])
                 }
-                Spacer()
-            }
-        })
+                .foregroundColor(.primary)
+                VStack {
+                    Text("\(tokenDetail.description.en)")
+                        .font(.caption2)
+                        .padding([.leading, .trailing])
+                }
+                HStack(alignment: .firstTextBaseline, spacing: 0) {
+                  
+                    Text("\(tokenDetail.marketCapRank ?? 0)")
+                        .font(.title2)
+                        .bold()
+                        .padding(.leading)
+                    Text("#")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                    
+                    Spacer()
+                    Text(tokenDetail.symbol)
+                        .font(.title2)
+                        .bold()
+                        .foregroundColor(.primary)
+                        .padding()
+                }
+                
+                HStack {
+                    Text("updated:")
+                    Text("\(tokenDetail.lastUpdated)")
+                }
+                .font(.caption2)
+                .padding(.bottom, 5)
+        }
+    }
+        .padding()
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.6)
     }
 }
