@@ -28,7 +28,7 @@ struct ContentView: View {
                 } else {
                     ScrollView {
                             LazyVGrid(columns: columns) {
-                                ForEach(appVM.cryptoTokensMarket, id: \.id) { token in
+                                ForEach(appVM.cryptoTokens, id: \.id) { token in
                                     Card(card: token)
                                 }
                             }
@@ -49,8 +49,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let vm = AppViewModel()
-        vm.cryptoTokensMarket = [CryptoTokenMarket(id: "ripple", symbol: "xrp", name: "XRP", currentPrice: 0.707961, marketCapRank: 7, priceChange24h: -0.08380801, priceChangePercentage24h: -10.58491, lastUpdated: "2021-06-08T11:23:41.422Z")]
         return ContentView()
             .environmentObject(AppViewModel())
     }
@@ -58,8 +56,7 @@ struct ContentView_Previews: PreviewProvider {
 
 struct Card: View {
     
-    let card: CryptoTokenMarket
-    
+    let card: Cryptocurrency
     var body: some View {
         /*HStack(alignment: .center, spacing: 15) {
             
@@ -70,66 +67,56 @@ struct Card: View {
             Text(card.symbol.uppercased())
                 .font(.title2)
         }*/
-       
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(.secondary.opacity(0.5))
-                VStack {
-                    HStack {
-                        Spacer()
-                        Image(uiImage: FileManager.default.loadImage(name: card.id))
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 50, height: 50)
-                            .cornerRadius(50)
-                            .padding([.top, .trailing])
-                    }
-                    .foregroundColor(.primary)
-                    VStack {
-                        Text("\(card.currentPrice) €")
-                            .font(.largeTitle)
-                            .bold()
-                        HStack {
-                            Text("last 24h:")
-                                .font(.caption2)
-                          
-                                    Text("\(card.priceChangePercentage24h) %")
-                                        .font(.caption)
-                                    Text("\(card.priceChange24h) €")
-                                        .font(.caption)
-                            
-                                
-                         
-                        }
-                    }
-                    HStack(alignment: .firstTextBaseline, spacing: 0) {
-                      
-                        Text("\(card.marketCapRank)")
-                            .font(.title2)
-                            .bold()
-                            .padding(.leading)
-                        Text("#")
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                        
-                        Spacer()
-                        Text(card.symbol)
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(.primary)
-                            .padding()
-                    }
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(.secondary.opacity(0.5))
+            VStack {
+                HStack {
+                    Text(card.name)
+                        .font(.title)
+                        .padding(.leading)
+                    Spacer()
+                    Image(uiImage: FileManager.default.loadImage(name: card.id))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                        .cornerRadius(50)
+                        .padding([.top, .trailing])
+                }
+                .foregroundColor(.primary)
+               /* VStack {
+                    Text("\(card.description.en)")
+                        .font(.caption2)
+                        .padding([.leading, .trailing])
+                }*/
+                /*HStack(alignment: .firstTextBaseline, spacing: 0) {
+                  
+                    Text("\(card.marketCapRank ?? 0)")
+                        .font(.title2)
+                        .bold()
+                        .padding(.leading)
+                    Text("#")
+                        .font(.caption)
+                        .fontWeight(.semibold)
                     
-                    HStack {
-                        Text("updated:")
-                        Text("\(card.lastUpdated)")
-                    }
-                    .font(.caption2)
-                    .padding(.bottom, 5)
-            }
+                    Spacer()
+                    Text(card.symbol)
+                        .font(.title2)
+                        .bold()
+                        .foregroundColor(.primary)
+                        .padding()
+                }*/
+                
+               /* HStack {
+                    Text("updated:")
+                    Text("\(card.lastUpdated)")
+                }
+                .font(.caption2)
+                .padding(.bottom, 5)*/
         }
-            .padding()
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.6)
+    }
+        .padding()
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/1.6)
             
     }
 }

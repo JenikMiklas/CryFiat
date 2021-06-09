@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct CryFiatApp: App {
+    
+    @StateObject var appVM = AppViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(AppViewModel())
+                .environmentObject(appVM)
         }
     }
 }

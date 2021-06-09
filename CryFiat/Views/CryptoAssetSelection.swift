@@ -22,6 +22,9 @@ struct CryptoAssetSelection: View {
                 HStack {
                     TextField("search token", text: $cfVM.tokenFind)
                         .textFieldStyle(PlainTextFieldStyle())
+                        .onChange(of: cfVM.tokenFind, perform: { _ in
+                            cfVM.errorMessage = ""
+                        })
                     Button(action: {
                        cfVM.findCryptoToken(token: token)
                     }, label: {
@@ -34,11 +37,19 @@ struct CryptoAssetSelection: View {
                     ScrollView {
                         LazyVGrid(columns: columns) {
                             ForEach(cfVM.tokenList.indices, id: \.self) { index in
-                                if cfVM.tokenList.count == cfVM.tokenImages.count {
-                                    TokenCard(cfVM: cfVM, tokenDetail: cfVM.tokenDetails[index], token: cfVM.tokenList[index], image: cfVM.tokenImages[index])
-                                } else if cfVM.tokenList.count == cfVM.tokenImages.count {
-                                    TokenCard(cfVM: cfVM, tokenDetail: cfVM.tokenDetails[index], token: cfVM.tokenList[index], image: UIImage(systemName: "questionmark")!)
-                                }
+                                if (cfVM.tokenList.count == cfVM.tokenDetails.count) {
+                                    if (cfVM.tokenList.count == cfVM.tokenImages.count) {
+                                        TokenCard(appVM: appVM, cfVM: cfVM, tokenDetail: cfVM.tokenDetails[index], token: cfVM.tokenList[index], image: cfVM.tokenImages[index])
+                                    } else {
+                                        TokenCard(appVM: appVM, cfVM: cfVM, tokenDetail: cfVM.tokenDetails[index], token: cfVM.tokenList[index], image: UIImage(systemName: "questionmark.circle")!)
+                                    }
+                                } else if cfVM.errorMessage == "" {
+                                    ProgressView("Loading")
+                                        .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                 } else {
+                                    Text("Error")
+                                        .frame(width: 200, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                 }
                             }
                         }
                     }
@@ -74,7 +85,7 @@ struct CryptoAssetSelection_Previews: PreviewProvider {
 
 struct TokenCard: View {
     
-    @EnvironmentObject var appVM: AppViewModel
+   @ObservedObject var appVM: AppViewModel
     @ObservedObject var cfVM: DataStoreModel
     let tokenDetail: CryptoTokenDetail
     let token: Cryptocurrency
@@ -86,14 +97,14 @@ struct TokenCard: View {
                 .foregroundColor(.secondary.opacity(0.5))
             VStack {
                 HStack {
-                    Text(token.name)
+                    Text(tokenDetail.name)
                         .font(.title)
                         .padding(.leading)
                     Button(action: {
                         //cfVM.getCryptoDetail(cryptoID: token.id)
                         if !appVM.cryptoTokens.contains(token) {
                                         appVM.cryptoTokens.append(token)
-                                        cfVM.saveImageToken(image: image, name: token.id)
+                                        cfVM.saveImageToken(image: image, name: tokenDetail.id)
                         }
                     }, label: {
                         Image(systemName: "plus.circle.fill")

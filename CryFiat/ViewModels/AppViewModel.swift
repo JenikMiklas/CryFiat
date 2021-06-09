@@ -12,11 +12,11 @@ class AppViewModel: ObservableObject {
     @Published var cryptoTokens = [Cryptocurrency]() {
         didSet {
             storeCryptoTokens()
-            self.downloadMarket()
+            //self.downloadMarket()
         }
     }
     
-    @Published var cryptoTokensMarket = [CryptoTokenMarket]()
+   // @Published var cryptoTokensDetail = [CryptoTokenDetail]()
     
     private var loadCryptoTokens = Just(FileManager.dataDirURL.appendingPathComponent(JsonFile.userCryptoData.rawValue))
     
@@ -45,7 +45,7 @@ class AppViewModel: ObservableObject {
             }
             .store(in: &subscriptions)
     }
-    
+    /*
     private func downloadMarket() {
         cryptoTokens.publisher
             .flatMap { [unowned self] in
@@ -69,7 +69,7 @@ class AppViewModel: ObservableObject {
                 print(data)
             }
             .store(in: &subscriptions)
-    }
+    }*/
     
     private func storeCryptoTokens() {
        let encoder = JSONEncoder()

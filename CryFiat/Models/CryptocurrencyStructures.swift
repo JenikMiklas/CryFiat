@@ -58,6 +58,7 @@ struct CryptoTokenMarket: Codable {
 
 
 struct CryptoTokenDetail: Codable {
+    
  
 
   struct Localization: Codable {

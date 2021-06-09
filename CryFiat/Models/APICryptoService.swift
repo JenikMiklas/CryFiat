@@ -71,7 +71,7 @@ public class APICryptoService {
                UIImage(data: $0)
             }
             .mapError({ error in
-                APIError.error("Decoding error")
+                APIError.error("Decoding error Image")
             })
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

@@ -12,6 +12,7 @@ import SwiftUI
 class DataStoreModel: ObservableObject {
 
     @Published var tokenFind = ""
+    @Published var errorMessage = ""
     @Published var tokenList = [Cryptocurrency]()
     @Published var tokenDetails = [CryptoTokenDetail]() {
         didSet {
@@ -118,12 +119,13 @@ class DataStoreModel: ObservableObject {
             .scan([CryptoTokenDetail]()) { (all, next) in
                 all + [next]
             }
-            .sink { completion in
+            .sink { [unowned self] completion in
                 switch completion {
                 case .finished:
                     print("Fetch success")
                 case .failure(let error):
                     print(error)
+                    self.errorMessage = error.localizedDescription
                 }
             } receiveValue: { [unowned self] data in
                 self.tokenDetails = data
