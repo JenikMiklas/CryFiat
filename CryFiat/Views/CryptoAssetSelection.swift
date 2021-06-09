@@ -39,9 +39,9 @@ struct CryptoAssetSelection: View {
                             ForEach(cfVM.tokenList.indices, id: \.self) { index in
                                 if (cfVM.tokenList.count == cfVM.tokenDetails.count) {
                                     if (cfVM.tokenList.count == cfVM.tokenImages.count) {
-                                        TokenCard(appVM: appVM, cfVM: cfVM, tokenDetail: cfVM.tokenDetails[index], token: cfVM.tokenList[index], image: cfVM.tokenImages[index])
+                                        TokenCard(cfVM: cfVM, tokenDetail: cfVM.tokenDetails[index], token: cfVM.tokenList[index], image: cfVM.tokenImages[index])
                                     } else {
-                                        TokenCard(appVM: appVM, cfVM: cfVM, tokenDetail: cfVM.tokenDetails[index], token: cfVM.tokenList[index], image: UIImage(systemName: "questionmark.circle")!)
+                                        TokenCard(cfVM: cfVM, tokenDetail: cfVM.tokenDetails[index], token: cfVM.tokenList[index], image: UIImage(systemName: "questionmark.circle")!)
                                     }
                                 } else if cfVM.errorMessage == "" {
                                     ProgressView("Loading")
@@ -85,7 +85,7 @@ struct CryptoAssetSelection_Previews: PreviewProvider {
 
 struct TokenCard: View {
     
-   @ObservedObject var appVM: AppViewModel
+    @EnvironmentObject var appVM: AppViewModel
     @ObservedObject var cfVM: DataStoreModel
     let tokenDetail: CryptoTokenDetail
     let token: Cryptocurrency
