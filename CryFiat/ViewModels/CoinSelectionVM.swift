@@ -13,6 +13,7 @@ final class CoinSelectionVM: ObservableObject {
     
     private let coinMarketService = CoinMarketService.shared
     private var cancellable = Set<AnyCancellable>()
+    private var page = 1
     
     init() {
         coinMarketService.$marketCoins
@@ -20,5 +21,10 @@ final class CoinSelectionVM: ObservableObject {
                 self.marketCoins = marketCoins
             }
             .store(in: &cancellable)
+    }
+    
+    func downloadMoreCoins() {
+        page += 1
+        coinMarketService.getMarketCoins(page: page)
     }
 }

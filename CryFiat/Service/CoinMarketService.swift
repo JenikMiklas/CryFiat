@@ -15,12 +15,11 @@ final class CoinMarketService {
     
     @Published var marketCoins = [CryptoTokenMarket]()
     
-    private var page = 1
     private var subscription: AnyCancellable?
     
     private init() { getMarketCoins() }
     
-    private func getMarketCoins() {
+    func getMarketCoins(page: Int = 1) {
         guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=\(page)&sparkline=false") else {
              fatalError("Wrong URL to get Top Market Coins")
         }
@@ -28,8 +27,12 @@ final class CoinMarketService {
             .decode(type: [CryptoTokenMarket].self, decoder: JSONDecoder())
             .sink(receiveCompletion: DownloadManager.Completion,
                   receiveValue: { [unowned self] (marketCoins) in
-                self.marketCoins = marketCoins
-                self.subscription?.cancel()
+                    if page > 1 {
+                        self.marketCoins += marketCoins
+                    } else {
+                        self.marketCoins = marketCoins
+                    }
+                    self.subscription?.cancel()
             })
     }
 }

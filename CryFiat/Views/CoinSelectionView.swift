@@ -37,6 +37,13 @@ struct CoinSelectionView: View {
                         LazyVGrid(columns: columnsAdaptive) {
                             ForEach(coinSelection.marketCoins, id: \.self) { coin in
                                 CoinCardView(coin: coin)
+                                    .onAppear {
+                                        if let lastCoin = coinSelection.marketCoins.last {
+                                            if lastCoin == coin {
+                                                coinSelection.downloadMoreCoins()
+                                            }
+                                        }
+                                    }
                             }
                         }
                         .frame(width: UIScreen.main.bounds.width)

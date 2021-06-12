@@ -50,7 +50,7 @@ struct CryptoTokenMarket: Codable, Equatable, Hashable {
   let name: String
   let image: String
   let currentPrice: Double
-  let marketCap: Int
+  let marketCap: Int?
   let marketCapRank: Int?
   let fullyDilutedValuation: Int?
   let totalVolume: Double?
@@ -60,17 +60,17 @@ struct CryptoTokenMarket: Codable, Equatable, Hashable {
   let priceChangePercentage24h: Double?
   let marketCapChange24h: Double?
   let marketCapChangePercentage24h: Double?
-  let circulatingSupply: Double
+  let circulatingSupply: Double?
   let totalSupply: Double?
   let maxSupply: Double?
-  let ath: Double
+  let ath: Double?
   let athChangePercentage: Double
-  let athDate: String
-  let atl: Double
+  let athDate: String?
+  let atl: Double?
   let atlChangePercentage: Double
-  let atlDate: String
+  let atlDate: String?
   let roi: Roi?
-  let lastUpdated: String
+  let lastUpdated: String?
 
   private enum CodingKeys: String, CodingKey {
     case id
