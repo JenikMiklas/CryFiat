@@ -68,10 +68,34 @@ public class APICryptoService {
         return URLSession.shared.dataTaskPublisher(for: URL(string: url)!)
             .map { $0.data }
             .compactMap {
-               UIImage(data: $0)
+                UIImage(data: $0)
             }
             .mapError({ error in
                 APIError.error("Decoding error Image")
+            })
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchTopCryptocurrencyImage(url: String, token: String) -> AnyPublisher<(String, UIImage), APIError> {
+        return URLSession.shared.dataTaskPublisher(for: URL(string: url)!)
+            .map { $0.data }
+            .compactMap {
+                (token, UIImage(data: $0)!)
+            }
+            .mapError({ error in
+                APIError.error("Decoding error Image")
+            })
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchTopMarket(page: Int) -> AnyPublisher<[CryptoTokenMarket], APIError> {
+        return URLSession.shared.dataTaskPublisher(for: URLRequest(url: URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=\(page)&sparkline=false")!))
+            .map { return $0.data }
+            .decode(type: [CryptoTokenMarket].self, decoder: JSONDecoder())
+            .mapError({ error in
+                APIError.error("Decoding error Market CryptoTokenTopMarket")
             })
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

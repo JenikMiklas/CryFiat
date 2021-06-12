@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 class DataStoreModel: ObservableObject {
-
+    //MARK: @PUBLISHERS
     @Published var tokenFind = ""
     @Published var errorMessage = ""
     @Published var tokenList = [Cryptocurrency]()
@@ -33,6 +33,17 @@ class DataStoreModel: ObservableObject {
         }
     }
     
+    @Published var tokensTopMarket = [CryptoTokenMarket]() {
+        didSet {
+            print(tokensTopMarket)
+        }
+    }
+    @Published var topImages = [(String, UIImage)](){
+        didSet {
+            //print("IMAGE LIST: \(topImages)")
+        }
+    }
+    
     private var tokens = [Cryptocurrency]() {
         didSet {
             if !(FileManager.default.dataJsonExists(file: JsonFile.cryptoData.rawValue)) {
@@ -41,14 +52,20 @@ class DataStoreModel: ObservableObject {
         }
     }
     
+    //MARK: APISERVICE
     private let APIService = APICryptoService.shared
     
     private var loadFiat = Just(FileManager.dataDirURL.appendingPathComponent(JsonFile.fiatData.rawValue))
     private var loadCryptoTokens = Just(FileManager.dataDirURL.appendingPathComponent(JsonFile.cryptoData.rawValue))
     
     private var subscriptions = Set<AnyCancellable>()
+
     
     init() {
+        
+        downloadTopmarket()
+        
+        //MARK: GET ALL FIAT LIST
         if !(FileManager.default.dataJsonExists(file: JsonFile.fiatData.rawValue)) {
             downloadFiat()
         } else {
@@ -73,6 +90,9 @@ class DataStoreModel: ObservableObject {
                 .store(in: &subscriptions)
             
         }
+        
+        //MARK: GET ALL CRYPTO LIST
+        /*
         if !(FileManager.default.dataJsonExists(file: JsonFile.cryptoData.rawValue)) {
             downloadCryptocurrencies()
         } else {
@@ -96,7 +116,13 @@ class DataStoreModel: ObservableObject {
                 }
                 .store(in: &subscriptions)
         }
+        */
         
+        
+        
+        
+        //MARK: FIND CRYPTO TOKEN ON WEB
+        /*
         $tokenFind
             .debounce(for: .seconds(1), scheduler: RunLoop.main)
             .removeDuplicates()
@@ -106,6 +132,7 @@ class DataStoreModel: ObservableObject {
                 self.findCryptoToken(token: token)
             }
             .store(in: &subscriptions)
+ */
     }
     
     public func findCryptoToken(token t: String) {
@@ -133,7 +160,7 @@ class DataStoreModel: ObservableObject {
             }
             .store(in: &subscriptions)
     }
-    
+    //MARK: SAVE TO DISC
     public func saveImageToken(image: UIImage, name: String) {
         FileManager.default.saveCryptocurrencyToken(image: image, fileName: name) { error in
             print(error.localizedDescription)
@@ -154,6 +181,7 @@ class DataStoreModel: ObservableObject {
         }
     }
     
+    //MARK: PRIVATE FUNC DOWNLOADS
     private func downloadFiat() {
         APIService.fetchFiat().sink { completion in
             switch completion {
@@ -204,5 +232,51 @@ class DataStoreModel: ObservableObject {
             .store(in: &subscriptions)
 
             
+    }
+    
+    func downloadTopCryptocurrencyImage() {
+        tokensTopMarket.publisher
+            .flatMap { [unowned self] token in
+                self.APIService.fetchTopCryptocurrencyImage(url: token.image, token: token.id)
+            }
+            .scan([(String, UIImage)]()) { (all, next) in
+                return all + [next]
+            }
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("Image success")
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { [unowned self] data in
+                self.topImages = data
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private var page = 1
+    
+    private func downloadTopmarket() {
+        APIService.fetchTopMarket(page: page)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("Fetch success Top Market")
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { [unowned self] data in
+                self.tokensTopMarket += data
+                if page < 4 {
+                    self.page += 1
+                    print(self.page)
+                    self.downloadTopmarket()
+                } else {
+                    print(self.tokensTopMarket.count)
+                    self.downloadTopCryptocurrencyImage()
+                }
+            }
+            .store(in: &subscriptions)
     }
 }

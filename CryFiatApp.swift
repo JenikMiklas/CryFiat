@@ -14,8 +14,9 @@ struct CryFiatApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(appVM)
+            /*ContentView()
+                .environmentObject(appVM)*/
+            CoinSelectionView()
         }
     }
 }
