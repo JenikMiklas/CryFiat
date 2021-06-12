@@ -20,6 +20,7 @@ struct CoinImageView: View {
             Image(uiImage: image)
                 .resizable()
                 .scaledToFit()
+                .clipShape(Circle())
         } else {
             ProgressView()
         }

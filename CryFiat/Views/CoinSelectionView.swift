@@ -36,19 +36,7 @@ struct CoinSelectionView: View {
                     ScrollView {
                         LazyVGrid(columns: columnsAdaptive) {
                             ForEach(coinSelection.marketCoins, id: \.self) { coin in
-                                Color.gray
-                                    .opacity(0.3)
-                                    .frame(width: 90, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                    .overlay(
-                                        VStack {
-                                            CoinImageView(imageUrl: coin.image)
-                                                .frame(width: 50, height: 50)
-                                            Text("\(coin.marketCapRank ?? 0)")
-                                                .font(.caption)
-                                            Text("\(coin.symbol)")
-                                        }
-                                    )
-                                    .cornerRadius(10)
+                                CoinCardView(coin: coin)
                             }
                         }
                         .frame(width: UIScreen.main.bounds.width)
@@ -75,12 +63,3 @@ struct CryptoAssetSelection_Previews: PreviewProvider {
         return CoinSelectionView()
     }
 }
-/*
-struct AdaptiveCard: View {
-    let tokenName: String
-    let tokenImage: UIImage?
-    var body: some View {
-        
-    }
-}
-*/
