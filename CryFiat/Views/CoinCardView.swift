@@ -30,7 +30,7 @@ extension CoinCardView {
             .frame(width: 90, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             .overlay(
                 VStack {
-                    CoinImageView(imageUrl: coin.image)
+                    CoinImageView(imageUrl: coin.image, coinName: coin.id)
                         .frame(width: 50, height: 50)
                     Text("\(coin.marketCapRank ?? 0)")
                         .font(.caption)

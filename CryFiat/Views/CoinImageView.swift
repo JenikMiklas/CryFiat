@@ -11,8 +11,8 @@ struct CoinImageView: View {
     
     @StateObject var coinImageVM: CoinImageVM
     
-    init(imageUrl: String) {
-        _coinImageVM = StateObject(wrappedValue: CoinImageVM(urlString: imageUrl))
+    init(imageUrl: String, coinName: String) {
+        _coinImageVM = StateObject(wrappedValue: CoinImageVM(urlString: imageUrl, coinName: coinName))
     }
     
     var body: some View {
@@ -29,7 +29,7 @@ struct CoinImageView: View {
 
 struct CoinImageView_Previews: PreviewProvider {
     static var previews: some View {
-        CoinImageView(imageUrl: "")
+        CoinImageView(imageUrl: "", coinName: "ripple")
             .previewLayout(.sizeThatFits)
             .frame(width: 50, height: 50)
     }

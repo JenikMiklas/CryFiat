@@ -14,10 +14,17 @@ final class CoinImageService {
     @Published var image: UIImage?
     
     private var subscription: AnyCancellable?
+    private let fileService = FileService.shared
     
-    init(urlString: String) { getCoinImage(urlString: urlString) }
+    init(urlString: String, coinName: String) {
+        if let uiImage = fileService.loadCachedImage(name: coinName) {
+            image = uiImage
+        } else {
+            getCoinImage(urlString: urlString, coinName: coinName)
+        }
+    }
     
-    private func getCoinImage(urlString: String) {
+    private func getCoinImage(urlString: String, coinName: String) {
         guard let url = URL(string: urlString) else {
              fatalError("Wrong URL to get Top Market Coins")
         }
@@ -28,6 +35,9 @@ final class CoinImageService {
             .sink(receiveCompletion: DownloadManager.Completion,
                   receiveValue: { [unowned self] (coinImage) in
                 self.image = coinImage
+                if let uiImage = coinImage {
+                    fileService.cacheImage(name: coinName, image: uiImage)
+                }
                 self.subscription?.cancel()
             })
     }

@@ -50,9 +50,9 @@ struct CryptoTokenMarket: Codable, Equatable, Hashable {
   let name: String
   let image: String
   let currentPrice: Double
-  let marketCap: Int?
+  let marketCap: Double?
   let marketCapRank: Int?
-  let fullyDilutedValuation: Int?
+  let fullyDilutedValuation: Double?
   let totalVolume: Double?
   let high24h: Double?
   let low24h: Double?
