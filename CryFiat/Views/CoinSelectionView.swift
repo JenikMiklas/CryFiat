@@ -54,7 +54,9 @@ struct CoinSelectionView: View {
                     Text("Close")
                 }
             }))
-            .navigationBarItems(leading: Button(action: { search.toggle() }, label: {
+            .navigationBarItems(leading: Button(action: { search.toggle()
+                coinSelection.downloadAllCoins()
+            }, label: {
                 Image(systemName: "magnifyingglass.circle.fill")
                     .resizable()
                     .frame(width: 30, height: 30)

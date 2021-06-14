@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CoinCardView: View {
     
-    let coin: CryptoTokenMarket
+    let coin: CoinsTokenMarket
     
     var body: some View {
         smallCard

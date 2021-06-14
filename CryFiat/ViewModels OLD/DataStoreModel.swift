@@ -33,7 +33,7 @@ class DataStoreModel: ObservableObject {
         }
     }
     
-    @Published var tokensTopMarket = [CryptoTokenMarket]() {
+    @Published var tokensTopMarket = [CoinsTokenMarket]() {
         didSet {
             print(tokensTopMarket)
         }

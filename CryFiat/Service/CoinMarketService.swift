@@ -13,18 +13,27 @@ final class CoinMarketService {
     
     static let shared = CoinMarketService()
     
-    @Published var marketCoins = [CryptoTokenMarket]()
+    @Published var marketCoins = [CoinsTokenMarket]()
+    @Published var basicCoins = [BasicCoin]()
     
     private var subscription: AnyCancellable?
     
     private init() { getMarketCoins() }
     
-    func getMarketCoins(page: Int = 1) {
-        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=\(page)&sparkline=false") else {
+    func getMarketCoins(page: Int = 1, urlString: String? = nil) {
+        var string = ""
+        if urlString == nil {
+            string = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=\(page)&sparkline=false"
+        } else {
+            string = urlString!
+        }
+           
+        guard let url = URL(string: string) else {
              fatalError("Wrong URL to get Top Market Coins")
         }
+        
         subscription = DownloadManager.downloadFrom(url: url)
-            .decode(type: [CryptoTokenMarket].self, decoder: JSONDecoder())
+            .decode(type: [CoinsTokenMarket].self, decoder: JSONDecoder())
             .sink(receiveCompletion: DownloadManager.Completion,
                   receiveValue: { [unowned self] (marketCoins) in
                     if page > 1 {
@@ -32,6 +41,20 @@ final class CoinMarketService {
                     } else {
                         self.marketCoins = marketCoins
                     }
+                    self.subscription?.cancel()
+            })
+    }
+    
+    func getAllCoins() {
+        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/list?include_platform=false") else {
+             fatalError("Wrong URL to get all Coins")
+        }
+        subscription = DownloadManager.downloadFrom(url: url)
+            .decode(type: [BasicCoin].self, decoder: JSONDecoder())
+            .sink(receiveCompletion: DownloadManager.Completion,
+                  receiveValue: { [unowned self] (coins) in
+                    self.basicCoins = coins
+                    print(coins)
                     self.subscription?.cancel()
             })
     }
