@@ -10,6 +10,8 @@
 		7F66A241265E6A6800B891DD /* CoinSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66A240265E6A6800B891DD /* CoinSelectionView.swift */; };
 		7F66A243265E901500B891DD /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66A242265E901500B891DD /* AppViewModel.swift */; };
 		7F66A245265ED84B00B891DD /* CryptoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66A244265ED84B00B891DD /* CryptoDetail.swift */; };
+		7F6967DF267774B60038E896 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6967DE267774B60038E896 /* SearchBarView.swift */; };
+		7F6967E226777BC50038E896 /* UIApplication + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6967E126777BC50038E896 /* UIApplication + Extension.swift */; };
 		7F6CE3F026769E08006E3FD2 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6CE3EF26769E08006E3FD2 /* FileService.swift */; };
 		7F773B25266D3AC30053CE3F /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F773B24266D3AC30053CE3F /* TestView.swift */; };
 		7F782F1326579EC700A358D2 /* CryFiatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F782F1226579EC700A358D2 /* CryFiatApp.swift */; };
@@ -36,6 +38,8 @@
 		7F66A240265E6A6800B891DD /* CoinSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSelectionView.swift; sourceTree = "<group>"; };
 		7F66A242265E901500B891DD /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		7F66A244265ED84B00B891DD /* CryptoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetail.swift; sourceTree = "<group>"; };
+		7F6967DE267774B60038E896 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		7F6967E126777BC50038E896 /* UIApplication + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extension.swift"; sourceTree = "<group>"; };
 		7F6CE3EF26769E08006E3FD2 /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
 		7F773B24266D3AC30053CE3F /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		7F782F0F26579EC700A358D2 /* CryFiat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryFiat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +75,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F6967E026777B9D0038E896 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7F6967E126777BC50038E896 /* UIApplication + Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7F782F0626579EC700A358D2 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +103,7 @@
 		7F782F1126579EC700A358D2 /* CryFiat */ = {
 			isa = PBXGroup;
 			children = (
+				7F6967E026777B9D0038E896 /* Extensions */,
 				7F7876B02674C97C00A2C54F /* Service */,
 				7F7876AD2674C39900A2C54F /* ViewModels */,
 				7F7876AC2674C38500A2C54F /* Views */,
@@ -149,6 +162,7 @@
 				7F66A240265E6A6800B891DD /* CoinSelectionView.swift */,
 				7F7876BE2675090A00A2C54F /* CoinCardView.swift */,
 				7F7876B82674FB1D00A2C54F /* CoinImageView.swift */,
+				7F6967DE267774B60038E896 /* SearchBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,7 +283,9 @@
 				7F782F272657C30600A358D2 /* DataStoreModel.swift in Sources */,
 				7F946CF826590DD9004DBB35 /* FileManager+Extension.swift in Sources */,
 				7F7876BF2675090A00A2C54F /* CoinCardView.swift in Sources */,
+				7F6967DF267774B60038E896 /* SearchBarView.swift in Sources */,
 				7FDB1F8B266005A200403135 /* DetailContent.swift in Sources */,
+				7F6967E226777BC50038E896 /* UIApplication + Extension.swift in Sources */,
 				7F7876BD2674FD9800A2C54F /* CoinImageService.swift in Sources */,
 				7F946CFA265915ED004DBB35 /* JsonFile.swift in Sources */,
 			);

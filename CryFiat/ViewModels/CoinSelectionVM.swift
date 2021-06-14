@@ -10,6 +10,7 @@ import Foundation
 
 final class CoinSelectionVM: ObservableObject {
     @Published var marketCoins = [CryptoTokenMarket]()
+    @Published var findCoin = ""
     
     private let coinMarketService = CoinMarketService.shared
     private var cancellable = Set<AnyCancellable>()

@@ -10,6 +10,7 @@ import SwiftUI
 struct CoinSelectionView: View {
     
     @StateObject var coinSelection = CoinSelectionVM()
+    @State private var search = false
     //@State private var token = ""
     //@Binding var sheet: Bool
     
@@ -18,20 +19,11 @@ struct CoinSelectionView: View {
     var body: some View {
         NavigationView {
             VStack {
-                /*HStack {
-                    TextField("search token", text: $coinSelection.marketCoins)
-                        .textFieldStyle(PlainTextFieldStyle())
-                        /*.onChange(of: cfVM.tokenFind, perform: { _ in
-                            cfVM.errorMessage = ""
-                        })*/
-                    Button(action: {
-                       //cfVM.findCryptoToken(token: token)
-                    }, label: {
-                        Image(systemName: "magnifyingglass.circle.fill")
-                            .font(.title)
-                    })
+                if search {
+                    SearchBarView(findToken: $coinSelection.findCoin)
+                        .transition(.move(edge: .top))
+                        .animation(.easeInOut)
                 }
-                .padding()*/
                 if !coinSelection.marketCoins.isEmpty {
                     ScrollView {
                         LazyVGrid(columns: columnsAdaptive) {
@@ -48,6 +40,7 @@ struct CoinSelectionView: View {
                         }
                         .frame(width: UIScreen.main.bounds.width)
                     }
+                    .animation(.easeInOut)
                } else {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -61,6 +54,11 @@ struct CoinSelectionView: View {
                     Text("Close")
                 }
             }))
+            .navigationBarItems(leading: Button(action: { search.toggle() }, label: {
+                Image(systemName: "magnifyingglass.circle.fill")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+            }))
         }
     }
 }
@@ -68,5 +66,6 @@ struct CoinSelectionView: View {
 struct CryptoAssetSelection_Previews: PreviewProvider {
     static var previews: some View {
         return CoinSelectionView()
+            
     }
 }
