@@ -23,6 +23,7 @@
 		7F782F272657C30600A358D2 /* DataStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F782F262657C30600A358D2 /* DataStoreModel.swift */; };
 		7F782F292657EAF400A358D2 /* CryptocurrencyStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F782F282657EAF400A358D2 /* CryptocurrencyStructures.swift */; };
 		7F7865F92678B7E600D74C1D /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7865F82678B7E600D74C1D /* Double+Extension.swift */; };
+		7F7865FB26792C8E00D74C1D /* CoinSizeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7865FA26792C8E00D74C1D /* CoinSizeCardView.swift */; };
 		7F7876AF2674C3B900A2C54F /* CoinSelectionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7876AE2674C3B900A2C54F /* CoinSelectionVM.swift */; };
 		7F7876B22674C99900A2C54F /* CoinMarketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7876B12674C99900A2C54F /* CoinMarketService.swift */; };
 		7F7876B42674DB5E00A2C54F /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7876B32674DB5E00A2C54F /* DownloadService.swift */; };
@@ -55,6 +56,7 @@
 		7F782F262657C30600A358D2 /* DataStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreModel.swift; sourceTree = "<group>"; };
 		7F782F282657EAF400A358D2 /* CryptocurrencyStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptocurrencyStructures.swift; sourceTree = "<group>"; };
 		7F7865F82678B7E600D74C1D /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		7F7865FA26792C8E00D74C1D /* CoinSizeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSizeCardView.swift; sourceTree = "<group>"; };
 		7F7876AE2674C3B900A2C54F /* CoinSelectionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSelectionVM.swift; sourceTree = "<group>"; };
 		7F7876B12674C99900A2C54F /* CoinMarketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketService.swift; sourceTree = "<group>"; };
 		7F7876B32674DB5E00A2C54F /* DownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadService.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				7F7876BE2675090A00A2C54F /* CoinCardView.swift */,
 				7F7876B82674FB1D00A2C54F /* CoinImageView.swift */,
 				7F6967DE267774B60038E896 /* SearchBarView.swift */,
+				7F7865FA26792C8E00D74C1D /* CoinSizeCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				7F6CE3F026769E08006E3FD2 /* FileService.swift in Sources */,
 				7F66A245265ED84B00B891DD /* CryptoDetail.swift in Sources */,
 				7F782F1326579EC700A358D2 /* CryFiatApp.swift in Sources */,
+				7F7865FB26792C8E00D74C1D /* CoinSizeCardView.swift in Sources */,
 				7F7876B42674DB5E00A2C54F /* DownloadService.swift in Sources */,
 				7F7876AF2674C3B900A2C54F /* CoinSelectionVM.swift in Sources */,
 				7F782F292657EAF400A358D2 /* CryptocurrencyStructures.swift in Sources */,

@@ -8,7 +8,9 @@
 import Foundation
 
 enum CoinCardSize {
-    case small, medium, large
+    case small
+    case medium
+    case large
 }
 
 struct CoinsTokenMarket: Codable, Equatable, Hashable {

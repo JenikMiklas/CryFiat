@@ -35,5 +35,6 @@ struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
         SearchBarView(findToken: .constant("xrp"))
             .previewLayout(.sizeThatFits)
+            .padding()
     }
 }

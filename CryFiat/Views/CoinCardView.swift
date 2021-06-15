@@ -24,7 +24,10 @@ struct CoinCardView_Previews: PreviewProvider {
                 .previewLayout(.sizeThatFits)
             CoinCardView(coin: PreviewVM.coin, cardSize: .medium)
                 .previewLayout(.sizeThatFits)
+            CoinCardView(coin: PreviewVM.coin, cardSize: .large)
+                .previewLayout(.sizeThatFits)
         }
+        .padding()
     }
 }
 
@@ -37,8 +40,8 @@ extension CoinCardView {
             smallCard
         case .medium:
              mediumCard
-        default:
-             smallCard
+        case .large:
+            largeCard.padding(.bottom)
         }
     }
     
@@ -78,8 +81,43 @@ extension CoinCardView {
                     .padding(.top, 5)
                     .padding(.trailing, 5)
                     .padding(.leading, 5)
-                    Text("\(coin.currentPrice)")
-                    Spacer()
+                    Text(coin.currentPrice.coinStringValue())
+                        .font(.title2)
+                        .padding(3)
+                    Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
+                        .font(.title3)
+                        .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? .green:.red)
+                }
+            )
+            .cornerRadius(10)
+    }
+    
+    private var largeCard: some View {
+        Color.gray
+            .opacity(0.3)
+            .frame(width: UIScreen.main.bounds.width * 0.9, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            .overlay(
+                VStack {
+                    HStack(alignment: .center) {
+                        VStack(alignment:.leading) {
+                            Text("\(coin.marketCapRank ?? 0)")
+                                .font(.headline)
+                            Text("\(coin.symbol)")
+                                .font(.title2)
+                        }
+                        Spacer()
+                        CoinImageView(imageUrl: coin.image, coinName: coin.id)
+                            .frame(width: 75, height: 75)
+                    }
+                    .padding(.top, 5)
+                    .padding(.trailing, 5)
+                    .padding(.leading, 5)
+                    Text(coin.currentPrice.coinStringValue())
+                        .font(.title2)
+                        .padding(3)
+                    Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
+                        .font(.title3)
+                        .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? .green:.red)
                 }
             )
             .cornerRadius(10)
