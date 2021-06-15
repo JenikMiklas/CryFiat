@@ -5,9 +5,14 @@
 //  Created by Jan Miklas on 12.06.2021.
 //
 
+
 import Combine
 import Foundation
 
+/// Download data from API
+/// ```
+/// Downloading raw data from given URL. Handling response and completion.
+/// ```
 final class DownloadManager {
     
     public enum ServiceError: LocalizedError {

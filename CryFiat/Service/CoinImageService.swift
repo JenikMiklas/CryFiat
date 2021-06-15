@@ -9,6 +9,10 @@ import Combine
 import Foundation
 import SwiftUI
 
+/// Coins images.
+/// ```
+/// Getting image for individual coin.
+/// ```
 final class CoinImageService {
     
     @Published var image: UIImage?

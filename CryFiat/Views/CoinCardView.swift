@@ -10,22 +10,38 @@ import SwiftUI
 struct CoinCardView: View {
     
     let coin: CoinsTokenMarket
+    let cardSize: CoinCardSize
     
     var body: some View {
-        smallCard
+        getSizeCard(cardSize: cardSize)
     }
 }
 
 struct CoinCardView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CoinCardView(coin: PreviewVM.coin)
+            CoinCardView(coin: PreviewVM.coin, cardSize: .small)
+                .previewLayout(.sizeThatFits)
+            CoinCardView(coin: PreviewVM.coin, cardSize: .medium)
                 .previewLayout(.sizeThatFits)
         }
     }
 }
 
 extension CoinCardView {
+    
+    @ViewBuilder
+    private func getSizeCard(cardSize: CoinCardSize) -> some View {
+        switch cardSize {
+        case .small:
+            smallCard
+        case .medium:
+             mediumCard
+        default:
+             smallCard
+        }
+    }
+    
     private var smallCard: some View {
         Color.gray
             .opacity(0.3)
@@ -45,14 +61,25 @@ extension CoinCardView {
     private var mediumCard: some View {
         Color.gray
             .opacity(0.3)
-            .frame(width: 90, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            .frame(width: 135, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             .overlay(
                 VStack {
-                    CoinImageView(imageUrl: coin.image, coinName: coin.id)
-                        .frame(width: 50, height: 50)
-                    Text("\(coin.marketCapRank ?? 0)")
-                        .font(.caption)
-                    Text("\(coin.symbol)")
+                    HStack(alignment: .center) {
+                        VStack(alignment:.leading) {
+                            Text("\(coin.marketCapRank ?? 0)")
+                                .font(.headline)
+                            Text("\(coin.symbol)")
+                                .font(.title2)
+                        }
+                        Spacer()
+                        CoinImageView(imageUrl: coin.image, coinName: coin.id)
+                            .frame(width: 50, height: 50)
+                    }
+                    .padding(.top, 5)
+                    .padding(.trailing, 5)
+                    .padding(.leading, 5)
+                    Text("\(coin.currentPrice)")
+                    Spacer()
                 }
             )
             .cornerRadius(10)

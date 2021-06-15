@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum CoinCardSize {
+    case small, medium, large
+}
+
 struct CoinsTokenMarket: Codable, Equatable, Hashable {
     static func == (lhs: CoinsTokenMarket, rhs: CoinsTokenMarket) -> Bool {
         lhs.id == rhs.id

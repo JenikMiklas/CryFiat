@@ -9,6 +9,11 @@ import Foundation
 import SwiftUI
 
 extension UIApplication {
+    
+    /// Hide kyboard.
+    /// ```
+    /// Keyboard hides after calling this function.
+    /// ```
     func hideKeyboard() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }

@@ -9,6 +9,11 @@ import Combine
 import Foundation
 import SwiftUI
 
+
+/// Data to Models.
+/// ```
+/// Converting data from Download Service to Models.
+/// ```
 final class CoinMarketService {
     
     static let shared = CoinMarketService()
