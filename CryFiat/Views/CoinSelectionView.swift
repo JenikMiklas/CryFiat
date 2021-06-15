@@ -28,7 +28,7 @@ struct CoinSelectionView: View {
                     ZStack {
                         ScrollView {
                             LazyVGrid(columns: columnsAdaptive) {
-                                ForEach(coinSelection.marketCoins, id: \.ID) { coin in
+                                ForEach(coinSelection.marketCoins, id: \.uuid) { coin in
                                     CoinCardView(coin: coin, cardSize: .small)
                                         .onAppear {
                                             if coinSelection.findCoin.isEmpty {
