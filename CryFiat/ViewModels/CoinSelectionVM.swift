@@ -39,10 +39,10 @@ final class CoinSelectionVM: ObservableObject {
                         string.append("%2C%20")
                     }
                 }
-                return  "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=\(string)&order=market_cap_desc&per_page=250&page=1&sparkline=false"
+                return  string
             }
             .compactMap { [unowned self] in
-                self.coinMarketService.getMarketCoins(urlString: $0)
+                self.coinMarketService.searchCoins(coins: $0)
             }
             .sink {}
             .store(in: &cancellable)

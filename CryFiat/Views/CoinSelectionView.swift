@@ -25,22 +25,26 @@ struct CoinSelectionView: View {
                         .animation(.easeInOut)
                 }
                 if !coinSelection.marketCoins.isEmpty {
-                    ScrollView {
-                        LazyVGrid(columns: columnsAdaptive) {
-                            ForEach(coinSelection.marketCoins, id: \.self) { coin in
-                                CoinCardView(coin: coin)
-                                    .onAppear {
-                                        if let lastCoin = coinSelection.marketCoins.last {
-                                            if lastCoin == coin {
-                                                coinSelection.downloadMoreCoins()
+                    ZStack {
+                        ScrollView {
+                            LazyVGrid(columns: columnsAdaptive) {
+                                ForEach(coinSelection.marketCoins, id: \.self) { coin in
+                                    CoinCardView(coin: coin)
+                                        .onAppear {
+                                            if coinSelection.findCoin.isEmpty {
+                                                if let lastCoin = coinSelection.marketCoins.last {
+                                                    if lastCoin == coin {
+                                                        coinSelection.downloadMoreCoins()
+                                                    }
+                                                }
                                             }
                                         }
-                                    }
+                                }
                             }
+                            .frame(width: UIScreen.main.bounds.width)
                         }
-                        .frame(width: UIScreen.main.bounds.width)
+                        .animation(.easeInOut)
                     }
-                    .animation(.easeInOut)
                } else {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
