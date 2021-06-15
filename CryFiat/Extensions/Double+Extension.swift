@@ -22,4 +22,17 @@ extension Double {
         formatter.maximumFractionDigits = 6
         return formatter
     }
+    
+    func coinStringValue() -> String {
+        let value = NSNumber(value: self)
+        return coinFormatter.string(from: value) ?? "0"
+    }
+    
+    func coinNumberString() -> String {
+        return String(format: "%.2f", self)
+    }
+    
+    func coinPercentString() -> String {
+        return coinNumberString() + " %"
+    }
 }
