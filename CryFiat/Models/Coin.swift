@@ -13,7 +13,7 @@ enum CoinCardSize {
 
 struct CoinsTokenMarket: Codable, Equatable, Hashable {
     static func == (lhs: CoinsTokenMarket, rhs: CoinsTokenMarket) -> Bool {
-        lhs.id == rhs.id
+        lhs.ID == rhs.ID
     }
     
   struct Roi: Codable, Hashable {
@@ -22,6 +22,7 @@ struct CoinsTokenMarket: Codable, Equatable, Hashable {
     let percentage: Double?
   }
 
+  let ID = UUID().uuidString
   let id: String
   let symbol: String
   let name: String
