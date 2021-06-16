@@ -15,36 +15,38 @@ struct CoinSizeCardView: View {
     var body: some View {
         ZStack {
             Color.white
-                .frame(height: 550)
+                .frame(height: 200)
                 .cornerRadius(20)
-            VStack {
+            HStack {
                 Button(action: {
                     cardSize = .small
                     chooseCardSize.toggle()
                 }, label: {
                     RoundedRectangle(cornerRadius:10)
-                        .frame(width: 90, height: 100)
+                        .frame(width: 90/2, height: 100/2)
                         .foregroundColor(Color.gray.opacity(0.3))
                 })
                 Divider()
+                    .frame(height: 75)
                 Button(action: {
                     cardSize = .medium
                     chooseCardSize.toggle()
                 }, label: {
                     RoundedRectangle(cornerRadius:10)
-                        .frame(width: 135, height: 150)
+                        .frame(width: 135/2, height: 150/2)
                         .foregroundColor(Color.gray.opacity(0.3))
                 })
                 Divider()
+                    .frame(height: 75)
                 Button(action: {
                     cardSize = .large
                     chooseCardSize.toggle()
                 }, label: {
                     RoundedRectangle(cornerRadius:10)
-                        .frame(width: UIScreen.main.bounds.width*0.9, height: 200)
+                        .frame(width: 320/2, height: 200/2)
                         .foregroundColor(Color.gray.opacity(0.3))
                 })
-            }
+            }.offset(y: -20)
         }
     }
 }

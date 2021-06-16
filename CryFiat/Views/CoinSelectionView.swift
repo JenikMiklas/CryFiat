@@ -16,7 +16,7 @@ struct CoinSelectionView: View {
     //@Binding var sheet: Bool
     
     var body: some View {
-        let columnsAdaptive: [GridItem] = [GridItem(.adaptive(minimum: getCardSize()), spacing: 0)]
+        let columnsAdaptive: [GridItem] = [GridItem(.adaptive(minimum: cardSize.rawValue), spacing: 0)]
         NavigationView {
             ZStack {
                 VStack {
@@ -71,13 +71,14 @@ struct CoinSelectionView: View {
                 .ignoresSafeArea(edges: .bottom)
                 if chooseCardSize {
                     CoinSizeCardView(cardSize: $cardSize, chooseCardSize: $chooseCardSize)
-                        .offset(y: chooseCardSize ? UIScreen.main.bounds.height/2-275:UIScreen.main.bounds.height)
+                        .offset(y: chooseCardSize ? UIScreen.main.bounds.height/2-95:UIScreen.main.bounds.height)
                         .transition(.move(edge: .bottom))
                         .animation(.default)
                         .zIndex(99)
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -89,18 +90,5 @@ struct CryptoAssetSelection_Previews: PreviewProvider {
                 .previewDevice("iPhone SE (2nd generation)")
         }
             
-    }
-}
-
-extension CoinSelectionView {
-    func getCardSize() -> CGFloat {
-        switch cardSize {
-        case .small:
-            return 90
-        case .medium:
-            return 135
-        case .large:
-            return UIScreen.main.bounds.width * 0.9
-        }
     }
 }

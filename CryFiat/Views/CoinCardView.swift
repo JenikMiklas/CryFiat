@@ -41,14 +41,14 @@ extension CoinCardView {
         case .medium:
              mediumCard
         case .large:
-            largeCard.padding(.bottom)
+            largeCard
         }
     }
     
     private var smallCard: some View {
         Color.gray
             .opacity(0.3)
-            .frame(width: 90, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            .frame(width: cardSize.rawValue, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             .overlay(
                 VStack {
                     CoinImageView(imageUrl: coin.image, coinName: coin.id)
@@ -64,7 +64,7 @@ extension CoinCardView {
     private var mediumCard: some View {
         Color.gray
             .opacity(0.3)
-            .frame(width: 135, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            .frame(width: cardSize.rawValue, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             .overlay(
                 VStack {
                     HStack(alignment: .center) {
@@ -95,7 +95,7 @@ extension CoinCardView {
     private var largeCard: some View {
         Color.gray
             .opacity(0.3)
-            .frame(width: UIScreen.main.bounds.width * 0.9, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            .frame(width: cardSize.rawValue, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             .overlay(
                 VStack {
                     HStack(alignment: .center) {

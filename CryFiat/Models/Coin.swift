@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
-enum CoinCardSize {
-    case small
-    case medium
-    case large
+enum CoinCardSize: CGFloat {
+    case small = 90
+    case medium = 135
+    case large = 320
 }
 
 struct CoinsTokenMarket: Codable, Equatable, Hashable {
