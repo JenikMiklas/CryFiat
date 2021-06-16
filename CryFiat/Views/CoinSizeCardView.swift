@@ -14,7 +14,7 @@ struct CoinSizeCardView: View {
     
     var body: some View {
         ZStack {
-            Color.white
+            Color(.systemGray6)
                 .frame(height: 200)
                 .cornerRadius(20)
             HStack {
@@ -24,7 +24,6 @@ struct CoinSizeCardView: View {
                 }, label: {
                     RoundedRectangle(cornerRadius:10)
                         .frame(width: 90/2, height: 100/2)
-                        .foregroundColor(Color.gray.opacity(0.3))
                 })
                 Divider()
                     .frame(height: 75)
@@ -34,7 +33,6 @@ struct CoinSizeCardView: View {
                 }, label: {
                     RoundedRectangle(cornerRadius:10)
                         .frame(width: 135/2, height: 150/2)
-                        .foregroundColor(Color.gray.opacity(0.3))
                 })
                 Divider()
                     .frame(height: 75)
@@ -44,16 +42,20 @@ struct CoinSizeCardView: View {
                 }, label: {
                     RoundedRectangle(cornerRadius:10)
                         .frame(width: 320/2, height: 200/2)
-                        .foregroundColor(Color.gray.opacity(0.3))
                 })
             }.offset(y: -20)
+            .foregroundColor(Color(.systemGray))
         }
     }
 }
-
+// MARK: PREVIEW
 struct CoinSizeCardView_Previews: PreviewProvider {
     static var previews: some View {
         CoinSizeCardView(cardSize: .constant(CoinCardSize.small), chooseCardSize: .constant(true))
+            .previewLayout(.sizeThatFits)
+            .padding()
+        CoinSizeCardView(cardSize: .constant(CoinCardSize.small), chooseCardSize: .constant(true))
+            .preferredColorScheme(.dark)
             .previewLayout(.sizeThatFits)
             .padding()
     }
