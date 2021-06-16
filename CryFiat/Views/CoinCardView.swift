@@ -11,12 +11,13 @@ struct CoinCardView: View {
     
     let coin: CoinsTokenMarket
     let cardSize: CoinCardSize
-    
+    // MARK: BODY
     var body: some View {
         getSizeCard(cardSize: cardSize)
     }
 }
 
+// MARK: PREVIEW
 struct CoinCardView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -30,7 +31,7 @@ struct CoinCardView_Previews: PreviewProvider {
         .padding()
     }
 }
-
+// MARK: EXTENSION
 extension CoinCardView {
     
     @ViewBuilder
@@ -44,7 +45,7 @@ extension CoinCardView {
             largeCard
         }
     }
-    
+    // MARK: CARDS
     private var smallCard: some View {
         Color.gray
             .opacity(0.3)

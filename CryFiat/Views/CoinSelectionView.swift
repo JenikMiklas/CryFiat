@@ -14,9 +14,8 @@ struct CoinSelectionView: View {
     @State private var cardSize = CoinCardSize.small
     @State private var chooseCardSize = false
     //@Binding var sheet: Bool
-    
+    // MARK: BODY
     var body: some View {
-        let columnsAdaptive: [GridItem] = [GridItem(.adaptive(minimum: cardSize.rawValue), spacing: 0)]
         NavigationView {
             ZStack {
                 VStack {
@@ -26,25 +25,7 @@ struct CoinSelectionView: View {
                             .animation(.easeInOut)
                     }
                     if !coinSelection.marketCoins.isEmpty {
-                        ZStack {
-                            ScrollView {
-                                LazyVGrid(columns: columnsAdaptive) {
-                                    ForEach(coinSelection.marketCoins, id: \.uuid) { coin in
-                                        CoinCardView(coin: coin, cardSize: cardSize)
-                                            .onAppear {
-                                                if coinSelection.findCoin.isEmpty {
-                                                    if let lastCoin = coinSelection.marketCoins.last {
-                                                        if lastCoin == coin {
-                                                            coinSelection.downloadMoreCoins()
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                    }
-                                }
-                                .frame(width: UIScreen.main.bounds.width)
-                            }
-                        }
+                        scrollList
                    } else {
                     ProgressView()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -53,35 +34,19 @@ struct CoinSelectionView: View {
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button(action: { search.toggle()
-                            coinSelection.downloadAllCoins()
-                        }, label: {
-                            Image(systemName: "magnifyingglass.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                        })
-                    }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button(action: { chooseCardSize.toggle() }, label: {
-                            Image(systemName: "rectangle.3.offgrid")
-                        })
-                    }
+                    tabBarItems
                 }
                 .ignoresSafeArea(edges: .bottom)
                 if chooseCardSize {
                     CoinSizeCardView(cardSize: $cardSize, chooseCardSize: $chooseCardSize)
-                        .offset(y: chooseCardSize ? UIScreen.main.bounds.height/2-95:UIScreen.main.bounds.height)
-                        .transition(.move(edge: .bottom))
-                        .animation(.default)
-                        .zIndex(99)
+                        .cardSelection(show: chooseCardSize)
                 }
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
-
+// MARK: PREVIEW
 struct CryptoAssetSelection_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -90,5 +55,48 @@ struct CryptoAssetSelection_Previews: PreviewProvider {
                 .previewDevice("iPhone SE (2nd generation)")
         }
             
+    }
+}
+
+extension CoinSelectionView {
+    // MARK: scrollList
+    private var scrollList: some View {
+        let columnsAdaptive: [GridItem] = [GridItem(.adaptive(minimum: cardSize.rawValue), spacing: 0)]
+        return ScrollView {
+            LazyVGrid(columns: columnsAdaptive) {
+                ForEach(coinSelection.marketCoins, id: \.uuid) { coin in
+                    CoinCardView(coin: coin, cardSize: cardSize)
+                        .onAppear {
+                            if coinSelection.findCoin.isEmpty {
+                                if let lastCoin = coinSelection.marketCoins.last {
+                                    if lastCoin == coin {
+                                        coinSelection.downloadMoreCoins()
+                                    }
+                                }
+                            }
+                        }
+                }
+            }
+            .frame(width: UIScreen.main.bounds.width)
+        }
+    }
+    // MARK: tabItems
+    private var tabBarItems: some ToolbarContent {
+        return Group {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { search.toggle()
+                    coinSelection.downloadAllCoins()
+                }, label: {
+                    Image(systemName: "magnifyingglass.circle.fill")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                })
+            }
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { chooseCardSize.toggle() }, label: {
+                    Image(systemName: "rectangle.3.offgrid")
+                })
+            }
+        }
     }
 }
