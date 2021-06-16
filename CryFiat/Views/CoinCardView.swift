@@ -47,9 +47,12 @@ extension CoinCardView {
     }
     // MARK: CARDS
     private var smallCard: some View {
-        Color.gray
-            .opacity(0.3)
-            .frame(width: cardSize.rawValue, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+        RoundedRectangle(cornerRadius: 10)
+             .fill(
+                 LinearGradient(gradient: Gradient(colors: [Color(.systemGray), Color(.systemGray5)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+             )
+            .frame(width: cardSize.rawValue, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+            .shadow(radius: 2)
             .overlay(
                 VStack {
                     CoinImageView(imageUrl: coin.image, coinName: coin.id)
@@ -63,9 +66,12 @@ extension CoinCardView {
     }
     
     private var mediumCard: some View {
-        Color.gray
-            .opacity(0.3)
-            .frame(width: cardSize.rawValue, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+        RoundedRectangle(cornerRadius: 10)
+             .fill(
+                 LinearGradient(gradient: Gradient(colors: [Color(.systemGray), Color(.systemGray5)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+             )
+            .frame(width: cardSize.rawValue, height: 150)
+            .shadow(radius: 2)
             .overlay(
                 VStack {
                     HStack(alignment: .center) {
@@ -90,13 +96,15 @@ extension CoinCardView {
                         .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? .green:.red)
                 }
             )
-            .cornerRadius(10)
     }
     
     private var largeCard: some View {
-        Color.gray
-            .opacity(0.3)
-            .frame(width: cardSize.rawValue, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+       RoundedRectangle(cornerRadius: 10)
+            .fill(
+                LinearGradient(gradient: Gradient(colors: [Color(.systemGray), Color(.systemGray5)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+            .frame(width: cardSize.rawValue, height: 200)
+            .shadow(radius: 2)
             .overlay(
                 VStack {
                     HStack(alignment: .center) {
@@ -107,20 +115,19 @@ extension CoinCardView {
                                 .font(.title2)
                         }
                         Spacer()
+                        Text(coin.currentPrice.coinStringValue())
+                            .font(.title2)
+                        Spacer()
                         CoinImageView(imageUrl: coin.image, coinName: coin.id)
-                            .frame(width: 75, height: 75)
+                            .frame(width: 50, height: 50)
                     }
-                    .padding(.top, 5)
-                    .padding(.trailing, 5)
-                    .padding(.leading, 5)
-                    Text(coin.currentPrice.coinStringValue())
-                        .font(.title2)
-                        .padding(3)
+                    .padding([.top, .leading, .trailing], 10.0)
                     Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
                         .font(.title3)
-                        .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? .green:.red)
+                        .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? Color(.systemGreen):Color(.systemRed))
+                    Spacer()
                 }
+                //.foregroundColor(Color.white)
             )
-            .cornerRadius(10)
     }
 }
