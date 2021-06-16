@@ -26,6 +26,7 @@ struct CoinCardView_Previews: PreviewProvider {
             CoinCardView(coin: PreviewVM.coin, cardSize: .medium)
                 .previewLayout(.sizeThatFits)
             CoinCardView(coin: PreviewVM.coin, cardSize: .large)
+                .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
         }
         .padding()
@@ -45,14 +46,11 @@ extension CoinCardView {
             largeCard
         }
     }
-    // MARK: CARDS
+    
+    // MARK: SMALL CARD
     private var smallCard: some View {
-        RoundedRectangle(cornerRadius: 10)
-             .fill(
-                 LinearGradient(gradient: Gradient(colors: [Color(.systemGray), Color(.systemGray5)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-             )
+        rectangle
             .frame(width: cardSize.rawValue, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
-            .shadow(radius: 2)
             .overlay(
                 VStack {
                     CoinImageView(imageUrl: coin.image, coinName: coin.id)
@@ -65,13 +63,10 @@ extension CoinCardView {
             .cornerRadius(10)
     }
     
+    // MARK: MEDIUM CARD
     private var mediumCard: some View {
-        RoundedRectangle(cornerRadius: 10)
-             .fill(
-                 LinearGradient(gradient: Gradient(colors: [Color(.systemGray), Color(.systemGray5)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-             )
+        rectangle
             .frame(width: cardSize.rawValue, height: 150)
-            .shadow(radius: 2)
             .overlay(
                 VStack {
                     HStack(alignment: .center) {
@@ -91,20 +86,19 @@ extension CoinCardView {
                     Text(coin.currentPrice.coinStringValue())
                         .font(.title2)
                         .padding(3)
-                    Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
-                        .font(.title3)
-                        .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? .green:.red)
+                    HStack {
+                        Text("24H: ")
+                        Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
+                            .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? .green:.red)
+                    } .font(.subheadline)
                 }
             )
     }
     
+    // MARK: LARGE CARD
     private var largeCard: some View {
-       RoundedRectangle(cornerRadius: 10)
-            .fill(
-                LinearGradient(gradient: Gradient(colors: [Color(.systemGray), Color(.systemGray5)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-            )
+        rectangle
             .frame(width: cardSize.rawValue, height: 200)
-            .shadow(radius: 2)
             .overlay(
                 VStack {
                     HStack(alignment: .center) {
@@ -115,19 +109,55 @@ extension CoinCardView {
                                 .font(.title2)
                         }
                         Spacer()
-                        Text(coin.currentPrice.coinStringValue())
-                            .font(.title2)
+                        VStack {
+                            Text(coin.currentPrice.coinStringValue())
+                                .font(.title2)
+                            HStack {
+                                VStack {
+                                    Text("24H: \(coin.high24h?.coinStringSymbol() ?? "?")")
+                                    Text("24L: \(coin.low24h?.coinStringSymbol() ?? "?")")
+                                }
+                                VStack {
+                                    Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
+                                        .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? Color(.systemGreen):Color(.systemRed))
+                                    Text(coin.priceChange24h?.coinStringSymbol() ?? "?")
+                                        .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? Color(.systemGreen):Color(.systemRed))
+                                       
+                                }
+                            }.font(.subheadline).padding(.top, 5)
+                        }
                         Spacer()
                         CoinImageView(imageUrl: coin.image, coinName: coin.id)
                             .frame(width: 50, height: 50)
                     }
-                    .padding([.top, .leading, .trailing], 10.0)
-                    Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
-                        .font(.title3)
-                        .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? Color(.systemGreen):Color(.systemRed))
+                        .padding(.top, 10.0)
+                    HStack(alignment: .center) {
+                        VStack(alignment:.leading) {
+                            Text("ath: \(coin.ath?.coinStringSymbol() ?? "?")")
+                            Text("atl: \(coin.atl?.coinStringSymbol() ?? "?")")
+                        }
+                        Spacer()
+                        VStack(alignment: .trailing) {
+                            Text("circulating / total supply")
+                            Text(coin.circulatingSupply?.coinNumberString() ?? "?")
+                            Text(coin.totalSupply?.coinNumberString() ?? "?")
+                        }.font(.subheadline)
+                        .padding(.top, 10)
+                    }
                     Spacer()
                 }
+                .padding([.leading, .trailing], 10.0)
                 //.foregroundColor(Color.white)
             )
     }
+    
+    // MARK: RECTANGLE
+    private var rectangle: some View {
+        RoundedRectangle(cornerRadius: 10)
+             .fill(
+                 LinearGradient(gradient: Gradient(colors: [Color(.systemGray), Color(.systemGray5)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+             )
+            .shadow(radius: 2)
+    }
 }
+

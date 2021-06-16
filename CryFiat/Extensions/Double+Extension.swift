@@ -35,4 +35,8 @@ extension Double {
     func coinPercentString() -> String {
         return coinNumberString() + " %"
     }
+    
+    func coinStringSymbol() -> String {
+        return coinNumberString() + " €"
+    }
 }
