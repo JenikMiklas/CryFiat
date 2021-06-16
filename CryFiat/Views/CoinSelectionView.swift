@@ -13,6 +13,7 @@ struct CoinSelectionView: View {
     @State private var search = false
     @State private var cardSize = CoinCardSize.small
     @State private var chooseCardSize = false
+    @State private var width: CGFloat = UIScreen.main.bounds.width
     //@Binding var sheet: Bool
     // MARK: BODY
     var body: some View {
@@ -61,9 +62,8 @@ struct CryptoAssetSelection_Previews: PreviewProvider {
 extension CoinSelectionView {
     // MARK: scrollList
     private var scrollList: some View {
-        let columnsAdaptive: [GridItem] = [GridItem(.adaptive(minimum: cardSize.rawValue), spacing: 0)]
         return ScrollView {
-            LazyVGrid(columns: columnsAdaptive) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: cardSize.rawValue), spacing: 0)]) {
                 ForEach(coinSelection.marketCoins, id: \.uuid) { coin in
                     CoinCardView(coin: coin, cardSize: cardSize)
                         .onAppear {
@@ -77,7 +77,6 @@ extension CoinSelectionView {
                         }
                 }
             }
-            .frame(width: UIScreen.main.bounds.width)
         }
     }
     // MARK: tabItems
