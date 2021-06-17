@@ -29,7 +29,6 @@ final class CoinSelectionVM: ObservableObject {
             .map (findCoins)
             .map (generatePath)
             .compactMap { [unowned self] in
-                print($0)
                 return self.coinMarketService.searchCoins(coins: $0)
             }
             .sink {}
