@@ -26,28 +26,36 @@ final class CoinSelectionVM: ObservableObject {
             .debounce(for: .seconds(1), scheduler: RunLoop.main)
             .removeDuplicates()
             .combineLatest(coinMarketService.$basicCoins)
-            .map {(searchCoin, allCoins) -> [BasicCoin] in
-                return allCoins.filter {
-                    $0.id.lowercased().contains(searchCoin.lowercased()) || $0.name.lowercased().contains(searchCoin.lowercased()) || $0.symbol.lowercased().contains(searchCoin.lowercased())
-                }
-            }
-            .map { coins -> String in
-                var string = ""
-                for coin in coins {
-                    string.append(coin.id)
-                    if coins.last != coin {
-                        string.append("%2C%20")
-                    }
-                }
-                return  string
-            }
+            .map (findCoins)
+            .map (generatePath)
             .compactMap { [unowned self] in
-                self.coinMarketService.searchCoins(coins: $0)
+                print($0)
+                return self.coinMarketService.searchCoins(coins: $0)
             }
             .sink {}
             .store(in: &cancellable)
     }
     
+    // MARK: PRIVATE
+    private func findCoins(coin: String, in basicCoins: [BasicCoin]) -> [BasicCoin] {
+        if coin.isEmpty { return [] }
+        return basicCoins.filter {
+            $0.id.lowercased().contains(coin.lowercased()) || $0.name.lowercased().contains(coin.lowercased()) || $0.symbol.lowercased().contains(coin.lowercased())
+        }
+    }
+    
+    private func generatePath(coins: [BasicCoin]) -> String {
+        var string = ""
+        for coin in coins {
+            string.append(coin.id)
+            if coins.last != coin {
+                string.append("%2C%20")
+            }
+        }
+        return  string
+    }
+    
+    // MARK: PUBLIC
     func downloadMoreCoins() {
         page += 1
         coinMarketService.getMarketCoins(page: page)

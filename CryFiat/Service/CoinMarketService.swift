@@ -30,7 +30,6 @@ final class CoinMarketService {
         guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=\(page)&sparkline=false") else {
              fatalError("Wrong URL to get Top Market Coins")
         }
-        
         subscription = DownloadManager.downloadFrom(url: url)
             .decode(type: [CoinsTokenMarket].self, decoder: JSONDecoder())
             .sink(receiveCompletion: DownloadManager.Completion,
@@ -48,7 +47,6 @@ final class CoinMarketService {
         guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=\(coins)&order=market_cap_desc&per_page=250&page=1&sparkline=false") else {
              fatalError("Wrong URL to get Top Market Coins")
         }
-        
         subscription = DownloadManager.downloadFrom(url: url)
             .decode(type: [CoinsTokenMarket].self, decoder: JSONDecoder())
             .sink(receiveCompletion: DownloadManager.Completion,
