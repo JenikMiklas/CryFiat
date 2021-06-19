@@ -52,10 +52,7 @@ struct CryptoAssetSelection_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             CoinSelectionView()
-            CoinSelectionView()
-                .previewDevice("iPhone SE (2nd generation)")
         }
-            
     }
 }
 
