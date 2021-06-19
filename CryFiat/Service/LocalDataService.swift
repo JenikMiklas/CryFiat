@@ -16,10 +16,12 @@ final class LocalDataService {
     @Published var userCoins = [UserCoin]()
     
     private init() {
-        container = NSPersistentContainer(name: "Coins")
+        container = NSPersistentContainer(name: "UserCoins")
         container.loadPersistentStores { (_, error) in
             print("Loading persistent store error.")
+            return
         }
+        getUserCoins()
     }
     
     

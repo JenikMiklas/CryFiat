@@ -16,7 +16,7 @@ struct CryFiatApp: App {
         WindowGroup {
             /*ContentView()
                 .environmentObject(appVM)*/
-            CoinSelectionView()
+            HomeView()
         }
     }
 }

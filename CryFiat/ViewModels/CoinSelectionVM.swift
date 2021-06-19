@@ -13,6 +13,7 @@ final class CoinSelectionVM: ObservableObject {
     @Published var findCoin = ""
     
     private let coinMarketService = CoinMarketService.shared
+    private let localDataService = LocalDataService.shared
     private var cancellable = Set<AnyCancellable>()
     private var page = 1
     
@@ -29,7 +30,7 @@ final class CoinSelectionVM: ObservableObject {
             .map (findCoins)
             .map (generatePath)
             .compactMap { [unowned self] in
-                return self.coinMarketService.searchCoins(coins: $0)
+                self.coinMarketService.searchCoins(coins: $0)
             }
             .sink {}
             .store(in: &cancellable)
@@ -64,5 +65,9 @@ final class CoinSelectionVM: ObservableObject {
         if coinMarketService.basicCoins.isEmpty {
             coinMarketService.getAllCoins()
         }
+    }
+    
+    func saveUserCoin(coin: CoinsTokenMarket) {
+        localDataService.processCoin(coin: coin, address: "no address")
     }
 }
