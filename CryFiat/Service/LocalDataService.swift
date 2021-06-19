@@ -56,6 +56,8 @@ final class LocalDataService {
         let userCoin = UserCoin(context: container.viewContext)
         userCoin.address = address
         userCoin.coinID = coin.id
+        userCoin.name = coin.name
+        userCoin.symbol = coin.symbol
         reload()
     }
     
