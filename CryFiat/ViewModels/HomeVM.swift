@@ -22,4 +22,8 @@ class HomeVM: ObservableObject {
             }
             .store(in: &cancellable)
     }
+    
+    func remove(coin: UserCoin) {
+        localDataService.removeFromUserList(coin: coin)
+    }
 }

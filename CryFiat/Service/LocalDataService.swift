@@ -33,6 +33,10 @@ final class LocalDataService {
         }
     }
     
+    func removeFromUserList(coin: UserCoin) {
+        delete(coin: coin)
+    }
+    
     func getUserCoins() {
         let request = NSFetchRequest<UserCoin>(entityName: "UserCoin")
         
@@ -55,13 +59,19 @@ final class LocalDataService {
         reload()
     }
     
-    private func delete(coin: CoinsTokenMarket) {
+    private func delete(coin: UserCoin) {
+         container.viewContext.delete(coin)
+         reload()
+         
+     }
+    
+   /* private func delete(coin: CoinsTokenMarket) {
         if let coin = userCoins.first(where: { $0.coinID == coin.id }) {
             container.viewContext.delete(coin)
             reload()
         }
     }
-    
+    */
     private func reload() {
         save()
         getUserCoins()

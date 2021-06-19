@@ -18,10 +18,22 @@ struct HomeView: View {
                     LazyHStack {
                         ForEach(homeVM.userCoins, id:\.id) { item in
                             CoinImageView(imageUrl: "", coinName: item.coinID!)
-                                .frame(width: 75, height: 75, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                .contextMenu(menuItems: {
+                                    Button(action: {
+                                        homeVM.remove(coin: item)
+                                    }, label: {
+                                        Label("Remove", systemImage: "trash")
+                                    })
+                                })
                         }
                     }
                 }
+                .padding(.top)
+                .frame(height: 75)
+                ScrollView(.vertical) {
+                    Text("detail")
+                }
+                Spacer()
             }
             .navigationTitle("CryFiat")
             .toolbar {
