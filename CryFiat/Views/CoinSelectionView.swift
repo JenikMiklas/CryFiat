@@ -46,6 +46,7 @@ struct CoinSelectionView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Coins selection")
     }
 }
 // MARK: PREVIEW
@@ -63,10 +64,16 @@ extension CoinSelectionView {
         return ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: cardSize.rawValue), spacing: 0)]) {
                 ForEach(coinSelection.marketCoins, id: \.uuid) { coin in
-                    CoinCardView(coin: coin, cardSize: cardSize)
+                    NavigationLink(
+                        destination: /*@START_MENU_TOKEN@*/Text("Destination")/*@END_MENU_TOKEN@*/,
+                        label: {
+                            CoinCardView(coin: coin, cardSize: cardSize)
+                        })
+                        .foregroundColor(.primary)
+                   /* CoinCardView(coin: coin, cardSize: cardSize)
                         .onTapGesture {
                             coinSelection.saveUserCoin(coin: coin)
-                        }
+                        }*/
                         .onAppear {
                             if coinSelection.findCoin.isEmpty {
                                 if let lastCoin = coinSelection.marketCoins.last {
