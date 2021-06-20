@@ -90,7 +90,7 @@ struct BasicCoin: Codable, Equatable, Hashable {
 }
 
 struct CoinDetail: Codable {
-    let id: String
+      let id: String
       let symbol: String
       let name: String
       let publicNotice: String?
