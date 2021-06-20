@@ -10,26 +10,12 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var homeVM = HomeVM()
+    @State private var updateCoinList = false
     
     var body: some View {
         NavigationView {
             VStack {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack {
-                        ForEach(homeVM.userCoins, id:\.id) { item in
-                            CoinImageView(imageUrl: "", coinName: item.coinID!)
-                                .contextMenu(menuItems: {
-                                    Button(action: {
-                                        homeVM.remove(coin: item)
-                                    }, label: {
-                                        Label("Remove", systemImage: "trash")
-                                    })
-                                })
-                        }
-                    }
-                }
-                .padding(.top)
-                .frame(height: 75)
+                coinList
                 ScrollView(.vertical) {
                     Text("detail")
                 }
@@ -44,6 +30,13 @@ struct HomeView: View {
                             Image(systemName: "plus.circle.fill")
                         })
                 }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if updateCoinList {
+                    Button(action: { updateCoinList.toggle() }, label: {
+                        Text("Close editing")
+                    })
+                }
+                }
             }
         }
     }
@@ -53,5 +46,62 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             
+    }
+}
+
+extension HomeView {
+    // MARK: COIN LIST
+    private var coinList: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack {
+                ForEach(homeVM.userCoins, id:\.id) { item in
+                    ZStack(alignment: .center) {
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            VStack {
+                                CoinImageView(imageUrl: "", coinName: item.coinID!)
+                                Text(item.symbol?.uppercased() ?? "")
+                                    .font(.headline)
+                                    .lineLimit(1)
+                                    .allowsTightening(false)
+                                    .foregroundColor(.primary)
+                                Text(item.name ?? "")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                    .lineLimit(1)
+                                    .allowsTightening(false)
+                            }
+                            .opacity(updateCoinList ? 0.4 : 1)
+                            .frame(width: 75)
+                            .padding(.trailing, 10)
+                        })
+                        .disabled(updateCoinList)
+
+                        .contextMenu(menuItems: {
+                            Button(action: {
+                                updateCoinList.toggle()
+                            }, label: {
+                                Label("Update Coin List", systemImage: "text.badge.minus")
+                            })
+                    })
+                        if updateCoinList {
+                            Button(action: {
+                                homeVM.remove(coin: item)
+                                if homeVM.userCoins.isEmpty {
+                                    updateCoinList.toggle()
+                                }
+                            }, label: {
+                               Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.red)
+                            })
+                            .offset(x: -6,y: 30)
+                        }
+                    }
+                }
+            }
+        }
+        .frame(height: 100)
+        .padding(.top)
     }
 }
