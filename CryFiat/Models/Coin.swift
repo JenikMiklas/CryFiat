@@ -94,16 +94,14 @@ struct CoinDetail: Codable {
       let symbol: String
       let name: String
       let publicNotice: String?
-      let localization: Localization
-      let description: Description
-      let links: Link
-      let image: Image
-      let sentimentVotesUpPercentage: Double
-      let sentimentVotesDownPercentage: Double
-      let marketCapRank: Int
-      let publicInterestScore: Double
-      let marketData: MarketData
-      let lastUpdated: String
+      let localization: Localization?
+      let description: Description?
+      let links: Link?
+      let image: Image?
+      let marketCapRank: Int?
+      let publicInterestScore: Double?
+      /*let marketData: MarketData?
+      let lastUpdated: String?*/
 
       private enum CodingKeys: String, CodingKey {
         case id
@@ -114,106 +112,24 @@ struct CoinDetail: Codable {
         case description
         case links
         case image
-        case sentimentVotesUpPercentage = "sentiment_votes_up_percentage"
-        case sentimentVotesDownPercentage = "sentiment_votes_down_percentage"
         case marketCapRank = "market_cap_rank"
         case publicInterestScore = "public_interest_score"
-        case marketData = "market_data"
-        case lastUpdated = "last_updated"
+        /*case marketData = "market_data"
+        case lastUpdated = "last_updated"*/
       }
     
     struct Localization: Codable {
       let en: String
-      let de: String
-      let es: String
-      let fr: String
-      let it: String
-      let pl: String
-      let ro: String
-      let hu: String
-      let nl: String
-      let pt: String
-      let sv: String
-      let vi: String
-      let tr: String
-      let ru: String
-      let ja: String
-      let zh: String
-      let zhTw: String
-      let ko: String
-      let ar: String
-      let th: String
-      let id: String
 
       private enum CodingKeys: String, CodingKey {
         case en
-        case de
-        case es
-        case fr
-        case it
-        case pl
-        case ro
-        case hu
-        case nl
-        case pt
-        case sv
-        case vi
-        case tr
-        case ru
-        case ja
-        case zh
-        case zhTw = "zh-tw"
-        case ko
-        case ar
-        case th
-        case id
       }
     }
     struct Description: Codable {
       let en: String
-      let de: String
-      let es: String
-      let fr: String
-      let it: String
-      let pl: String
-      let ro: String
-      let hu: String
-      let nl: String
-      let pt: String
-      let sv: String
-      let vi: String
-      let tr: String
-      let ru: String
-      let ja: String
-      let zh: String
-      let zhTw: String
-      let ko: String
-      let ar: String
-      let th: String
-      let id: String
 
       private enum CodingKeys: String, CodingKey {
         case en
-        case de
-        case es
-        case fr
-        case it
-        case pl
-        case ro
-        case hu
-        case nl
-        case pt
-        case sv
-        case vi
-        case tr
-        case ru
-        case ja
-        case zh
-        case zhTw = "zh-tw"
-        case ko
-        case ar
-        case th
-        case id
       }
     }
     struct Link: Codable {

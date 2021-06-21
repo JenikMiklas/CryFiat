@@ -22,7 +22,7 @@ final class CoinImageService {
     
     init(urlString: String, coinName: String) {
         if let uiImage = fileService.loadCachedImage(name: coinName) {
-            image = uiImage
+            self.image = uiImage
         } else {
             getCoinImage(urlString: urlString, coinName: coinName)
         }

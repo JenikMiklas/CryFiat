@@ -13,11 +13,11 @@ struct CoinSelectionView: View {
     @State private var search = false
     @State private var cardSize = CoinCardSize.small
     @State private var chooseCardSize = false
-    @State private var width: CGFloat = UIScreen.main.bounds.width
+    @State private var showCoinDetail = false
     //@Binding var sheet: Bool
     // MARK: BODY
     var body: some View {
-        NavigationView {
+       
             ZStack {
                 VStack {
                     if search {
@@ -43,16 +43,18 @@ struct CoinSelectionView: View {
                         .cardSelection(show: chooseCardSize)
                 }
             }
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
+        
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Coins selection")
+            .sheet(isPresented: $showCoinDetail) {
+                CoinDetailView(show: $showCoinDetail)
+            }
     }
 }
 // MARK: PREVIEW
 struct CryptoAssetSelection_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        NavigationView {
             CoinSelectionView()
         }
     }
@@ -64,12 +66,14 @@ extension CoinSelectionView {
         return ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: cardSize.rawValue), spacing: 0)]) {
                 ForEach(coinSelection.marketCoins, id: \.uuid) { coin in
-                    NavigationLink(
-                        destination: /*@START_MENU_TOKEN@*/Text("Destination")/*@END_MENU_TOKEN@*/,
-                        label: {
-                            CoinCardView(coin: coin, cardSize: cardSize)
-                        })
+                    Button(action: {
+                        showCoinDetail.toggle()
+                        coinSelection.getCoinDetail(coinID: coin.id)
+                    }, label: {
+                        CoinCardView(coin: coin, cardSize: cardSize)
+                    })
                         .foregroundColor(.primary)
+
                    /* CoinCardView(coin: coin, cardSize: cardSize)
                         .onTapGesture {
                             coinSelection.saveUserCoin(coin: coin)

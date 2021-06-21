@@ -10,13 +10,14 @@ import SwiftUI
 @main
 struct CryFiatApp: App {
     
-    @StateObject var appVM = AppViewModel()
-    
+    //@StateObject var appVM = AppViewModel()
+   
     var body: some Scene {
         WindowGroup {
             /*ContentView()
                 .environmentObject(appVM)*/
             HomeView()
+        
         }
     }
 }

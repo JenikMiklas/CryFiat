@@ -13,7 +13,7 @@ final class CoinSelectionVM: ObservableObject {
     @Published var findCoin = ""
     
     private let coinMarketService = CoinMarketService.shared
-    private let localDataService = LocalDataService.shared
+    //private let localDataService = LocalDataService.shared
     private var cancellable = Set<AnyCancellable>()
     private var page = 1
     
@@ -67,7 +67,11 @@ final class CoinSelectionVM: ObservableObject {
         }
     }
     
-    func saveUserCoin(coin: CoinsTokenMarket) {
-        localDataService.processCoin(coin: coin, address: "no address")
+    func getCoinDetail(coinID: String) {
+        coinMarketService.getCoinDetail(coin: coinID)
     }
+    
+    /*func saveUserCoin(coin: CoinsTokenMarket) {
+        localDataService.processCoin(coin: coin, address: "no address")
+    }*/
 }
