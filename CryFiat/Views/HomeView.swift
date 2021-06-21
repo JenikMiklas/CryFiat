@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var homeVM = HomeVM()
-    @State private var updateCoinList = false
+    @State private var updateCoinList = true
     
     var body: some View {
         NavigationView {
@@ -59,6 +59,7 @@ extension HomeView {
                         Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                             VStack {
                                 CoinImageView(imageUrl: "", coinName: item.coinID!)
+                                    .opacity(updateCoinList ? 0.4 : 1)
                                 Text(item.symbol?.uppercased() ?? "")
                                     .font(.headline)
                                     .lineLimit(1)
@@ -70,7 +71,7 @@ extension HomeView {
                                     .lineLimit(1)
                                     .allowsTightening(false)
                             }
-                            .opacity(updateCoinList ? 0.4 : 1)
+                            .opacity(updateCoinList ? 0.8 : 1)
                             .frame(width: 75)
                             .padding(.trailing, 10)
                         })
@@ -95,7 +96,7 @@ extension HomeView {
                                 .frame(width: 30, height: 30)
                                 .foregroundColor(.red)
                             })
-                            .offset(x: -6,y: 30)
+                            .offset(x: 25,y: 12)
                         }
                     }
                 }

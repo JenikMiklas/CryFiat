@@ -20,7 +20,6 @@ final class CoinMarketService {
     
     @Published var marketCoins = [CoinsTokenMarket]()
     @Published var basicCoins = [BasicCoin]()
-    @Published var coinDetail: CoinDetail?
     
     private var subscription: AnyCancellable?
     
@@ -69,17 +68,5 @@ final class CoinMarketService {
                     print(coins)
                     self.subscription?.cancel()
             })
-    }
-    
-    func getCoinDetail(coin: String) {
-        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/\(coin)?tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false") else {
-             fatalError("Wrong URL to get all Coin Detail.")
-        }
-        subscription = DownloadManager.downloadFrom(url: url)
-            .decode(type: CoinDetail.self, decoder: JSONDecoder())
-            .sink(receiveCompletion: DownloadManager.Completion,
-                  receiveValue: { [unowned self] coinDetail in
-                    self.coinDetail = coinDetail
-                  })
     }
 }

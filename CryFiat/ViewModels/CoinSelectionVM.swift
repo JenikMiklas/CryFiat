@@ -7,13 +7,16 @@
 
 import Combine
 import Foundation
+import SwiftUI
 
 final class CoinSelectionVM: ObservableObject {
     @Published var marketCoins = [CoinsTokenMarket]() 
     @Published var findCoin = ""
+    @Published var addCoin: CoinsTokenMarket?
     
     private let coinMarketService = CoinMarketService.shared
-    //private let localDataService = LocalDataService.shared
+    private let localDataService = LocalDataService.shared
+    private let fileService = FileService.shared
     private var cancellable = Set<AnyCancellable>()
     private var page = 1
     
@@ -67,11 +70,11 @@ final class CoinSelectionVM: ObservableObject {
         }
     }
     
-    func getCoinDetail(coinID: String) {
-        coinMarketService.getCoinDetail(coin: coinID)
+    func saveUserCoin(coin: CoinsTokenMarket) {
+        localDataService.processCoin(coin: coin, address: "no address")
     }
     
-    /*func saveUserCoin(coin: CoinsTokenMarket) {
-        localDataService.processCoin(coin: coin, address: "no address")
-    }*/
+    func getImageCoin(coinID: String) -> UIImage {
+        return fileService.loadCachedImage(name: coinID) ?? UIImage(systemName: "questionmark")!
+    }
 }

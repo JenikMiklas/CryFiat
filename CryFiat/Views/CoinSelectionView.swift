@@ -13,7 +13,8 @@ struct CoinSelectionView: View {
     @State private var search = false
     @State private var cardSize = CoinCardSize.small
     @State private var chooseCardSize = false
-    @State private var showCoinDetail = false
+    @State private var addCoin = false
+    
     //@Binding var sheet: Bool
     // MARK: BODY
     var body: some View {
@@ -42,13 +43,14 @@ struct CoinSelectionView: View {
                     CoinSizeCardView(cardSize: $cardSize, chooseCardSize: $chooseCardSize)
                         .cardSelection(show: chooseCardSize)
                 }
+                if addCoin {
+                    AddCoinView(coinSelection: coinSelection, addCoin: $addCoin)
+                        .cardSelection(show: addCoin)
+                }
             }
         
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Coins selection")
-            .sheet(isPresented: $showCoinDetail) {
-                CoinDetailView(show: $showCoinDetail)
-            }
     }
 }
 // MARK: PREVIEW
@@ -67,8 +69,9 @@ extension CoinSelectionView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: cardSize.rawValue), spacing: 0)]) {
                 ForEach(coinSelection.marketCoins, id: \.uuid) { coin in
                     Button(action: {
-                        showCoinDetail.toggle()
-                        coinSelection.getCoinDetail(coinID: coin.id)
+                        coinSelection.addCoin = coin
+                        if chooseCardSize { chooseCardSize.toggle() }
+                        addCoin = true
                     }, label: {
                         CoinCardView(coin: coin, cardSize: cardSize)
                     })
@@ -104,7 +107,10 @@ extension CoinSelectionView {
                 })
             }
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: { chooseCardSize.toggle() }, label: {
+                Button(action: {
+                    if addCoin { addCoin.toggle() }
+                        chooseCardSize.toggle()
+                }, label: {
                     Image(systemName: "rectangle.3.offgrid")
                 })
             }
