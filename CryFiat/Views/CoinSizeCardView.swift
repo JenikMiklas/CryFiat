@@ -17,34 +17,38 @@ struct CoinSizeCardView: View {
             Color(.systemGray6)
                 .frame(height: 200)
                 .cornerRadius(20)
-            HStack {
-                Button(action: {
-                    cardSize = .small
-                    chooseCardSize.toggle()
-                }, label: {
-                    RoundedRectangle(cornerRadius:10)
-                        .frame(width: 90/2, height: 100/2)
-                })
-                Divider()
-                    .frame(height: 75)
-                Button(action: {
-                    cardSize = .medium
-                    chooseCardSize.toggle()
-                }, label: {
-                    RoundedRectangle(cornerRadius:10)
-                        .frame(width: 135/2, height: 150/2)
-                })
-                Divider()
-                    .frame(height: 75)
-                Button(action: {
-                    cardSize = .large
-                    chooseCardSize.toggle()
-                }, label: {
-                    RoundedRectangle(cornerRadius:10)
-                        .frame(width: 320/2, height: 200/2)
-                })
+            VStack {
+                Text("Coin card size")
+                    .font(.headline)
+                HStack {
+                    Button(action: {
+                        cardSize = .small
+                        chooseCardSize.toggle()
+                    }, label: {
+                        RoundedRectangle(cornerRadius:10)
+                            .frame(width: 90/2, height: 100/2)
+                    })
+                    Divider()
+                        .frame(height: 75)
+                    Button(action: {
+                        cardSize = .medium
+                        chooseCardSize.toggle()
+                    }, label: {
+                        RoundedRectangle(cornerRadius:10)
+                            .frame(width: 135/2, height: 150/2)
+                    })
+                    Divider()
+                        .frame(height: 75)
+                    Button(action: {
+                        cardSize = .large
+                        chooseCardSize.toggle()
+                    }, label: {
+                        RoundedRectangle(cornerRadius:10)
+                            .frame(width: 320/2, height: 200/2)
+                    })
+                }
+                .foregroundColor(Color(.systemGray))
             }.offset(y: -20)
-            .foregroundColor(Color(.systemGray))
         }
     }
 }
