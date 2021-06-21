@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var homeVM = HomeVM()
-    @State private var updateCoinList = true
+    @State private var updateCoinList = false
     
     var body: some View {
         NavigationView {
