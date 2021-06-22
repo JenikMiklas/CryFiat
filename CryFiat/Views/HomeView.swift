@@ -30,10 +30,10 @@ struct HomeView: View {
                         })
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if updateCoinList || !homeVM.userCoins.isEmpty {
+                    if !homeVM.userCoins.isEmpty {
                     Button(action: { updateCoinList.toggle() }, label: {
-                        if updateCoinList {
-                            
+                        if !updateCoinList {
+                            Image(systemName: "trash.circle.fill")
                         } else {
                             Text("Close editing")
                         }
@@ -82,14 +82,6 @@ extension HomeView {
                             .padding(.trailing, 10)
                         })
                         .disabled(updateCoinList)
-
-                        .contextMenu(menuItems: {
-                            Button(action: {
-                                updateCoinList.toggle()
-                            }, label: {
-                                Label("Update Coin List", systemImage: "text.badge.minus")
-                            })
-                    })
                         if updateCoinList {
                             Button(action: {
                                 homeVM.remove(coin: item)
@@ -102,7 +94,7 @@ extension HomeView {
                                 .frame(width: 30, height: 30)
                                 .foregroundColor(.red)
                             })
-                            .offset(x: 25,y: 12)
+                            .offset(x: 25,y: -30)
                         }
                     }
                 }
