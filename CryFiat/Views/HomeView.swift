@@ -23,11 +23,13 @@ struct HomeView: View {
             .navigationTitle("CryFiat")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(
-                        destination: CoinSelectionView(),
-                        label: {
-                            Image(systemName: "plus.circle.fill")
+                    HStack {
+                        NavigationLink(
+                            destination: CoinSelectionView(),
+                            label: {
+                                Image(systemName: "plus.circle.fill")
                         })
+                    }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     if !homeVM.userCoins.isEmpty {

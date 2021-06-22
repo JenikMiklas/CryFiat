@@ -9,13 +9,9 @@
 /* Begin PBXBuildFile section */
 		7F049616267E14ED0045A6FB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F049615267E14ED0045A6FB /* HomeView.swift */; };
 		7F049618267E19D00045A6FB /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F049617267E19D00045A6FB /* HomeVM.swift */; };
-		7F049620267E4F100045A6FB /* CryFiatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F04961F267E4F100045A6FB /* CryFiatUITests.swift */; };
 		7F66A241265E6A6800B891DD /* CoinSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66A240265E6A6800B891DD /* CoinSelectionView.swift */; };
 		7F66A243265E901500B891DD /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66A242265E901500B891DD /* AppViewModel.swift */; };
 		7F66A245265ED84B00B891DD /* CryptoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66A244265ED84B00B891DD /* CryptoDetail.swift */; };
-		7F6881CB267B3C62001E38EE /* CryFiatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6881CA267B3C62001E38EE /* CryFiatTests.swift */; };
-		7F6881D3267B3CFD001E38EE /* CoinDecoderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6881D2267B3CFD001E38EE /* CoinDecoderTest.swift */; };
-		7F6881D8267B473F001E38EE /* coins.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F6881D7267B473F001E38EE /* coins.json */; };
 		7F6967DF267774B60038E896 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6967DE267774B60038E896 /* SearchBarView.swift */; };
 		7F6967E226777BC50038E896 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6967E126777BC50038E896 /* UIApplication+Extension.swift */; };
 		7F6967E5267782DC0038E896 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6967E4267782DC0038E896 /* Coin.swift */; };
@@ -47,37 +43,12 @@
 		7FDB1F8B266005A200403135 /* DetailContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDB1F8A266005A200403135 /* DetailContent.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		7F049622267E4F100045A6FB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7F782F0726579EC700A358D2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7F782F0E26579EC700A358D2;
-			remoteInfo = CryFiat;
-		};
-		7F6881CD267B3C62001E38EE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7F782F0726579EC700A358D2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7F782F0E26579EC700A358D2;
-			remoteInfo = CryFiat;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		7F049615267E14ED0045A6FB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7F049617267E19D00045A6FB /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
-		7F04961D267E4F100045A6FB /* CryFiatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryFiatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F04961F267E4F100045A6FB /* CryFiatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryFiatUITests.swift; sourceTree = "<group>"; };
-		7F049621267E4F100045A6FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F66A240265E6A6800B891DD /* CoinSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSelectionView.swift; sourceTree = "<group>"; };
 		7F66A242265E901500B891DD /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		7F66A244265ED84B00B891DD /* CryptoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetail.swift; sourceTree = "<group>"; };
-		7F6881C8267B3C62001E38EE /* CryFiatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryFiatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F6881CA267B3C62001E38EE /* CryFiatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryFiatTests.swift; sourceTree = "<group>"; };
-		7F6881CC267B3C62001E38EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7F6881D2267B3CFD001E38EE /* CoinDecoderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDecoderTest.swift; sourceTree = "<group>"; };
-		7F6881D7267B473F001E38EE /* coins.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = coins.json; sourceTree = "<group>"; };
 		7F6967DE267774B60038E896 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		7F6967E126777BC50038E896 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		7F6967E4267782DC0038E896 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
@@ -112,20 +83,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7F04961A267E4F100045A6FB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F6881C5267B3C62001E38EE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7F782F0C26579EC700A358D2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -136,34 +93,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7F04961E267E4F100045A6FB /* CryFiatUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7F04961F267E4F100045A6FB /* CryFiatUITests.swift */,
-				7F049621267E4F100045A6FB /* Info.plist */,
-			);
-			path = CryFiatUITests;
-			sourceTree = "<group>";
-		};
-		7F6881C9267B3C62001E38EE /* CryFiatTests */ = {
-			isa = PBXGroup;
-			children = (
-				7F6881D6267B46FF001E38EE /* files */,
-				7F6881CA267B3C62001E38EE /* CryFiatTests.swift */,
-				7F6881CC267B3C62001E38EE /* Info.plist */,
-				7F6881D2267B3CFD001E38EE /* CoinDecoderTest.swift */,
-			);
-			path = CryFiatTests;
-			sourceTree = "<group>";
-		};
-		7F6881D6267B46FF001E38EE /* files */ = {
-			isa = PBXGroup;
-			children = (
-				7F6881D7267B473F001E38EE /* coins.json */,
-			);
-			path = files;
-			sourceTree = "<group>";
-		};
 		7F6967E026777B9D0038E896 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,8 +117,6 @@
 				7F798CAB267A3D35001DD404 /* Assets.xcassets */,
 				7F782F1226579EC700A358D2 /* CryFiatApp.swift */,
 				7F782F1126579EC700A358D2 /* CryFiat */,
-				7F6881C9267B3C62001E38EE /* CryFiatTests */,
-				7F04961E267E4F100045A6FB /* CryFiatUITests */,
 				7F782F1026579EC700A358D2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -198,8 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				7F782F0F26579EC700A358D2 /* CryFiat.app */,
-				7F6881C8267B3C62001E38EE /* CryFiatTests.xctest */,
-				7F04961D267E4F100045A6FB /* CryFiatUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -317,42 +242,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7F04961C267E4F100045A6FB /* CryFiatUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7F049624267E4F100045A6FB /* Build configuration list for PBXNativeTarget "CryFiatUITests" */;
-			buildPhases = (
-				7F049619267E4F100045A6FB /* Sources */,
-				7F04961A267E4F100045A6FB /* Frameworks */,
-				7F04961B267E4F100045A6FB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7F049623267E4F100045A6FB /* PBXTargetDependency */,
-			);
-			name = CryFiatUITests;
-			productName = CryFiatUITests;
-			productReference = 7F04961D267E4F100045A6FB /* CryFiatUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
-		7F6881C7267B3C62001E38EE /* CryFiatTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7F6881CF267B3C62001E38EE /* Build configuration list for PBXNativeTarget "CryFiatTests" */;
-			buildPhases = (
-				7F6881C4267B3C62001E38EE /* Sources */,
-				7F6881C5267B3C62001E38EE /* Frameworks */,
-				7F6881C6267B3C62001E38EE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7F6881CE267B3C62001E38EE /* PBXTargetDependency */,
-			);
-			name = CryFiatTests;
-			productName = CryFiatTests;
-			productReference = 7F6881C8267B3C62001E38EE /* CryFiatTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		7F782F0E26579EC700A358D2 /* CryFiat */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F782F1E26579EC900A358D2 /* Build configuration list for PBXNativeTarget "CryFiat" */;
@@ -379,14 +268,6 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
-					7F04961C267E4F100045A6FB = {
-						CreatedOnToolsVersion = 12.5;
-						TestTargetID = 7F782F0E26579EC700A358D2;
-					};
-					7F6881C7267B3C62001E38EE = {
-						CreatedOnToolsVersion = 12.5;
-						TestTargetID = 7F782F0E26579EC700A358D2;
-					};
 					7F782F0E26579EC700A358D2 = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -406,28 +287,11 @@
 			projectRoot = "";
 			targets = (
 				7F782F0E26579EC700A358D2 /* CryFiat */,
-				7F6881C7267B3C62001E38EE /* CryFiatTests */,
-				7F04961C267E4F100045A6FB /* CryFiatUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7F04961B267E4F100045A6FB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F6881C6267B3C62001E38EE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F6881D8267B473F001E38EE /* coins.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7F782F0D26579EC700A358D2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -440,23 +304,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7F049619267E4F100045A6FB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F049620267E4F100045A6FB /* CryFiatUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F6881C4267B3C62001E38EE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F6881CB267B3C62001E38EE /* CryFiatTests.swift in Sources */,
-				7F6881D3267B3CFD001E38EE /* CoinDecoderTest.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7F782F0B26579EC700A358D2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -498,98 +345,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		7F049623267E4F100045A6FB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7F782F0E26579EC700A358D2 /* CryFiat */;
-			targetProxy = 7F049622267E4F100045A6FB /* PBXContainerItemProxy */;
-		};
-		7F6881CE267B3C62001E38EE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7F782F0E26579EC700A358D2 /* CryFiat */;
-			targetProxy = 7F6881CD267B3C62001E38EE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		7F049625267E4F100045A6FB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J57U5HP4K7;
-				INFOPLIST_FILE = CryFiatUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = cz.jenikmiklas.CryFiatUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CryFiat;
-			};
-			name = Debug;
-		};
-		7F049626267E4F100045A6FB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J57U5HP4K7;
-				INFOPLIST_FILE = CryFiatUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = cz.jenikmiklas.CryFiatUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CryFiat;
-			};
-			name = Release;
-		};
-		7F6881D0267B3C62001E38EE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J57U5HP4K7;
-				INFOPLIST_FILE = CryFiatTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = cz.jenikmiklas.CryFiatTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CryFiat.app/CryFiat";
-			};
-			name = Debug;
-		};
-		7F6881D1267B3C62001E38EE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J57U5HP4K7;
-				INFOPLIST_FILE = CryFiatTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = cz.jenikmiklas.CryFiatTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CryFiat.app/CryFiat";
-			};
-			name = Release;
-		};
 		7F782F1C26579EC900A358D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -753,24 +509,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7F049624267E4F100045A6FB /* Build configuration list for PBXNativeTarget "CryFiatUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7F049625267E4F100045A6FB /* Debug */,
-				7F049626267E4F100045A6FB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7F6881CF267B3C62001E38EE /* Build configuration list for PBXNativeTarget "CryFiatTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7F6881D0267B3C62001E38EE /* Debug */,
-				7F6881D1267B3C62001E38EE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		7F782F0A26579EC700A358D2 /* Build configuration list for PBXProject "CryFiat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
