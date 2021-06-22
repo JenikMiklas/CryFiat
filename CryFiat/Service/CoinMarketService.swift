@@ -24,7 +24,7 @@ final class CoinMarketService {
     
     private var subscription: AnyCancellable?
     
-    private init() { getMarketCoins() }
+    private init() {}
     
     func getMarketCoins(page: Int = 1) {
            
