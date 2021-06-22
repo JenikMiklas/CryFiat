@@ -16,7 +16,11 @@ struct HomeView: View {
         NavigationView {
             VStack {
                 coinList
-                Text(homeVM.selectedCoin?.name ?? "")
+                if !homeVM.selectedCoins.isEmpty {
+                    Text(homeVM.selectedCoin?.name ?? homeVM.selectedCoins.first?.name ?? "")
+                } else {
+                    ProgressView()
+                }
                 
                 Spacer()
             }
@@ -33,11 +37,15 @@ struct HomeView: View {
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     if !homeVM.userCoins.isEmpty {
-                    Button(action: { updateCoinList.toggle() }, label: {
+                    Button(action: {
+                        withAnimation {
+                            updateCoinList.toggle()
+                        }
+                    }, label: {
                         if !updateCoinList {
                             Image(systemName: "trash.circle.fill")
                         } else {
-                            Text("Close editing")
+                            Image(systemName: "xmark.circle")
                         }
                     })
                 }
@@ -60,20 +68,20 @@ extension HomeView {
     private var coinList: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack {
-                ForEach(homeVM.userCoins, id:\.id) { item in
+                ForEach(homeVM.selectedCoins, id:\.uuid) { item in
                     ZStack(alignment: .center) {
                         Button(action: {
-                            homeVM.getSelectedCoin(coinID: item.coinID!)
+                            homeVM.selectedCoin = item
                         }, label: {
                             VStack {
-                                CoinImageView(imageUrl: "", coinName: item.coinID!)
+                                CoinImageView(imageUrl: "", coinName: item.id)
                                     .opacity(updateCoinList ? 0.4 : 1)
-                                Text(item.symbol?.uppercased() ?? "")
+                                Text(item.symbol.uppercased())
                                     .font(.headline)
                                     .lineLimit(1)
                                     .allowsTightening(false)
                                     .foregroundColor(.primary)
-                                Text(item.name ?? "")
+                                Text(item.name)
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                     .lineLimit(1)

@@ -12,6 +12,10 @@ struct CryFiatApp: App {
     
     //@StateObject var appVM = AppViewModel()
    
+    /*init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.red]
+    }*/
+    
     var body: some Scene {
         WindowGroup {
             /*ContentView()

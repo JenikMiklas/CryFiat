@@ -11,6 +11,7 @@ import Foundation
 class HomeVM: ObservableObject {
     
     @Published var userCoins = [UserCoin]()
+    @Published var selectedCoins = [CoinsTokenMarket]()
     @Published var selectedCoin: CoinsTokenMarket?
     
     private let localDataService = LocalDataService.shared
@@ -22,22 +23,40 @@ class HomeVM: ObservableObject {
         localDataService.$userCoins
             .sink { [unowned self] coins in
                 self.userCoins = coins
+                if !self.userCoins.isEmpty {
+                    self.getSelectedCoins(coinsID: generatePath(coins: self.userCoins))
+                } else {
+                    self.selectedCoins = [CoinsTokenMarket]()
+                }
             }
             .store(in: &cancellable)
         
-        coinMarketService.$selectedCoin
-            .map { $0.first }
-            .sink { [unowned self] coin in
-                self.selectedCoin = coin
+        coinMarketService.$selectedCoins
+            .sink { [unowned self] coins in
+                self.selectedCoins = coins
+                print(coins)
             }
             .store(in: &cancellable)
     }
     
-    func remove(coin: UserCoin) {
-        localDataService.removeFromUserList(coin: coin)
+    private func generatePath(coins: [UserCoin]) -> String {
+        var string = ""
+        for coin in coins {
+            string.append(coin.coinID!)
+            if coins.last != coin {
+                string.append("%2C%20")
+            }
+        }
+        return  string
     }
     
-    func getSelectedCoin(coinID: String) {
-        coinMarketService.getCoin(coin: coinID)
+    func remove(coin: CoinsTokenMarket) {
+        if let coinToRemove = userCoins.first(where: { $0.coinID == coin.id }) {
+            localDataService.removeFromUserList(coin: coinToRemove)
+        }
+    }
+    
+    private func getSelectedCoins(coinsID: String) {
+        coinMarketService.getUserCoins(coins: coinsID)
     }
 }
