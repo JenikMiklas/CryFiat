@@ -16,9 +16,8 @@ struct HomeView: View {
         NavigationView {
             VStack {
                 coinList
-                ScrollView(.vertical) {
-                    Text("detail")
-                }
+                Text(homeVM.selectedCoin?.name ?? "")
+                
                 Spacer()
             }
             .navigationTitle("CryFiat")
@@ -31,9 +30,13 @@ struct HomeView: View {
                         })
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if updateCoinList {
+                    if updateCoinList || !homeVM.userCoins.isEmpty {
                     Button(action: { updateCoinList.toggle() }, label: {
-                        Text("Close editing")
+                        if updateCoinList {
+                            
+                        } else {
+                            Text("Close editing")
+                        }
                     })
                 }
                 }
@@ -46,6 +49,7 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             
+            
     }
 }
 
@@ -56,7 +60,9 @@ extension HomeView {
             LazyHStack {
                 ForEach(homeVM.userCoins, id:\.id) { item in
                     ZStack(alignment: .center) {
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Button(action: {
+                            homeVM.getSelectedCoin(coinID: item.coinID!)
+                        }, label: {
                             VStack {
                                 CoinImageView(imageUrl: "", coinName: item.coinID!)
                                     .opacity(updateCoinList ? 0.4 : 1)

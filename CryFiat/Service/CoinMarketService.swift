@@ -20,6 +20,7 @@ final class CoinMarketService {
     
     @Published var marketCoins = [CoinsTokenMarket]()
     @Published var basicCoins = [BasicCoin]()
+    @Published var selectedCoin = [CoinsTokenMarket]()
     
     private var subscription: AnyCancellable?
     
@@ -66,6 +67,19 @@ final class CoinMarketService {
                   receiveValue: { [unowned self] (coins) in
                     self.basicCoins = coins
                     print(coins)
+                    self.subscription?.cancel()
+            })
+    }
+    
+    func getCoin(coin: String) {
+        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=\(coin)&order=market_cap_desc&per_page=250&page=1&sparkline=false") else {
+             fatalError("Wrong URL to get Top Market Coins")
+        }
+        subscription = DownloadManager.downloadFrom(url: url)
+            .decode(type: [CoinsTokenMarket].self, decoder: JSONDecoder())
+            .sink(receiveCompletion: DownloadManager.Completion,
+                  receiveValue: { [unowned self] (marketCoins) in
+                    self.selectedCoin = marketCoins
                     self.subscription?.cancel()
             })
     }

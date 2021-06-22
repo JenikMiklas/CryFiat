@@ -11,6 +11,7 @@ import Foundation
 class HomeVM: ObservableObject {
     
     @Published var userCoins = [UserCoin]()
+    @Published var selectedCoin: CoinsTokenMarket?
     
     private let localDataService = LocalDataService.shared
     private let coinMarketService = CoinMarketService.shared
@@ -23,9 +24,20 @@ class HomeVM: ObservableObject {
                 self.userCoins = coins
             }
             .store(in: &cancellable)
+        
+        coinMarketService.$selectedCoin
+            .map { $0.first }
+            .sink { [unowned self] coin in
+                self.selectedCoin = coin
+            }
+            .store(in: &cancellable)
     }
     
     func remove(coin: UserCoin) {
         localDataService.removeFromUserList(coin: coin)
+    }
+    
+    func getSelectedCoin(coinID: String) {
+        coinMarketService.getCoin(coin: coinID)
     }
 }
