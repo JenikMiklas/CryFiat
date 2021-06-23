@@ -9,11 +9,17 @@ import SwiftUI
 
 struct CoinSelectionView: View {
     
-    @StateObject var coinSelection = CoinSelectionVM()
+    @StateObject var coinSelection: CoinSelectionVM
     @State private var search = false
     @State private var cardSize = CoinCardSize.small
     @State private var chooseCardSize = false
     @State private var addCoin = false
+    //let currency: Currency
+    
+    init(currency: Currency) {
+        //self.currency = currency
+        self._coinSelection = StateObject(wrappedValue: CoinSelectionVM(currency: currency))
+    }
     
     //@Binding var sheet: Bool
     // MARK: BODY
@@ -57,7 +63,7 @@ struct CoinSelectionView: View {
 struct CryptoAssetSelection_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CoinSelectionView()
+            CoinSelectionView(currency: Currency(rawValue: "eur")!)
         }
     }
 }
@@ -73,7 +79,7 @@ extension CoinSelectionView {
                         if chooseCardSize { chooseCardSize.toggle() }
                         addCoin = true
                     }, label: {
-                        CoinCardView(coin: coin, cardSize: cardSize)
+                        CoinCardView(coin: coin, cardSize: cardSize, currency: coinSelection.currency)
                     })
                         .foregroundColor(.primary)
 

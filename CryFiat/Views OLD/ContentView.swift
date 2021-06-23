@@ -41,7 +41,7 @@ struct ContentView: View {
                 Image(systemName: "plus.circle.fill")
             }))
                 .sheet(isPresented: $sheet) {
-                    CoinSelectionView()
+                    CoinSelectionView(currency: Currency(rawValue: "eur")!)
             }
         }
     }

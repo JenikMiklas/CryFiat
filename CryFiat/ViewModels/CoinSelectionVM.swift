@@ -14,13 +14,17 @@ final class CoinSelectionVM: ObservableObject {
     @Published var findCoin = ""
     @Published var addCoin: CoinsTokenMarket?
     
+    var currency: Currency
+    
     private let coinMarketService = CoinMarketService.shared
     private let localDataService = LocalDataService.shared
     private let fileService = FileService.shared
     private var cancellable = Set<AnyCancellable>()
     private var page = 1
     
-    init() {
+    init(currency: Currency) {
+        self.currency = currency
+        print(currency)
         coinMarketService.$marketCoins
             .sink { [unowned self] (marketCoins) in
                 self.marketCoins = marketCoins
@@ -33,7 +37,7 @@ final class CoinSelectionVM: ObservableObject {
             .map (findCoins)
             .map (generatePath)
             .compactMap { [unowned self] in
-                self.coinMarketService.searchCoins(coins: $0)
+                self.coinMarketService.searchCoins(coins: $0, currency: currency)
             }
             .sink {}
             .store(in: &cancellable)
@@ -61,7 +65,7 @@ final class CoinSelectionVM: ObservableObject {
     // MARK: PUBLIC
     func downloadMoreCoins() {
         page += 1
-        coinMarketService.getMarketCoins(page: page)
+        coinMarketService.getMarketCoins(page: page, currency: currency)
     }
     
     func downloadAllCoins() {

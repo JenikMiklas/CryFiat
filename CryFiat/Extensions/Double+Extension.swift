@@ -11,13 +11,14 @@ extension Double {
     /// ```
     /// Coverts a Double into a Coin with 2-6 decimal places.
     /// ```
+    
     private var coinFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.usesGroupingSeparator = true
-        formatter.numberStyle = .currency
-        formatter.locale = .current
-        formatter.currencyCode = "EUR"
-        formatter.currencySymbol = "€"
+        //formatter.numberStyle = .currency
+        //formatter.locale = .current
+        //formatter.currencyCode = Currency.eur.rawValue
+        //formatter.currencySymbol = "€"
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 6
         return formatter
@@ -36,7 +37,11 @@ extension Double {
         return coinNumberString() + " %"
     }
     
-    func coinStringSymbol() -> String {
-        return coinNumberString() + " €"
+    func coinStringSymbol(currency: Currency) -> String {
+        if currency.symbol == "" {
+            return coinNumberString() + " " + currency.rawValue.uppercased()
+        } else {
+            return currency.symbol + " " + coinNumberString()
+        }
     }
 }

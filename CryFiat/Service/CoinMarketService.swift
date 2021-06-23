@@ -26,9 +26,9 @@ final class CoinMarketService {
     
     private init() {}
     
-    func getMarketCoins(page: Int = 1) {
+    func getMarketCoins(page: Int = 1, currency: Currency) {
            
-        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=\(page)&sparkline=false") else {
+        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=\(currency.rawValue)&order=market_cap_desc&per_page=250&page=\(page)&sparkline=false") else {
              fatalError("Wrong URL to get Top Market Coins")
         }
         subscription = DownloadManager.downloadFrom(url: url)
@@ -44,8 +44,8 @@ final class CoinMarketService {
             })
     }
     
-    func searchCoins(coins: String) {
-        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=\(coins)&order=market_cap_desc&per_page=250&page=1&sparkline=false") else {
+    func searchCoins(coins: String, currency: Currency) {
+        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=\(currency.rawValue)&ids=\(coins)&order=market_cap_desc&per_page=250&page=1&sparkline=false") else {
              fatalError("Wrong URL to get Top Market Coins")
         }
         subscription = DownloadManager.downloadFrom(url: url)
@@ -71,8 +71,8 @@ final class CoinMarketService {
             })
     }
     
-    func getUserCoins(coins: String) {
-        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=\(coins)&order=market_cap_desc&per_page=250&page=1&sparkline=false") else {
+    func getUserCoins(coins: String, currency: Currency) {
+        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=\(currency.rawValue)&ids=\(coins)&order=market_cap_desc&per_page=250&page=1&sparkline=false") else {
              fatalError("Wrong URL to get Top Market Coins")
         }
         subscription = DownloadManager.downloadFrom(url: url)

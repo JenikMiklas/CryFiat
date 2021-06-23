@@ -48,7 +48,7 @@ struct AddCoinView: View {
 
 struct AddCoinView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCoinView(coinSelection: CoinSelectionVM(), addCoin: .constant(false))
+        AddCoinView(coinSelection: CoinSelectionVM(currency: Currency(rawValue: "eur")!), addCoin: .constant(false))
             .previewLayout(.sizeThatFits)
             .padding()
     }

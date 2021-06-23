@@ -7,12 +7,20 @@
 
 import Combine
 import Foundation
+import SwiftUI
 
 class HomeVM: ObservableObject {
     
     @Published var userCoins = [UserCoin]()
     @Published var selectedCoins = [CoinsTokenMarket]()
     @Published var selectedCoin: CoinsTokenMarket?
+    @Published var selectedCurrency = Currency.czk {
+        didSet {
+            storedCurrency = selectedCurrency
+            getSelectedCoins(coinsID: generatePath(coins: userCoins))
+        }
+    }
+    @AppStorage("currency") var storedCurrency = Currency.eur
     
     private let localDataService = LocalDataService.shared
     private let coinMarketService = CoinMarketService.shared
@@ -20,6 +28,7 @@ class HomeVM: ObservableObject {
     private var cancellable = Set<AnyCancellable>()
     
     init() {
+        selectedCurrency = storedCurrency
         localDataService.$userCoins
             .sink { [unowned self] coins in
                 self.userCoins = coins
@@ -59,6 +68,6 @@ class HomeVM: ObservableObject {
     }
     
     private func getSelectedCoins(coinsID: String) {
-        coinMarketService.getUserCoins(coins: coinsID)
+        coinMarketService.getUserCoins(coins: coinsID, currency: selectedCurrency)
     }
 }

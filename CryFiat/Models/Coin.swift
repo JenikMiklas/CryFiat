@@ -14,8 +14,135 @@ enum CoinCardSize: CGFloat {
     case large = 320
 }
 
-enum Currency: String, Codable {
+enum Currency: String, Codable, CaseIterable {
     case btc, eth, ltc, bch, bnb, eos, xrp, xlm, link, dot, yfi, usd, aed, ars, aud, bdt, bhd, bmd, brl, cad, chf, clp, cny, czk, dkk, eur, gbp, hkd, huf, idr, ils, inr, jpy, krw, kwd, lkr, mmk, mxn, myr, ngn, nok, nzd, php, pkr, pln, rub, sar, sek, sgd, thb, twd, uah, vef, vnd, zar, xdr, xag, xau, bits, sats
+    
+    var curencies: [Currency] {
+        Self.allCases.sorted { $0.rawValue < $1.rawValue }
+    }
+    
+    var flag: String {
+        switch self {
+        case .aed:
+            return "🇦🇪"
+        case .ars:
+            return "🇦🇷"
+        case .aud:
+            return "🇦🇺"
+        case .bdt:
+            return "🇧🇩"
+        case .bhd:
+            return "🇧🇭"
+        case .bmd:
+            return "🇧🇲"
+        case .brl:
+            return "🇧🇷"
+        case .chf:
+            return "🇨🇭"
+        case .clp:
+            return "🇨🇱"
+        case .cny:
+            return "🇨🇳"
+        case .czk:
+            return "🇨🇿"
+        case .dkk:
+            return "🇩🇰"
+        case .eur:
+            return "🇪🇺"
+        case .gbp:
+            return "🇬🇧"
+        case .hkd:
+            return "🇭🇰"
+        case .huf:
+            return "🇭🇺"
+        case .idr:
+            return "🇮🇩"
+        case .ils:
+            return "🇮🇱"
+        case .inr:
+            return "🇮🇳"
+        case .jpy:
+            return "🇯🇵"
+        case .krw:
+            return "🇰🇷"
+        case .kwd:
+            return "🇰🇼"
+        case .lkr:
+            return "🇱🇰"
+        case .mmk:
+            return "🇲🇲"
+        case .mxn:
+            return "🇲🇽"
+        case .myr:
+            return "🇲🇾"
+        case .ngn:
+            return "🇳🇬"
+        case .nok:
+            return "🇳🇴"
+        case .nzd:
+            return "🇳🇿"
+        case .php:
+            return "🇵🇭"
+        case .pkr:
+            return "🇵🇰"
+        case .pln:
+            return "🇵🇱"
+        case .rub:
+            return "🇷🇺"
+        case .sar:
+            return "🇸🇦"
+        case .sek:
+            return "🇸🇪"
+        case .sgd:
+            return "🇸🇬"
+        case .thb:
+            return "🇹🇭"
+        case .twd:
+            return "🇹🇼"
+        case .uah:
+            return "🇺🇦"
+        case .usd:
+            return "🇺🇸"
+        case .vef:
+            return "🇻🇪"
+        case .vnd:
+            return "🇻🇳"
+        case .zar:
+            return "🇿🇦"
+        default:
+            return "crypto"
+    }
+}
+    var symbol: String {
+        switch self {
+        case .btc:
+            return "₿"
+        case .ltc:
+            return "Ł"
+        case .aud, .usd, .bmd, .cad, .hkd, .nzd, .sgd, .twd:
+            return "$"
+        case .eur:
+            return "€"
+        case .gbp:
+            return "£"
+        case .inr, .idr, .pkr, .lkr:
+            return "₨"
+        case .jpy:
+            return "¥"
+        case .krw:
+            return "₩"
+        case .ngn:
+            return "₦"
+        case .php:
+            return "₱"
+        case .rub:
+            return "₽"
+        case .thb:
+            return "฿"
+        default:
+            return ""
+        }
+    }
 }
 
 struct CoinsTokenMarket: Codable, Equatable, Hashable {

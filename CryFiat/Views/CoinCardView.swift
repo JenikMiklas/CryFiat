@@ -11,6 +11,7 @@ struct CoinCardView: View {
     
     let coin: CoinsTokenMarket
     let cardSize: CoinCardSize
+    let currency: Currency
     // MARK: BODY
     var body: some View {
         getSizeCard(cardSize: cardSize)
@@ -21,11 +22,11 @@ struct CoinCardView: View {
 struct CoinCardView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CoinCardView(coin: PreviewVM.coin, cardSize: .small)
+            CoinCardView(coin: PreviewVM.coin, cardSize: .small, currency: Currency(rawValue: "eur")!)
                 .previewLayout(.sizeThatFits)
-            CoinCardView(coin: PreviewVM.coin, cardSize: .medium)
+            CoinCardView(coin: PreviewVM.coin, cardSize: .medium, currency: Currency(rawValue: "eur")!)
                 .previewLayout(.sizeThatFits)
-            CoinCardView(coin: PreviewVM.coin, cardSize: .large)
+            CoinCardView(coin: PreviewVM.coin, cardSize: .large, currency: Currency(rawValue: "eur")!)
                 .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
         }
@@ -114,13 +115,13 @@ extension CoinCardView {
                                 .font(.title2)
                             HStack {
                                 VStack {
-                                    Text("24H: \(coin.high24h?.coinStringSymbol() ?? "?")")
-                                    Text("24L: \(coin.low24h?.coinStringSymbol() ?? "?")")
+                                    Text("24H: \(coin.high24h?.coinStringSymbol(currency: currency) ?? "?")")
+                                    Text("24L: \(coin.low24h?.coinStringSymbol(currency: currency) ?? "?")")
                                 }
                                 VStack {
                                     Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
                                         .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? Color(.systemGreen):Color(.systemRed))
-                                    Text(coin.priceChange24h?.coinStringSymbol() ?? "?")
+                                    Text(coin.priceChange24h?.coinStringSymbol(currency: currency) ?? "?")
                                         .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? Color(.systemGreen):Color(.systemRed))
                                        
                                 }
@@ -133,8 +134,8 @@ extension CoinCardView {
                         .padding(.top, 10.0)
                     HStack(alignment: .center) {
                         VStack(alignment:.leading) {
-                            Text("ath: \(coin.ath?.coinStringSymbol() ?? "?")")
-                            Text("atl: \(coin.atl?.coinStringSymbol() ?? "?")")
+                            Text("ath: \(coin.ath?.coinStringSymbol(currency: currency) ?? "?")")
+                            Text("atl: \(coin.atl?.coinStringSymbol(currency: currency) ?? "?")")
                         }
                         Spacer()
                         VStack(alignment: .trailing) {

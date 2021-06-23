@@ -11,6 +11,7 @@ struct HomeView: View {
     
     @StateObject var homeVM = HomeVM()
     @State private var updateCoinList = false
+    @State private var selectCurrency = false
     
     var body: some View {
         NavigationView {
@@ -29,7 +30,25 @@ struct HomeView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     HStack {
                         NavigationLink(
-                            destination: CoinSelectionView(),
+                            destination:
+                                SelectCurrencyView(homeVM: homeVM, currency: $homeVM.selectedCurrency),
+                            label: {
+                                Button(action: { selectCurrency.toggle() }, label: {
+                                    if homeVM.selectedCurrency.flag != "crypto" {
+                                        Text(homeVM.selectedCurrency.rawValue == "eur" ? "🇪🇺":homeVM.selectedCurrency.flag)
+                                    } else {
+                                        Image(homeVM.selectedCurrency.rawValue)
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                    }
+                                })
+                            })
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        NavigationLink(
+                            destination: CoinSelectionView(currency: homeVM.storedCurrency),
                             label: {
                                 Image(systemName: "plus.circle.fill")
                         })
@@ -60,6 +79,7 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
             
             
+            
     }
 }
 
@@ -74,7 +94,7 @@ extension HomeView {
                             homeVM.selectedCoin = item
                         }, label: {
                             VStack {
-                                Text(item.currentPrice.coinStringValue())
+                                Text(item.currentPrice.coinStringSymbol(currency: homeVM.selectedCurrency))
                                     .font(.callout)
                                     .lineLimit(1)
                                     .allowsTightening(false)
