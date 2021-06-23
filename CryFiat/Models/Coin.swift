@@ -14,6 +14,10 @@ enum CoinCardSize: CGFloat {
     case large = 320
 }
 
+enum Currency: String, Codable {
+    case btc, eth, ltc, bch, bnb, eos, xrp, xlm, link, dot, yfi, usd, aed, ars, aud, bdt, bhd, bmd, brl, cad, chf, clp, cny, czk, dkk, eur, gbp, hkd, huf, idr, ils, inr, jpy, krw, kwd, lkr, mmk, mxn, myr, ngn, nok, nzd, php, pkr, pln, rub, sar, sek, sgd, thb, twd, uah, vef, vnd, zar, xdr, xag, xau, bits, sats
+}
+
 struct CoinsTokenMarket: Codable, Equatable, Hashable {
     static func == (lhs: CoinsTokenMarket, rhs: CoinsTokenMarket) -> Bool {
         lhs.uuid == rhs.uuid
