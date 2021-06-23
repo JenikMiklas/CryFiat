@@ -34,7 +34,6 @@ class HomeVM: ObservableObject {
         coinMarketService.$selectedCoins
             .sink { [unowned self] coins in
                 self.selectedCoins = coins
-                print(coins)
             }
             .store(in: &cancellable)
     }
@@ -51,6 +50,9 @@ class HomeVM: ObservableObject {
     }
     
     func remove(coin: CoinsTokenMarket) {
+        if let index = selectedCoins.firstIndex(where: { $0.id == coin.id }) {
+            selectedCoins.remove(at: index)
+        }
         if let coinToRemove = userCoins.first(where: { $0.coinID == coin.id }) {
             localDataService.removeFromUserList(coin: coinToRemove)
         }

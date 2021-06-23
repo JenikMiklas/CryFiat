@@ -74,6 +74,11 @@ extension HomeView {
                             homeVM.selectedCoin = item
                         }, label: {
                             VStack {
+                                Text(item.currentPrice.coinStringValue())
+                                    .font(.callout)
+                                    .lineLimit(1)
+                                    .allowsTightening(false)
+                                    .foregroundColor(item.priceChangePercentage24h ?? 0 > 0 ? .green:.red)
                                 CoinImageView(imageUrl: "", coinName: item.id)
                                     .opacity(updateCoinList ? 0.4 : 1)
                                 Text(item.symbol.uppercased())
@@ -88,7 +93,7 @@ extension HomeView {
                                     .allowsTightening(false)
                             }
                             .opacity(updateCoinList ? 0.8 : 1)
-                            .frame(width: 75)
+                            .frame(width: 80)
                             .padding(.trailing, 10)
                         })
                         .disabled(updateCoinList)
@@ -110,7 +115,7 @@ extension HomeView {
                 }
             }
         }
-        .frame(height: 100)
+        .frame(height: 130)
         .padding(.top)
     }
 }
