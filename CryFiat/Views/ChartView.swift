@@ -15,6 +15,7 @@ struct ChartView: View {
     private let midVal: Double
     private let lastUpdate: Date
     private let startDate: Date
+    @State private var trimValue: CGFloat = 0
     
     init(coin: CoinsTokenMarket) {
         self.priceData = coin.sparklineIn7d?.price ?? [Double]()
@@ -28,27 +29,16 @@ struct ChartView: View {
     var body: some View {
         VStack {
             chartView
-                .background(
-                    VStack {
-                        Divider()
-                        Spacer()
-                        Divider()
-                        Spacer()
-                        Divider()
-                    })
-                .overlay(
-                    VStack {
-                        Text(maxVal.coinStringValue())
-                        Spacer()
-                        Text(((maxVal-minVal)/2).coinStringValue())
-                        Spacer()
-                        Text(minVal.coinStringValue())
-                }.font(.subheadline), alignment: .leading)
-            HStack {
-                Text(startDate.shortDateString())
-                Spacer()
-                Text(lastUpdate.shortDateString())
-            }.font(.callout)
+                .background(background)
+                .overlay(overlay, alignment: .leading)
+            timeInterval
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                withAnimation(.linear(duration: 2)) {
+                    trimValue = 1
+                }
+            }
         }
     }
 }
@@ -72,7 +62,34 @@ extension ChartView {
                     path.addLine(to: CGPoint(x: dx, y: y))
                 }
             }
+            .trim(from: 0, to: trimValue)
             .stroke(priceData.last ?? 0 > priceData.first ?? 0 ? Color.green:Color.red, lineWidth: 3)
+            .shadow(color: .primary.opacity(0.5), radius: 10, x: 0.0, y: 10)
         }
+    }
+    private var background: some View {
+        VStack {
+            Divider()
+            Spacer()
+            Divider()
+            Spacer()
+            Divider()
+        }
+    }
+    private var overlay: some View {
+        VStack {
+            Text(maxVal.coinStringValue())
+            Spacer()
+            Text(((maxVal-minVal)/2).coinStringValue())
+            Spacer()
+            Text(minVal.coinStringValue())
+    }.font(.subheadline)
+    }
+    private var timeInterval: some View {
+        HStack {
+            Text(startDate.shortDateString())
+            Spacer()
+            Text(lastUpdate.shortDateString())
+        }.font(.callout)
     }
 }
