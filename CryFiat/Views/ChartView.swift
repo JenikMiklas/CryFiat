@@ -9,22 +9,14 @@ import SwiftUI
 
 struct ChartView: View {
     
-    let priceData: [Double]
-    private let maxVal: Double
-    private let minVal: Double
-    private let midVal: Double
-    private let lastUpdate: Date
-    private let startDate: Date
+    @ObservedObject var homeVM: HomeVM
+    @State private var priceData: [Double] = [Double]()
+    @State private var maxVal: Double = 0
+    @State private var minVal: Double = 0
+    @State private var midVal: Double = 0
+    @State private var lastUpdate: Date = Date()
+    @State private var startDate: Date = Date ()
     @State private var trimValue: CGFloat = 0
-    
-    init(coin: CoinsTokenMarket) {
-        self.priceData = coin.sparklineIn7d?.price ?? [Double]()
-        self.maxVal = priceData.max() ?? 0
-        self.minVal = priceData.min() ?? 0
-        self.midVal = maxVal-minVal
-        self.lastUpdate = Date().dateFrom(string: coin.lastUpdated ?? "")
-        self.startDate = lastUpdate.addingTimeInterval(-7*24*3600)
-    }
     
     var body: some View {
         VStack {
@@ -33,19 +25,26 @@ struct ChartView: View {
                 .overlay(overlay, alignment: .leading)
             timeInterval
         }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                withAnimation(.linear(duration: 2)) {
+        .onReceive(homeVM.$chartData, perform: { chartData in
+            trimValue = 0
+            priceData = chartData ?? [Double]()
+            maxVal = priceData.max() ?? 0
+            minVal = priceData.min() ?? 0
+            midVal = maxVal-minVal
+            lastUpdate = Date().dateFrom(string: homeVM.selectedCoin?.lastUpdated ?? "")
+            startDate = lastUpdate.addingTimeInterval(-7*24*3600)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                withAnimation(.linear(duration: 1)) {
                     trimValue = 1
                 }
             }
-        }
+        })
     }
 }
 
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView(coin: PreviewVM.coin)
+        ChartView(homeVM: HomeVM())
     }
 }
 
@@ -78,18 +77,19 @@ extension ChartView {
     }
     private var overlay: some View {
         VStack {
-            Text(maxVal.coinStringValue())
+            Text(maxVal.coinNumberString())
             Spacer()
-            Text(((maxVal-minVal)/2).coinStringValue())
+            Text((midVal/2 + minVal).coinNumberString())
             Spacer()
-            Text(minVal.coinStringValue())
-    }.font(.subheadline)
+            Text(minVal.coinNumberString())
+    }.font(.subheadline).padding(.leading)
     }
     private var timeInterval: some View {
         HStack {
             Text(startDate.shortDateString())
             Spacer()
             Text(lastUpdate.shortDateString())
-        }.font(.callout)
+        }.font(.caption)
+        .padding([.leading, .trailing])
     }
 }

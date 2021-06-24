@@ -155,9 +155,6 @@ struct CoinsTokenMarket: Codable, Equatable, Hashable {
     let currency: String?
     let percentage: Double?
   }
-  struct SparklineIn7d: Codable, Hashable {
-    let price: [Double]
-  }
     
   let uuid = UUID().uuidString
   let id: String
@@ -186,7 +183,6 @@ struct CoinsTokenMarket: Codable, Equatable, Hashable {
   let atlDate: String?
   let roi: Roi?
   let lastUpdated: String?
-  let sparklineIn7d: SparklineIn7d?
 
   private enum CodingKeys: String, CodingKey {
     case id
@@ -215,7 +211,6 @@ struct CoinsTokenMarket: Codable, Equatable, Hashable {
     case atlDate = "atl_date"
     case roi
     case lastUpdated = "last_updated"
-    case sparklineIn7d = "sparkline_in_7d"
   }
 }
 
@@ -225,3 +220,6 @@ struct BasicCoin: Codable, Equatable, Hashable {
     let name: String
 }
 
+struct ChartData: Codable {
+  let prices: [[Double]]
+}

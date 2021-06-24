@@ -15,62 +15,76 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                coinList
-                if !homeVM.selectedCoins.isEmpty {
-                    Text(homeVM.selectedCoin?.name ?? homeVM.selectedCoins.first?.name ?? "")
-                } else {
-                    ProgressView()
-                }
-                
-                Spacer()
-            }
-            .navigationTitle("CryFiat")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack {
-                        NavigationLink(
-                            destination:
-                                SelectCurrencyView(homeVM: homeVM, currency: $homeVM.selectedCurrency),
-                            label: {
-                                Button(action: { selectCurrency.toggle() }, label: {
-                                    if homeVM.selectedCurrency.flag != "crypto" {
-                                        Text(homeVM.selectedCurrency.rawValue == "eur" ? "🇪🇺":homeVM.selectedCurrency.flag)
-                                    } else {
-                                        Image(homeVM.selectedCurrency.rawValue)
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                                    }
-                                })
-                            })
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack {
+                    coinList
+                    if !homeVM.selectedCoins.isEmpty {
+                        VStack {
+                            Text(homeVM.selectedCoin?.name ?? homeVM.selectedCoins.first?.name ?? "")
+                            ChartView(homeVM: homeVM)
+                                .frame(height: 200)
+                            
+                        }
+                        
+                    } else {
+                        ProgressView()
                     }
+                    
+                    Spacer()
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack {
-                        NavigationLink(
-                            destination: CoinSelectionView(currency: homeVM.storedCurrency),
-                            label: {
-                                Image(systemName: "plus.circle.fill")
+                .navigationTitle("CryFiat")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        HStack {
+                            NavigationLink(
+                                destination:
+                                    SelectCurrencyView(homeVM: homeVM, currency: $homeVM.selectedCurrency),
+                                label: {
+                                    Button(action: { selectCurrency.toggle() }, label: {
+                                        if homeVM.selectedCurrency.flag != "crypto" {
+                                            Text(homeVM.selectedCurrency.rawValue == "eur" ? "🇪🇺":homeVM.selectedCurrency.flag)
+                                        } else {
+                                            Image(homeVM.selectedCurrency.rawValue)
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                        }
+                                    })
+                                })
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        HStack {
+                            NavigationLink(
+                                destination: CoinSelectionView(currency: homeVM.storedCurrency),
+                                label: {
+                                    Image(systemName: "plus.circle.fill")
+                            })
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        if !homeVM.userCoins.isEmpty {
+                        Button(action: {
+                            withAnimation {
+                                updateCoinList.toggle()
+                            }
+                        }, label: {
+                            if !updateCoinList {
+                                Image(systemName: "trash.circle.fill")
+                            } else {
+                                Image(systemName: "xmark.circle")
+                            }
                         })
                     }
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    if !homeVM.userCoins.isEmpty {
-                    Button(action: {
-                        withAnimation {
-                            updateCoinList.toggle()
-                        }
-                    }, label: {
-                        if !updateCoinList {
-                            Image(systemName: "trash.circle.fill")
-                        } else {
-                            Image(systemName: "xmark.circle")
-                        }
-                    })
-                }
-                }
+                    }
+            }
             }
         }.navigationViewStyle(StackNavigationViewStyle())
+        .onAppear {
+            if !homeVM.selectedCoins.isEmpty {
+                homeVM.selectedCoin = homeVM.selectedCoins.first!
+                homeVM.getChartData(coin: homeVM.selectedCoins.first!.id, currency: homeVM.selectedCurrency)
+            }
+        }
     }
 }
 
@@ -92,6 +106,7 @@ extension HomeView {
                     ZStack(alignment: .center) {
                         Button(action: {
                             homeVM.selectedCoin = item
+                            homeVM.getChartData(coin: item.id, currency: homeVM.selectedCurrency)
                         }, label: {
                             VStack {
                                 Text(item.currentPrice.coinStringSymbol(currency: homeVM.selectedCurrency))
