@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "link.png",
+      "filename" : "chainlink-link-logo-1.png",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "chainlink-link-logo.png",
       "idiom" : "universal"
     }
   ],

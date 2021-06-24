@@ -3,6 +3,16 @@
     {
       "filename" : "btc.png",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "btc-1.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

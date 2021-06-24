@@ -3,6 +3,16 @@
     {
       "filename" : "ltc.png",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "ltc-1.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

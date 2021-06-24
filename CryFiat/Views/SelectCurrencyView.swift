@@ -30,6 +30,7 @@ struct SelectCurrencyView: View {
                         Image(item.rawValue)
                             .resizable()
                             .frame(width: 30, height: 30)
+                            .cornerRadius(30)
                     }
                     Spacer()
                     Text(item.symbol)

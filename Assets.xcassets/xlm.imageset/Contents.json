@@ -3,6 +3,16 @@
     {
       "filename" : "stellar.png",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "images-2.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

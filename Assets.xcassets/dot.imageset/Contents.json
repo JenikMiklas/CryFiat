@@ -3,6 +3,16 @@
     {
       "filename" : "polkadot.png",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "images.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

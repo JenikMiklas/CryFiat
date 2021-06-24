@@ -3,6 +3,16 @@
     {
       "filename" : "bch.png",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "bch-1.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

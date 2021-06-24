@@ -1,6 +1,16 @@
 {
   "images" : [
     {
+      "filename" : "ripple.heic",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
       "filename" : "xrp.png",
       "idiom" : "universal"
     }

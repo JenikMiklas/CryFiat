@@ -3,6 +3,16 @@
     {
       "filename" : "eth.png",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "eth-1.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {
