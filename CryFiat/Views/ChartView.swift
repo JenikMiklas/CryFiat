@@ -13,32 +13,43 @@ struct ChartView: View {
     private let maxVal: Double
     private let minVal: Double
     private let midVal: Double
+    private let lastUpdate: Date
+    private let startDate: Date
     
     init(coin: CoinsTokenMarket) {
         self.priceData = coin.sparklineIn7d?.price ?? [Double]()
         self.maxVal = priceData.max() ?? 0
         self.minVal = priceData.min() ?? 0
         self.midVal = maxVal-minVal
+        self.lastUpdate = Date().dateFrom(string: coin.lastUpdated ?? "")
+        self.startDate = lastUpdate.addingTimeInterval(-7*24*3600)
     }
     
     var body: some View {
-        chartView
-            .background(
-                VStack {
-                    Divider()
-                    Spacer()
-                    Divider()
-                    Spacer()
-                    Divider()
-                })
-            .overlay(
-                VStack {
-                    Text(maxVal.coinStringValue())
-                    Spacer()
-                    Text(((maxVal-minVal)/2).coinStringValue())
-                    Spacer()
-                    Text(minVal.coinStringValue())
+        VStack {
+            chartView
+                .background(
+                    VStack {
+                        Divider()
+                        Spacer()
+                        Divider()
+                        Spacer()
+                        Divider()
+                    })
+                .overlay(
+                    VStack {
+                        Text(maxVal.coinStringValue())
+                        Spacer()
+                        Text(((maxVal-minVal)/2).coinStringValue())
+                        Spacer()
+                        Text(minVal.coinStringValue())
                 }.font(.subheadline), alignment: .leading)
+            HStack {
+                Text(startDate.shortDateString())
+                Spacer()
+                Text(lastUpdate.shortDateString())
+            }.font(.callout)
+        }
     }
 }
 
