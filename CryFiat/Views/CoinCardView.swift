@@ -27,7 +27,6 @@ struct CoinCardView_Previews: PreviewProvider {
             CoinCardView(coin: PreviewVM.coin, cardSize: .medium, currency: Currency(rawValue: "eur")!)
                 .previewLayout(.sizeThatFits)
             CoinCardView(coin: PreviewVM.coin, cardSize: .large, currency: Currency(rawValue: "eur")!)
-                .preferredColorScheme(.dark)
                 .previewLayout(.sizeThatFits)
         }
         .padding()
@@ -111,7 +110,7 @@ extension CoinCardView {
                         }
                         Spacer()
                         VStack {
-                            Text(coin.currentPrice.coinStringValue())
+                            Text(coin.currentPrice.coinStringSymbol(currency: currency))
                                 .font(.title2)
                             HStack {
                                 VStack {

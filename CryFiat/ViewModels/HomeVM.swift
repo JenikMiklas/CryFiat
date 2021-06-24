@@ -17,7 +17,9 @@ class HomeVM: ObservableObject {
     @Published var selectedCurrency = Currency.czk {
         didSet {
             storedCurrency = selectedCurrency
-            getSelectedCoins(coinsID: generatePath(coins: userCoins))
+            if !userCoins.isEmpty {
+                getSelectedCoins(coinsID: generatePath(coins: userCoins))
+            }
         }
     }
     @AppStorage("currency") var storedCurrency = Currency.eur
@@ -61,9 +63,9 @@ class HomeVM: ObservableObject {
     func remove(coin: CoinsTokenMarket) {
         if let index = selectedCoins.firstIndex(where: { $0.id == coin.id }) {
             selectedCoins.remove(at: index)
-        }
-        if let coinToRemove = userCoins.first(where: { $0.coinID == coin.id }) {
-            localDataService.removeFromUserList(coin: coinToRemove)
+            if let coinToRemove = userCoins.first(where: { $0.coinID == coin.id }) {
+                localDataService.removeFromUserList(coin: coinToRemove)
+            }
         }
     }
     

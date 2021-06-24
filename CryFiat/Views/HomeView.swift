@@ -39,7 +39,7 @@ struct HomeView: View {
                                     } else {
                                         Image(homeVM.selectedCurrency.rawValue)
                                             .resizable()
-                                            .frame(width: 30, height: 30)
+                                            .frame(width: 20, height: 20)
                                     }
                                 })
                             })
@@ -97,7 +97,7 @@ extension HomeView {
                                 Text(item.currentPrice.coinStringSymbol(currency: homeVM.selectedCurrency))
                                     .font(.callout)
                                     .lineLimit(1)
-                                    .allowsTightening(false)
+                                    .allowsTightening(true)
                                     .foregroundColor(item.priceChangePercentage24h ?? 0 > 0 ? .green:.red)
                                 CoinImageView(imageUrl: "", coinName: item.id)
                                     .opacity(updateCoinList ? 0.4 : 1)

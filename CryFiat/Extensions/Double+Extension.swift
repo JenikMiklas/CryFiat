@@ -15,8 +15,8 @@ extension Double {
     private var coinFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.usesGroupingSeparator = true
-        //formatter.numberStyle = .currency
-        //formatter.locale = .current
+        formatter.numberStyle = .decimal
+        formatter.locale = .current
         //formatter.currencyCode = Currency.eur.rawValue
         //formatter.currencySymbol = "€"
         formatter.minimumFractionDigits = 2
@@ -26,11 +26,21 @@ extension Double {
     
     func coinStringValue() -> String {
         let value = NSNumber(value: self)
-        return coinFormatter.string(from: value) ?? "0"
+        return coinFormatter.string(from: value) ?? "?"
     }
     
     func coinNumberString() -> String {
-        return String(format: "%.2f", self)
+        var val: String
+        if self <= 0.1 {
+            val = String(format: "%.5f", self)
+        } else if self > 100 {
+            val = String(format: "%.0f", self)
+        } else if self > 10 {
+            val = String(format: "%.1f", self)
+        } else {
+            val = String(format: "%.2f", self)
+        }
+        return val
     }
     
     func coinPercentString() -> String {
@@ -38,6 +48,7 @@ extension Double {
     }
     
     func coinStringSymbol(currency: Currency) -> String {
+        
         if currency.symbol == "" {
             return coinNumberString() + " " + currency.rawValue.uppercased()
         } else {
