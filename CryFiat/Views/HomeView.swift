@@ -12,6 +12,7 @@ struct HomeView: View {
     @StateObject var homeVM = HomeVM()
     @State private var updateCoinList = false
     @State private var selectCurrency = false
+    @State private var loadingChart = true
     
     var body: some View {
         NavigationView {
@@ -19,15 +20,16 @@ struct HomeView: View {
                 VStack {
                     coinList
                     if !homeVM.selectedCoins.isEmpty {
-                        VStack {
-                            Text(homeVM.selectedCoin?.name ?? homeVM.selectedCoins.first?.name ?? "")
-                            ChartView(homeVM: homeVM)
+                        VStack(alignment: .leading) {
+                            Text("\(homeVM.selectedCoin?.name ?? "") week chart")
+                                .font(.title)
+                                .padding()
+                            ChartView(homeVM: homeVM, loadingChart: $loadingChart)
                                 .frame(height: 200)
+                            
                             
                         }
                         
-                    } else {
-                        ProgressView()
                     }
                     
                     Spacer()
@@ -106,6 +108,7 @@ extension HomeView {
                     ZStack(alignment: .center) {
                         Button(action: {
                             homeVM.selectedCoin = item
+                            loadingChart.toggle()
                             homeVM.getChartData(coin: item.id, currency: homeVM.selectedCurrency)
                         }, label: {
                             VStack {

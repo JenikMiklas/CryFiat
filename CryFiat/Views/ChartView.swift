@@ -17,13 +17,19 @@ struct ChartView: View {
     @State private var lastUpdate: Date = Date()
     @State private var startDate: Date = Date ()
     @State private var trimValue: CGFloat = 0
+    @Binding var loadingChart: Bool
     
     var body: some View {
         VStack {
+            if !loadingChart {
             chartView
                 .background(background)
                 .overlay(overlay, alignment: .leading)
             timeInterval
+            } else {
+                ProgressView()
+                 .frame(height: 200)
+            }
         }
         .onReceive(homeVM.$chartData, perform: { chartData in
             trimValue = 0
@@ -33,6 +39,7 @@ struct ChartView: View {
             midVal = maxVal-minVal
             lastUpdate = Date().dateFrom(string: homeVM.selectedCoin?.lastUpdated ?? "")
             startDate = lastUpdate.addingTimeInterval(-7*24*3600)
+            loadingChart.toggle()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 withAnimation(.linear(duration: 1)) {
                     trimValue = 1
@@ -44,7 +51,7 @@ struct ChartView: View {
 
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView(homeVM: HomeVM())
+        ChartView(homeVM: HomeVM(), loadingChart: .constant(false))
     }
 }
 
