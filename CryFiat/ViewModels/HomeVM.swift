@@ -48,6 +48,7 @@ class HomeVM: ObservableObject {
                 self.selectedCoins = coins
             }
             .store(in: &cancellable)
+        
         coinMarketService.$chartData
             .sink { [unowned self] chartData in
                 self.chartData = chartData

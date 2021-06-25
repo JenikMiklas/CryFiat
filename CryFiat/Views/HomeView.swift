@@ -21,13 +21,15 @@ struct HomeView: View {
                     coinList
                     if !homeVM.selectedCoins.isEmpty {
                         VStack(alignment: .leading) {
-                            Text("\(homeVM.selectedCoin?.name ?? "") week chart")
-                                .font(.title)
-                                .padding()
+                            HStack(alignment: .firstTextBaseline) {
+                                Text(homeVM.selectedCoin?.name ?? "")
+                                    .font(.title)
+                                Text(" / \(homeVM.selectedCurrency.rawValue.uppercased()) week chart")
+                                    .font(.title3)
+                            }
+                            .padding()
                             ChartView(homeVM: homeVM, loadingChart: $loadingChart)
                                 .frame(height: 200)
-                            
-                            
                         }
                         
                     }
@@ -81,12 +83,13 @@ struct HomeView: View {
             }
             }
         }.navigationViewStyle(StackNavigationViewStyle())
-        .onAppear {
-            if !homeVM.selectedCoins.isEmpty {
-                homeVM.selectedCoin = homeVM.selectedCoins.first!
-                homeVM.getChartData(coin: homeVM.selectedCoins.first!.id, currency: homeVM.selectedCurrency)
+        /*.onReceive(homeVM.$selectedCoins, perform: { coins in
+            if !coins.isEmpty {
+                print("empty")
+                homeVM.selectedCoin = coins.first!
+                homeVM.getChartData(coin: coins.first!.id, currency: homeVM.selectedCurrency)
             }
-        }
+        })*/
     }
 }
 
