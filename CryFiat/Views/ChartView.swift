@@ -28,7 +28,7 @@ struct ChartView: View {
             timeInterval
             } else {
                 ProgressView()
-                 .frame(height: 200)
+                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .onReceive(homeVM.$chartData, perform: { chartData in
