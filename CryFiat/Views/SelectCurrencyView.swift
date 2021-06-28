@@ -11,6 +11,9 @@ struct SelectCurrencyView: View {
     
     @ObservedObject var homeVM: HomeVM
     //@Binding var currency: Currency
+    @State private var coinID: String?
+    @State private var currency: Currency?
+    @Binding var loadingChart: Bool
 
     
     var body: some View {
@@ -47,9 +50,16 @@ struct SelectCurrencyView: View {
         }
         .navigationTitle("Select currency")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            currency = homeVM.selectedCurrency
+            coinID = homeVM.selectedCoin?.id
+        }
         .onDisappear {
-            if let coin = homeVM.selectedCoin {
-                homeVM.getCoinData(coin: coin, currency: homeVM.selectedCurrency)
+            if currency != homeVM.storedCurrency || coinID != homeVM.selectedCoin?.id {
+                if let coin = homeVM.selectedCoin {
+                    homeVM.getCoinData(coin: coin, currency: homeVM.selectedCurrency)
+                }
+                loadingChart = true
             }
         }
     }
@@ -58,7 +68,7 @@ struct SelectCurrencyView: View {
 struct SelectCurrencyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SelectCurrencyView(homeVM: HomeVM())
+            SelectCurrencyView(homeVM: HomeVM(), loadingChart: .constant(true))
         }
     }
 }

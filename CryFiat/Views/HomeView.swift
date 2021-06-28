@@ -41,7 +41,7 @@ struct HomeView: View {
                         HStack {
                             NavigationLink(
                                 destination:
-                                    SelectCurrencyView(homeVM: homeVM),
+                                    SelectCurrencyView(homeVM: homeVM, loadingChart: $loadingChart),
                                 label: {
                                     Button(action: {  }, label: {
                                         if homeVM.selectedCurrency.flag != "crypto" {
@@ -82,13 +82,6 @@ struct HomeView: View {
             }
             }
         }.navigationViewStyle(StackNavigationViewStyle())
-        /*.onReceive(homeVM.$selectedCoins, perform: { coins in
-            if !coins.isEmpty {
-                print("empty")
-                homeVM.selectedCoin = coins.first!
-                homeVM.getChartData(coin: coins.first!.id, currency: homeVM.selectedCurrency)
-            }
-        })*/
     }
 }
 

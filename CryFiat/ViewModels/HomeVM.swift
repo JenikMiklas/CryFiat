@@ -47,6 +47,9 @@ class HomeVM: ObservableObject {
         coinMarketService.$selectedCoins
             .sink { [unowned self] coins in
                 self.selectedCoins = coins
+                if !coins.isEmpty && self.selectedCoin == nil {
+                    self.selectedCoin = coins.first!
+                }
             }
             .store(in: &cancellable)
         
@@ -72,7 +75,7 @@ class HomeVM: ObservableObject {
         coinMarketService.getUserCoins(coins: coinsID, currency: selectedCurrency)
     }
     
-    private func getChartData(coin: String, currency: Currency) {
+    func getChartData(coin: String, currency: Currency) {
         coinMarketService.getChartData(coin: coin, currency: currency)
     }
     
