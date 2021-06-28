@@ -20,6 +20,7 @@ class HomeVM: ObservableObject {
             storedCurrency = selectedCurrency
             if !userCoins.isEmpty {
                 getSelectedCoins(coinsID: generatePath(coins: userCoins))
+                print("změna fiat")
             }
         }
     }
@@ -67,6 +68,14 @@ class HomeVM: ObservableObject {
         return  string
     }
     
+    private func getSelectedCoins(coinsID: String) {
+        coinMarketService.getUserCoins(coins: coinsID, currency: selectedCurrency)
+    }
+    
+    private func getChartData(coin: String, currency: Currency) {
+        coinMarketService.getChartData(coin: coin, currency: currency)
+    }
+    
     func remove(coin: CoinsTokenMarket) {
         if let index = selectedCoins.firstIndex(where: { $0.id == coin.id }) {
             selectedCoins.remove(at: index)
@@ -74,13 +83,11 @@ class HomeVM: ObservableObject {
                 localDataService.removeFromUserList(coin: coinToRemove)
             }
         }
+        if selectedCoins.isEmpty { selectedCoin = nil }
     }
     
-    private func getSelectedCoins(coinsID: String) {
-        coinMarketService.getUserCoins(coins: coinsID, currency: selectedCurrency)
-    }
-    
-    func getChartData(coin: String, currency: Currency) {
-        coinMarketService.getChartData(coin: coin, currency: currency)
+    func getCoinData(coin: CoinsTokenMarket, currency: Currency) {
+        selectedCoin = coin
+        getChartData(coin: coin.id, currency: currency)
     }
 }

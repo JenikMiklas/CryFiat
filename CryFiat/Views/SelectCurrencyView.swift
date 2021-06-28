@@ -10,13 +10,14 @@ import SwiftUI
 struct SelectCurrencyView: View {
     
     @ObservedObject var homeVM: HomeVM
-    @Binding var currency: Currency
+    //@Binding var currency: Currency
+
     
     var body: some View {
-        List(currency.curencies, id:\.rawValue) { item in
+        List(homeVM.selectedCurrency.currencies, id:\.rawValue) { item in
             Button(action: {
                 withAnimation {
-                    currency = item
+                    homeVM.selectedCurrency = item
                 }
             }, label: {
                 HStack {
@@ -35,7 +36,7 @@ struct SelectCurrencyView: View {
                     Spacer()
                     Text(item.symbol)
                         .font(.headline)
-                    if currency == item {
+                    if homeVM.selectedCurrency == item {
                         Image(systemName:"checkmark.square.fill")
                             .foregroundColor(.green)
                             .font(.title2)
@@ -46,13 +47,18 @@ struct SelectCurrencyView: View {
         }
         .navigationTitle("Select currency")
         .navigationBarTitleDisplayMode(.inline)
+        .onDisappear {
+            if let coin = homeVM.selectedCoin {
+                homeVM.getCoinData(coin: coin, currency: homeVM.selectedCurrency)
+            }
+        }
     }
 }
 
 struct SelectCurrencyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SelectCurrencyView(homeVM: HomeVM(), currency: .constant(Currency(rawValue: "eur")!))
+            SelectCurrencyView(homeVM: HomeVM())
         }
     }
 }

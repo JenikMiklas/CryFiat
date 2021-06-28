@@ -17,7 +17,7 @@ enum CoinCardSize: CGFloat {
 enum Currency: String, Codable, CaseIterable {
     case btc, eth, ltc, bch, bnb, eos, xrp, xlm, link, dot, yfi, usd, aed, ars, aud, bdt, bhd, bmd, brl, cad, chf, clp, cny, czk, dkk, eur, gbp, hkd, huf, idr, ils, inr, jpy, krw, kwd, lkr, mmk, mxn, myr, ngn, nok, nzd, php, pkr, pln, rub, sar, sek, sgd, thb, twd, uah, vef, vnd, zar, xag, bits
     
-    var curencies: [Currency] {
+    var currencies: [Currency] {
         Self.allCases.sorted { $0.rawValue < $1.rawValue }
     }
     

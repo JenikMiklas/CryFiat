@@ -11,7 +11,6 @@ struct HomeView: View {
     
     @StateObject var homeVM = HomeVM()
     @State private var updateCoinList = false
-    @State private var selectCurrency = false
     @State private var loadingChart = true
     
     var body: some View {
@@ -42,9 +41,9 @@ struct HomeView: View {
                         HStack {
                             NavigationLink(
                                 destination:
-                                    SelectCurrencyView(homeVM: homeVM, currency: $homeVM.selectedCurrency),
+                                    SelectCurrencyView(homeVM: homeVM),
                                 label: {
-                                    Button(action: { selectCurrency.toggle() }, label: {
+                                    Button(action: {  }, label: {
                                         if homeVM.selectedCurrency.flag != "crypto" {
                                             Text(homeVM.selectedCurrency.rawValue == "eur" ? "🇪🇺":homeVM.selectedCurrency.flag)
                                         } else {
@@ -110,9 +109,8 @@ extension HomeView {
                 ForEach(homeVM.selectedCoins, id:\.uuid) { item in
                     ZStack(alignment: .center) {
                         Button(action: {
-                            homeVM.selectedCoin = item
                             loadingChart.toggle()
-                            homeVM.getChartData(coin: item.id, currency: homeVM.selectedCurrency)
+                            homeVM.getCoinData(coin: item, currency: homeVM.selectedCurrency)
                         }, label: {
                             VStack {
                                 Text(item.currentPrice.coinStringSymbol(currency: homeVM.selectedCurrency))

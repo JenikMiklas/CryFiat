@@ -47,7 +47,7 @@ final class DownloadManager {
         case .finished:
             break
         case .failure(let error):
-            print(error.localizedDescription)
+            print("Cpmpletion error: \(error.localizedDescription)")
         }
     }
 }

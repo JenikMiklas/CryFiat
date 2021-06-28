@@ -39,7 +39,7 @@ struct ChartView: View {
             midVal = maxVal-minVal
             lastUpdate = Date().dateFrom(string: homeVM.selectedCoin?.lastUpdated ?? "")
             startDate = lastUpdate.addingTimeInterval(-7*24*3600)
-            loadingChart.toggle()
+            loadingChart = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 withAnimation(.linear(duration: 1)) {
                     trimValue = 1
