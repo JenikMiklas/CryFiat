@@ -31,7 +31,8 @@ struct HomeView: View {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 10, pinnedViews: /*@START_MENU_TOKEN@*/[]/*@END_MENU_TOKEN@*/, content: {
                             CoinInfo(title: "Rank", value: homeVM.selectedCoin?.marketCapRank?.coinStringValue() ?? "?")
                             CoinInfo(title: "Price", value: homeVM.selectedCoin?.currentPrice.coinStringLongSymbol(currency: homeVM.selectedCurrency) ?? "?")
-                            CoinInfo(title: "Market cap", value: homeVM.selectedCoin?.marketCap?.coinNumberString() ?? "?")
+                            CoinInfo(title: "Market cap", value: homeVM.selectedCoin?.marketCap?.coinMarketCap() ?? "?")
+                            CoinInfo(title: "Volume 24H", value: homeVM.selectedCoin?.totalVolume?.coinMarketCap() ?? "?")
                         })
                         .padding()
                         if homeVM.chartData != nil {

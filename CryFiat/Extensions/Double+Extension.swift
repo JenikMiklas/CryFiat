@@ -64,4 +64,17 @@ extension Double {
             return currency.symbol + " " + coinStringValue()
         }
     }
+    
+    func coinMarketCap() -> String {
+        var str = String(format: "%.0f", locale: .current, self)
+        if str.count > 15 {
+            let startIndex = str.index(str.startIndex, offsetBy: str.count - 12)
+            str.replaceSubrange(startIndex..., with: " bil")
+        }
+        else if str.count > 8 {
+            let startIndex = str.index(str.startIndex, offsetBy: str.count - 8)
+            str.replaceSubrange(startIndex..., with: " mil")
+        }
+        return str
+    }
 }
