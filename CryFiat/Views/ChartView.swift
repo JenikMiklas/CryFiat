@@ -9,49 +9,48 @@ import SwiftUI
 
 struct ChartView: View {
     
-    @ObservedObject var homeVM: HomeVM
-    @State private var priceData: [Double] = [Double]()
+    let priceData: [Double]
+    let coin: CoinsTokenMarket
     @State private var maxVal: Double = 0
     @State private var minVal: Double = 0
     @State private var midVal: Double = 0
     @State private var lastUpdate: Date = Date()
     @State private var startDate: Date = Date ()
     @State private var trimValue: CGFloat = 0
-    @Binding var loadingChart: Bool
+    
+    init(chartData: [Double], coin: CoinsTokenMarket) {
+        self.priceData = chartData
+        self.coin = coin
+    }
     
     var body: some View {
         VStack {
-            if !loadingChart {
             chartView
                 .background(background)
                 .overlay(overlay, alignment: .leading)
             timeInterval
-            } else {
-                ProgressView()
-                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
+            
         }
-        .onReceive(homeVM.$chartData, perform: { chartData in
+        .onAppear {
             trimValue = 0
-            priceData = chartData ?? [Double]()
             maxVal = priceData.max() ?? 0
             minVal = priceData.min() ?? 0
             midVal = maxVal-minVal
-            lastUpdate = Date().dateFrom(string: homeVM.selectedCoin?.lastUpdated ?? "")
+            lastUpdate = Date().dateFrom(string: coin.lastUpdated ?? "")
             startDate = lastUpdate.addingTimeInterval(-7*24*3600)
-            loadingChart = false
+            print(priceData)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 withAnimation(.linear(duration: 1)) {
                     trimValue = 1
                 }
             }
-        })
+        }
     }
 }
 
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView(homeVM: HomeVM(), loadingChart: .constant(false))
+        ChartView(chartData: PreviewVM.chartData, coin: PreviewVM.coin)
     }
 }
 

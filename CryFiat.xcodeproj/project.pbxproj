@@ -45,6 +45,7 @@
 		7F830B332683568200F247BF /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F946CF726590DD9004DBB35 /* FileManager+Extension.swift */; };
 		7F830B3526836C8500F247BF /* SelectCurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F830B3426836C8500F247BF /* SelectCurrencyView.swift */; };
 		7F86942F2680DE2900A1FBAA /* AddCoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F86942E2680DE2900A1FBAA /* AddCoinView.swift */; };
+		7F8929BC268B7AF000CA5622 /* CoinDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8929BB268B7AF000CA5622 /* CoinDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		7F81262E267BD722006A96AD /* LocalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataService.swift; sourceTree = "<group>"; };
 		7F830B3426836C8500F247BF /* SelectCurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyView.swift; sourceTree = "<group>"; };
 		7F86942E2680DE2900A1FBAA /* AddCoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoinView.swift; sourceTree = "<group>"; };
+		7F8929BB268B7AF000CA5622 /* CoinDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailView.swift; sourceTree = "<group>"; };
 		7F946CF726590DD9004DBB35 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		7F946CF9265915ED004DBB35 /* JsonFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFile.swift; sourceTree = "<group>"; };
 		7FDB1F8A266005A200403135 /* DetailContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContent.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				7F7865FA26792C8E00D74C1D /* CoinSizeCardView.swift */,
 				7F86942E2680DE2900A1FBAA /* AddCoinView.swift */,
 				7F049615267E14ED0045A6FB /* HomeView.swift */,
+				7F8929BB268B7AF000CA5622 /* CoinDetailView.swift */,
 				7F830B3426836C8500F247BF /* SelectCurrencyView.swift */,
 				7F7AF44D2684B11500001925 /* ChartView.swift */,
 			);
@@ -339,6 +342,7 @@
 				7F7865FB26792C8E00D74C1D /* CoinSizeCardView.swift in Sources */,
 				7F830B2B2683567400F247BF /* TestView.swift in Sources */,
 				7F7876B42674DB5E00A2C54F /* DownloadService.swift in Sources */,
+				7F8929BC268B7AF000CA5622 /* CoinDetailView.swift in Sources */,
 				7F830B322683567E00F247BF /* APICryptoService.swift in Sources */,
 				7F7876AF2674C3B900A2C54F /* CoinSelectionVM.swift in Sources */,
 				7F7FBA6F268A341700367917 /* Int+Extension.swift in Sources */,
