@@ -55,4 +55,13 @@ extension Double {
             return currency.symbol + " " + coinNumberString()
         }
     }
+    
+    func coinStringLongSymbol(currency: Currency) -> String {
+        
+        if currency.symbol == "" {
+            return coinStringValue() + " " + currency.rawValue.uppercased()
+        } else {
+            return currency.symbol + " " + coinStringValue()
+        }
+    }
 }
