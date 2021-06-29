@@ -20,10 +20,25 @@ struct HomeView: View {
                     coinList
                     
                     if let coin = homeVM.selectedCoin {
+                        HStack {
+                            Text(coin.name)
+                                .font(.title)
+                                .padding()
+                            Spacer()
+                        }
                         NavigationLink(
                             destination: CoinDetailView(coin: coin, currency: homeVM.selectedCurrency, chartData: homeVM.chartData ?? [Double]()),
                             label: {
-                                /*@START_MENU_TOKEN@*/Text("Navigate")/*@END_MENU_TOKEN@*/
+                                Text("\(coin.symbol.uppercased()) detail")
+                                    .padding()
+                                    .foregroundColor(.primary)
+                                    .font(.headline)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(lineWidth: 2)
+                                            .foregroundColor(.secondary)
+                                    )
+                                
                             })
                     }
                     
