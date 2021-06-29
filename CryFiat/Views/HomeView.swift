@@ -19,16 +19,35 @@ struct HomeView: View {
                 VStack {
                     coinList
                     if !homeVM.selectedCoins.isEmpty {
-                        VStack(alignment: .leading) {
-                            HStack(alignment: .firstTextBaseline) {
-                                Text(homeVM.selectedCoin?.name ?? "")
-                                    .font(.title)
-                                Text(" / \(homeVM.selectedCurrency.rawValue.uppercased()) week chart")
-                                    .font(.title3)
+                        Divider()
+                        HStack {
+                            Text(homeVM.selectedCoin?.name ?? "")
+                                .font(.title)
+                            Text("Overview")
+                                .font(.title)
+                                .foregroundColor(.secondary)
+                            Spacer()
+                        }.padding(.leading)
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 10, pinnedViews: /*@START_MENU_TOKEN@*/[]/*@END_MENU_TOKEN@*/, content: {
+                            CoinInfo(title: "Rank", value: homeVM.selectedCoin?.marketCapRank?.coinStringValue() ?? "?")
+                            CoinInfo(title: "Price", value: homeVM.selectedCoin?.currentPrice.coinStringLongSymbol(currency: homeVM.selectedCurrency) ?? "?")
+                            CoinInfo(title: "Market cap", value: homeVM.selectedCoin?.marketCap?.coinNumberString() ?? "?")
+                        })
+                        .padding()
+                        if homeVM.chartData != nil {
+                            Divider()
+                            VStack(alignment: .leading) {
+                                HStack(alignment: .firstTextBaseline) {
+                                    Text(homeVM.selectedCoin?.symbol.uppercased() ?? "")
+                                        .font(.title)
+                                    Text(" / \(homeVM.selectedCurrency.rawValue.uppercased()) week chart")
+                                        .font(.title)
+                                        .foregroundColor(.secondary)
+                                }
+                                .padding()
+                                ChartView(homeVM: homeVM, loadingChart: $loadingChart)
+                                    .frame(height: 200)
                             }
-                            .padding()
-                            ChartView(homeVM: homeVM, loadingChart: $loadingChart)
-                                .frame(height: 200)
                         }
                         
                     }
@@ -149,5 +168,22 @@ extension HomeView {
         }
         .frame(height: 130)
         .padding(.top)
+    }
+}
+
+struct CoinInfo: View {
+    let title: String
+    let value: String
+    
+    var body: some View {
+        VStack(alignment: .trailing) {
+            Text(title)
+                .bold()
+                .font(.callout)
+                .foregroundColor(.secondary)
+                .padding(.bottom, 3)
+            Text(value)
+                .font(.title2)
+        }.padding()
     }
 }
