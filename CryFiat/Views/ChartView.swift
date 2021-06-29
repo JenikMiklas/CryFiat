@@ -46,12 +46,6 @@ struct ChartView: View {
                 }
             }
         })
-        .onReceive(homeVM.$selectedCoin, perform: { coin in
-            print("selected")
-            if let coin = coin {
-                homeVM.getChartData(coin: coin.id, currency: homeVM.selectedCurrency)
-            }
-        })
     }
 }
 
