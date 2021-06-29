@@ -21,25 +21,26 @@ struct HomeView: View {
                     
                     if let coin = homeVM.selectedCoin {
                         HStack {
-                            Text(coin.name)
-                                .font(.title)
-                                .padding()
+                            VStack(alignment: .leading) {
+                                Text(coin.name)
+                                    .font(.title)
+                                NavigationLink(
+                                    destination: CoinDetailView(coin: coin, currency: homeVM.selectedCurrency, chartData: homeVM.chartData ?? [Double]()),
+                                    label: {
+                                        Text("\(coin.symbol.uppercased()) detail")
+                                            .padding()
+                                            .foregroundColor(.primary)
+                                            .font(.headline)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(lineWidth: 2)
+                                                    .foregroundColor(.secondary)
+                                            )
+                                        
+                                    })
+                            }.padding()
                             Spacer()
                         }
-                        NavigationLink(
-                            destination: CoinDetailView(coin: coin, currency: homeVM.selectedCurrency, chartData: homeVM.chartData ?? [Double]()),
-                            label: {
-                                Text("\(coin.symbol.uppercased()) detail")
-                                    .padding()
-                                    .foregroundColor(.primary)
-                                    .font(.headline)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .stroke(lineWidth: 2)
-                                            .foregroundColor(.secondary)
-                                    )
-                                
-                            })
                     }
                     
                     Spacer()
