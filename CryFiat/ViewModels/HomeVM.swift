@@ -47,8 +47,13 @@ class HomeVM: ObservableObject {
         coinMarketService.$selectedCoins
             .sink { [unowned self] coins in
                 self.selectedCoins = coins
+                print("coins news")
                 if !coins.isEmpty && self.selectedCoin == nil {
                     self.selectedCoin = coins.first!
+                } else {
+                    self.selectedCoin = coins.first(where: { coin in
+                        coin.id == self.selectedCoin!.id
+                    })
                 }
             }
             .store(in: &cancellable)
