@@ -5,44 +5,42 @@
 //  Created by Jan Miklas on 19.06.2021.
 //
 
+import CoreImage.CIFilterBuiltins
 import SwiftUI
 
 struct HomeView: View {
     
     @StateObject var homeVM = HomeVM()
     @State private var updateCoinList = false
-    @State private var loadingChart = true
     
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     coinList
-                    
                     if let coin = homeVM.selectedCoin {
                         HStack {
-                            VStack(alignment: .leading) {
-                                Text(coin.name)
-                                    .font(.title)
-                                NavigationLink(
-                                    destination: CoinDetailView(coin: coin, currency: homeVM.selectedCurrency, chartData: homeVM.chartData ?? [Double]()),
-                                    label: {
+                            NavigationLink(
+                                destination: CoinDetailView(coin: coin, currency: homeVM.selectedCurrency, chartData: homeVM.chartData ?? [Double]()),
+                                label: {
+                                    VStack(alignment: .leading) {
+                                        Text(coin.name)
+                                            .font(.title)
                                         Text("\(coin.symbol.uppercased()) detail")
                                             .padding()
-                                            .foregroundColor(.primary)
                                             .font(.headline)
                                             .background(
                                                 RoundedRectangle(cornerRadius: 10)
                                                     .stroke(lineWidth: 2)
                                                     .foregroundColor(.secondary)
                                             )
-                                        
-                                    })
-                            }.padding()
+                                    }.padding().foregroundColor(.primary)
+                                })
                             Spacer()
                         }
+                        QRCodeView()
+                        
                     }
-                    
                     Spacer()
                 }
                 .navigationTitle("CryFiat")
@@ -51,7 +49,7 @@ struct HomeView: View {
                         HStack {
                             NavigationLink(
                                 destination:
-                                    SelectCurrencyView(homeVM: homeVM, loadingChart: $loadingChart),
+                                    SelectCurrencyView(homeVM: homeVM),
                                 label: {
                                     Button(action: {  }, label: {
                                         if homeVM.selectedCurrency.flag != "crypto" {
@@ -112,7 +110,6 @@ extension HomeView {
                 ForEach(homeVM.selectedCoins, id:\.uuid) { item in
                     ZStack(alignment: .center) {
                         Button(action: {
-                            loadingChart.toggle()
                             homeVM.getCoinData(coin: item, currency: homeVM.selectedCurrency)
                         }, label: {
                             VStack {
@@ -159,5 +156,44 @@ extension HomeView {
         }
         .frame(height: 130)
         .padding(.top)
+    }
+}
+
+
+struct QRCodeView: View {
+    
+    @State private var name = "ripple:rUwYKnpcDr9PLfE9DzZ6r8P3qpKbqv4SyA?amount=10&message=New house"
+    @State private var email = "10"
+    
+    private let context = CIContext()
+    private let filter = CIFilter.qrCodeGenerator()
+    
+    var body: some View {
+            VStack {
+                TextField("jméno", text: $name)
+                    .textContentType(.URL)
+                    .font(.title)
+                    .padding(.horizontal)
+                /*TextField("váš@email.cz", text: $email)
+                    .font(.title)
+                    .padding([.horizontal, .bottom])*/
+                Image(uiImage: generateQRCode(from: "\(name)"))
+                    .interpolation(.none)
+                    .resizable()
+                    .scaledToFit()
+                Spacer()
+            }
+    }
+    
+    func generateQRCode(from string: String) -> UIImage {
+        let data = Data(string.utf8)
+        filter.setValue(data, forKey: "inputMessage")
+        
+        if let outputImage = filter.outputImage {
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                return UIImage(cgImage: cgimg)
+            }
+        }
+        return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
 }

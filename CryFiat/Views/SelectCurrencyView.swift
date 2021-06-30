@@ -13,7 +13,6 @@ struct SelectCurrencyView: View {
     //@Binding var currency: Currency
     @State private var coinID: String?
     @State private var currency: Currency?
-    @Binding var loadingChart: Bool
 
     
     var body: some View {
@@ -59,7 +58,6 @@ struct SelectCurrencyView: View {
                 if let coin = homeVM.selectedCoin {
                     homeVM.getCoinData(coin: coin, currency: homeVM.selectedCurrency)
                 }
-                loadingChart = true
             }
         }
     }
@@ -68,7 +66,7 @@ struct SelectCurrencyView: View {
 struct SelectCurrencyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SelectCurrencyView(homeVM: HomeVM(), loadingChart: .constant(true))
+            SelectCurrencyView(homeVM: HomeVM())
         }
     }
 }

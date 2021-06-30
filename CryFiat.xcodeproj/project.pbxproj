@@ -46,6 +46,7 @@
 		7F6967E126777BC50038E896 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		7F6967E4267782DC0038E896 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		7F6CE3EF26769E08006E3FD2 /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
+		7F7181A7268BC46E007F68CB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		7F71B7BD267BACC400B1745A /* Coins.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Coins.xcdatamodel; sourceTree = "<group>"; };
 		7F782F0F26579EC700A358D2 /* CryFiat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryFiat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F782F1226579EC700A358D2 /* CryFiatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryFiatApp.swift; sourceTree = "<group>"; };
@@ -103,6 +104,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		7F7181A6268BC46E007F68CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7F7181A7268BC46E007F68CB /* CoreImage.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7F782F0626579EC700A358D2 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +119,7 @@
 				7F782F1226579EC700A358D2 /* CryFiatApp.swift */,
 				7F782F1126579EC700A358D2 /* CryFiat */,
 				7F782F1026579EC700A358D2 /* Products */,
+				7F7181A6268BC46E007F68CB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
