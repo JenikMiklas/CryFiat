@@ -75,7 +75,7 @@ final class CoinSelectionVM: ObservableObject {
     }
     
     func saveUserCoin(coin: CoinsTokenMarket) {
-        localDataService.processCoin(coin: coin, address: "no address")
+        localDataService.processCoin(coin: coin, address: "")
     }
     
     func getImageCoin(coinID: String) -> UIImage {

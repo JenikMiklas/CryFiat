@@ -12,6 +12,10 @@ struct HomeView: View {
     
     @StateObject var homeVM = HomeVM()
     @State private var updateCoinList = false
+    @State private var address = ""
+    @State private var qrAddress = ""
+    @State private var amountEditing = false
+    @State private var priceEditing = false
     
     var body: some View {
         NavigationView {
@@ -38,7 +42,9 @@ struct HomeView: View {
                                 })
                             Spacer()
                         }
-                        QRCodeView()
+                        coinAddress
+                        QRCodeView(address: $qrAddress)
+                            .frame(minWidth: 100, idealWidth: 300, maxWidth: 600, minHeight: 100, idealHeight: 300, maxHeight: 600, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         
                     }
                     Spacer()
@@ -88,6 +94,19 @@ struct HomeView: View {
                     }
                     }
             }
+            /*.onChange(of: homeVM.selectedCoin, perform: { _ in
+                    if homeVM.selectedCoin != nil {
+                        homeVM.updatePrice(amount: homeVM.amount)
+                    }
+                    address = homeVM.getAddress()
+                })*/
+                .onChange(of: address, perform: { value in
+                    homeVM.processCoin(address: value)
+                    qrAddress = homeVM.qrAddress(address: address, amount: String(homeVM.amount))
+                })
+                .onTapGesture {
+                    UIApplication.shared.hideKeyboard()
+                }
             }
         }.navigationViewStyle(StackNavigationViewStyle())
     }
@@ -96,9 +115,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            
-            
-            
     }
 }
 
@@ -157,19 +173,72 @@ extension HomeView {
         .frame(height: 130)
         .padding(.top)
     }
+    // MARK: Coin Address
+    private var coinAddress: some View {
+        VStack(alignment: .leading) {
+            Text("address")
+                .foregroundColor(.secondary)
+            TextField("", text: $address)
+                .padding()
+                .background(Color.secondary.opacity(0.2))
+                .cornerRadius(10)
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(homeVM.selectedCoin?.symbol ?? "")
+                        .foregroundColor(.secondary)
+                    TextField("", text: $homeVM.amount) { changed in
+                        amountEditing = changed
+                    }
+                    .keyboardType(.numbersAndPunctuation)
+                    .padding()
+                    .background(Color.secondary.opacity(0.2))
+                    .cornerRadius(10)
+                    .onChange(of: homeVM.amount, perform: { value in
+                        if amountEditing {
+                            homeVM.updatePrice(amount: value)
+                            qrAddress = homeVM.qrAddress(address: address, amount: String(homeVM.amount))
+                        }
+                    })
+                }
+                VStack(alignment: .leading) {
+                    Group {
+                    Text(homeVM.selectedCurrency.rawValue)
+                        .foregroundColor(.secondary)
+                    TextField("", text: $homeVM.price) { changed in
+                            priceEditing = changed
+                        }
+                    .keyboardType(.numbersAndPunctuation)
+                        .padding()
+                        .background(Color.secondary.opacity(0.2))
+                        .cornerRadius(10)
+                        .onChange(of: homeVM.price, perform: { value in
+                            if priceEditing {
+                                homeVM.updateAmount(price: value)
+                                qrAddress = homeVM.qrAddress(address: address, amount: String(homeVM.amount))
+                            }
+                    })
+                    }
+                }
+            }
+        }.padding([.leading, .trailing])
+    }
 }
 
 
+
+// MARK: QRCODE
 struct QRCodeView: View {
     
-    @State private var name = "ripple:rUwYKnpcDr9PLfE9DzZ6r8P3qpKbqv4SyA?amount=10&message=New house"
-    @State private var email = "10"
+    @Binding var address: String
     
     private let context = CIContext()
     private let filter = CIFilter.qrCodeGenerator()
-    
     var body: some View {
-            VStack {
+        Image(uiImage: generateQRCode(from: "\(address)"))
+            .interpolation(.none)
+            .resizable()
+            .scaledToFit()
+           /* VStack {
                 TextField("jméno", text: $name)
                     .textContentType(.URL)
                     .font(.title)
@@ -182,10 +251,10 @@ struct QRCodeView: View {
                     .resizable()
                     .scaledToFit()
                 Spacer()
-            }
+            }*/
     }
     
-    func generateQRCode(from string: String) -> UIImage {
+   private func generateQRCode(from string: String) -> UIImage {
         let data = Data(string.utf8)
         filter.setValue(data, forKey: "inputMessage")
         

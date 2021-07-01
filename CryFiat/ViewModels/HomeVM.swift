@@ -13,17 +13,24 @@ class HomeVM: ObservableObject {
     
     @Published var userCoins = [UserCoin]()
     @Published var selectedCoins = [CoinsTokenMarket]()
-    @Published var selectedCoin: CoinsTokenMarket?
+    @Published var selectedCoin: CoinsTokenMarket? {
+        didSet {
+            if let coin = selectedCoin {
+                price = String(coin.currentPrice * (Double(amount) ?? 1))
+            }
+        }
+    }
     @Published var chartData: [Double]?
     @Published var selectedCurrency = Currency.czk {
         didSet {
             storedCurrency = selectedCurrency
             if !userCoins.isEmpty {
                 getSelectedCoins(coinsID: generatePath(coins: userCoins))
-                print("změna fiat")
             }
         }
     }
+    @Published var price: String = "1"
+    @Published var amount: String = "1"
     @AppStorage("currency") var storedCurrency = Currency.eur
     
     private let localDataService = LocalDataService.shared
@@ -47,7 +54,6 @@ class HomeVM: ObservableObject {
         coinMarketService.$selectedCoins
             .sink { [unowned self] coins in
                 self.selectedCoins = coins
-                print("coins news")
                 if !coins.isEmpty && self.selectedCoin == nil {
                     self.selectedCoin = coins.first!
                 } else {
@@ -80,7 +86,7 @@ class HomeVM: ObservableObject {
         coinMarketService.getUserCoins(coins: coinsID, currency: selectedCurrency)
     }
     
-    func getChartData(coin: String, currency: Currency) {
+    private func getChartData(coin: String, currency: Currency) {
         coinMarketService.getChartData(coin: coin, currency: currency)
     }
     
@@ -97,5 +103,35 @@ class HomeVM: ObservableObject {
     func getCoinData(coin: CoinsTokenMarket, currency: Currency) {
         selectedCoin = coin
         getChartData(coin: coin.id, currency: currency)
+    }
+    
+    func processCoin(address: String) {
+        if let coin = selectedCoin {
+            localDataService.processCoin(coin: coin, address: address)
+        }
+    }
+    
+    func getAddress() -> String {
+        if let selected = selectedCoin {
+            return userCoins.first { coin in
+                coin.coinID == selected.id
+            }?.address ?? ""
+        }
+        return ""
+    }
+    //"ripple:rUwYKnpcDr9PLfE9DzZ6r8P3qpKbqv4SyA?amount=10&message=New house"
+    func qrAddress(address: String, amount: String) -> String {
+        if let coin = selectedCoin {
+            return coin.id + ":" + address + "?amount=" + amount
+        }
+        return ""
+    }
+    
+    func updatePrice(amount: String) {
+        price = String((Double(amount) ?? 1) * selectedCoin!.currentPrice)
+    }
+    
+    func updateAmount(price: String) {
+       amount = String((Double(price) ?? 1) / selectedCoin!.currentPrice)
     }
 }
