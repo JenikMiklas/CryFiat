@@ -17,6 +17,7 @@ class HomeVM: ObservableObject {
         didSet {
             if let coin = selectedCoin {
                 price = String(coin.currentPrice * (Double(amount) ?? 1))
+                address = getAddress()
             }
         }
     }
@@ -31,6 +32,14 @@ class HomeVM: ObservableObject {
     }
     @Published var price: String = "1"
     @Published var amount: String = "1"
+    @Published var address = "" {
+        didSet {
+            processCoin(address: address)
+            qrAddress = qrAddress(address: address, amount: String(amount))
+        }
+    }
+    @Published var qrAddress = ""
+    
     @AppStorage("currency") var storedCurrency = Currency.eur
     
     private let localDataService = LocalDataService.shared
@@ -111,7 +120,7 @@ class HomeVM: ObservableObject {
         }
     }
     
-    func getAddress() -> String {
+    private func getAddress() -> String {
         if let selected = selectedCoin {
             return userCoins.first { coin in
                 coin.coinID == selected.id
@@ -120,7 +129,7 @@ class HomeVM: ObservableObject {
         return ""
     }
     //"ripple:rUwYKnpcDr9PLfE9DzZ6r8P3qpKbqv4SyA?amount=10&message=New house"
-    func qrAddress(address: String, amount: String) -> String {
+    private func qrAddress(address: String, amount: String) -> String {
         if let coin = selectedCoin {
             return coin.id + ":" + address + "?amount=" + amount
         }
@@ -129,9 +138,13 @@ class HomeVM: ObservableObject {
     
     func updatePrice(amount: String) {
         price = String((Double(amount) ?? 1) * selectedCoin!.currentPrice)
+        qrAddress = qrAddress(address: address, amount: String(amount))
+        print(qrAddress)
     }
     
     func updateAmount(price: String) {
-       amount = String((Double(price) ?? 1) / selectedCoin!.currentPrice)
+        amount = String((Double(price) ?? 1) / selectedCoin!.currentPrice)
+        qrAddress = qrAddress(address: address, amount: String(amount))
+        print(qrAddress)
     }
 }

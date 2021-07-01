@@ -12,8 +12,6 @@ struct HomeView: View {
     
     @StateObject var homeVM = HomeVM()
     @State private var updateCoinList = false
-    @State private var address = ""
-    @State private var qrAddress = ""
     @State private var amountEditing = false
     @State private var priceEditing = false
     
@@ -43,7 +41,7 @@ struct HomeView: View {
                             Spacer()
                         }
                         coinAddress
-                        QRCodeView(address: $qrAddress)
+                        QRCodeView(address: $homeVM.qrAddress)
                             .frame(minWidth: 100, idealWidth: 300, maxWidth: 600, minHeight: 100, idealHeight: 300, maxHeight: 600, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         
                     }
@@ -94,16 +92,6 @@ struct HomeView: View {
                     }
                     }
             }
-            /*.onChange(of: homeVM.selectedCoin, perform: { _ in
-                    if homeVM.selectedCoin != nil {
-                        homeVM.updatePrice(amount: homeVM.amount)
-                    }
-                    address = homeVM.getAddress()
-                })*/
-                .onChange(of: address, perform: { value in
-                    homeVM.processCoin(address: value)
-                    qrAddress = homeVM.qrAddress(address: address, amount: String(homeVM.amount))
-                })
                 .onTapGesture {
                     UIApplication.shared.hideKeyboard()
                 }
@@ -178,7 +166,7 @@ extension HomeView {
         VStack(alignment: .leading) {
             Text("address")
                 .foregroundColor(.secondary)
-            TextField("", text: $address)
+            TextField("", text: $homeVM.address)
                 .padding()
                 .background(Color.secondary.opacity(0.2))
                 .cornerRadius(10)
@@ -196,7 +184,6 @@ extension HomeView {
                     .onChange(of: homeVM.amount, perform: { value in
                         if amountEditing {
                             homeVM.updatePrice(amount: value)
-                            qrAddress = homeVM.qrAddress(address: address, amount: String(homeVM.amount))
                         }
                     })
                 }
@@ -214,7 +201,6 @@ extension HomeView {
                         .onChange(of: homeVM.price, perform: { value in
                             if priceEditing {
                                 homeVM.updateAmount(price: value)
-                                qrAddress = homeVM.qrAddress(address: address, amount: String(homeVM.amount))
                             }
                     })
                     }

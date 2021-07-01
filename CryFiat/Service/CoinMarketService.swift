@@ -95,7 +95,6 @@ final class CoinMarketService {
                 for price in chartData.prices {
                     arr.append(price[1])
                 }
-                print(arr)
                 return arr
             }
             .sink(receiveCompletion: DownloadManager.Completion,
