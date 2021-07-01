@@ -35,7 +35,7 @@ class HomeVM: ObservableObject {
     @Published var address = "" {
         didSet {
             processCoin(address: address)
-            qrAddress = qrAddress(address: address, amount: String(amount))
+            qrAddress = qrAddress(address: address, amount: amount)
         }
     }
     @Published var qrAddress = ""
@@ -137,14 +137,16 @@ class HomeVM: ObservableObject {
     }
     
     func updatePrice(amount: String) {
-        price = String((Double(amount) ?? 1) * selectedCoin!.currentPrice)
-        qrAddress = qrAddress(address: address, amount: String(amount))
+        let dPrice = (Double(amount) ?? 1) * selectedCoin!.currentPrice
+        price = dPrice.priceFormat()
+        qrAddress = qrAddress(address: address, amount: amount)
         print(qrAddress)
     }
     
     func updateAmount(price: String) {
-        amount = String((Double(price) ?? 1) / selectedCoin!.currentPrice)
-        qrAddress = qrAddress(address: address, amount: String(amount))
+        let dAmount = (Double(price) ?? 1) / selectedCoin!.currentPrice
+        amount = dAmount.priceFormat()
+        qrAddress = qrAddress(address: address, amount: amount)
         print(qrAddress)
     }
 }

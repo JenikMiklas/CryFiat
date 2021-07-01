@@ -77,4 +77,8 @@ extension Double {
         }
         return str
     }
+    
+    func priceFormat() -> String {
+        return String(format: "%.6f", self)
+    }
 }
