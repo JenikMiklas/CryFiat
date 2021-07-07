@@ -29,8 +29,8 @@ struct CoinSelectionView: View {
                 VStack {
                     if search {
                         SearchBarView(findToken: $coinSelection.findCoin)
+                            .padding()
                             .transition(.move(edge: .top))
-                            .animation(.easeInOut)
                     }
                     if !coinSelection.marketCoins.isEmpty {
                         scrollList
@@ -104,7 +104,8 @@ extension CoinSelectionView {
     private var tabBarItems: some ToolbarContent {
         return Group {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: { search.toggle()
+                Button(action: {
+                    withAnimation(.easeInOut) { search.toggle() }
                     coinSelection.downloadAllCoins()
                 }, label: {
                     Image(systemName: "magnifyingglass.circle.fill")
