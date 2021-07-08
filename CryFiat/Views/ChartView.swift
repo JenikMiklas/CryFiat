@@ -32,16 +32,15 @@ struct ChartView: View {
             
         }
         .onAppear {
-            trimValue = 0
+            trimValue = 0.0
             maxVal = priceData.max() ?? 0
             minVal = priceData.min() ?? 0
             midVal = maxVal-minVal
             lastUpdate = Date().dateFrom(string: coin.lastUpdated ?? "")
             startDate = lastUpdate.addingTimeInterval(-7*24*3600)
-            print(priceData)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 withAnimation(.linear(duration: 1)) {
-                    trimValue = 1
+                    trimValue = 1.0
                 }
             }
         }
@@ -58,13 +57,16 @@ extension ChartView {
     private var chartView: some View {
         GeometryReader { geo in
             Path { path in
-                for i in priceData.indices {
-                    let dx = geo.size.width / CGFloat(priceData.count) * CGFloat(i+1)
-                    let y = (1 - CGFloat((priceData[i] - minVal) / midVal)) * geo.size.height
-                    if i == 0 {
-                        path.move(to: CGPoint(x: 0, y: y))
+                if midVal != 0 {
+                    for i in priceData.indices {
+                        let dx = geo.size.width / CGFloat(priceData.count) * CGFloat(i+1)
+                        let y = (1 - CGFloat((priceData[i] - minVal) / midVal)) * geo.size.height
+                        if i == 0 {
+                            path.move(to: CGPoint(x: 0.0, y: y))
+                        } else {
+                            path.addLine(to: CGPoint(x: dx, y: y))
+                        }
                     }
-                    path.addLine(to: CGPoint(x: dx, y: y))
                 }
             }
             .trim(from: 0, to: trimValue)
