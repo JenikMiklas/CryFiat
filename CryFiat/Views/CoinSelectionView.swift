@@ -62,8 +62,14 @@ struct CoinSelectionView: View {
 // MARK: PREVIEW
 struct CryptoAssetSelection_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            CoinSelectionView(currency: Currency(rawValue: "eur")!)
+        Group {
+            NavigationView {
+                CoinSelectionView(currency: Currency(rawValue: "eur")!)
+            }
+            NavigationView {
+                CoinSelectionView(currency: Currency(rawValue: "eur")!)
+            }
+            .previewDevice("iPod touch (7th generation)")
         }
     }
 }
@@ -72,7 +78,7 @@ extension CoinSelectionView {
     // MARK: scrollList
     private var scrollList: some View {
         return ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: cardSize.rawValue), spacing: 0)]) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: cardSize.rawValue), spacing: 5)]) {
                 ForEach(coinSelection.marketCoins, id: \.uuid) { coin in
                     Button(action: {
                         coinSelection.addCoin = coin
@@ -97,7 +103,7 @@ extension CoinSelectionView {
                             }
                         }
                 }
-            }
+            }.padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/, 5)
         }
     }
     // MARK: tabItems
