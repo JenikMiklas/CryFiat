@@ -49,115 +49,91 @@ extension CoinCardView {
     
     // MARK: SMALL CARD
     private var smallCard: some View {
-        rectangle
-            .frame(width: cardSize.rawValue, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
-            .overlay(
-                VStack {
-                    CoinImageView(imageUrl: coin.image, coinName: coin.id)
-                        .frame(width: 50, height: 50)
-                    Text("\(coin.marketCapRank ?? 0)")
-                        .font(.caption)
-                    Text("\(coin.symbol)")
-                }
-            )
-            .cornerRadius(10)
+        VStack {
+            CoinImageView(imageUrl: coin.image, coinName: coin.id)
+                .frame(width: 50, height: 50)
+            Text("\(coin.marketCapRank ?? 0)")
+                .font(.caption)
+            Text("\(coin.symbol)")
+        }.frame(width: cardSize.rawValue, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
     }
     
     // MARK: MEDIUM CARD
     private var mediumCard: some View {
-        rectangle
-            .frame(width: cardSize.rawValue, height: 150)
-            .overlay(
-                VStack {
-                    HStack(alignment: .center) {
-                        VStack(alignment:.leading) {
-                            Text("\(coin.marketCapRank ?? 0)")
-                                .font(.headline)
-                            Text("\(coin.symbol)")
-                                .font(.title2)
-                        }
-                        Spacer()
-                        CoinImageView(imageUrl: coin.image, coinName: coin.id)
-                            .frame(width: 50, height: 50)
-                    }
-                    .padding(.top, 5)
-                    .padding(.trailing, 5)
-                    .padding(.leading, 5)
-                    Text(coin.currentPrice.coinStringValue())
+        VStack {
+            HStack(alignment: .center) {
+                VStack(alignment:.leading) {
+                    Text("\(coin.marketCapRank ?? 0)")
+                        .font(.headline)
+                    Text("\(coin.symbol)")
                         .font(.title2)
-                        .padding(3)
-                    HStack {
-                        Text("24H: ")
-                        Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
-                            .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? .green:.red)
-                    } .font(.subheadline)
                 }
-            )
+                Spacer()
+                CoinImageView(imageUrl: coin.image, coinName: coin.id)
+                    .frame(width: 50, height: 50)
+            }
+            .padding(.top, 5)
+            .padding(.trailing, 5)
+            .padding(.leading, 5)
+            Text(coin.currentPrice.coinStringValue())
+                .font(.title2)
+                .padding(3)
+            HStack {
+                Text("24H: ")
+                Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
+                    .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? .green:.red)
+            } .font(.subheadline)
+        }.frame(width: cardSize.rawValue, height: 150)
     }
     
     // MARK: LARGE CARD
     private var largeCard: some View {
-        rectangle
-            .frame(width: cardSize.rawValue, height: 200)
-            .overlay(
-                VStack {
-                    HStack(alignment: .center) {
-                        VStack(alignment:.leading) {
-                            Text("\(coin.marketCapRank ?? 0)")
-                                .font(.headline)
-                            Text("\(coin.symbol)")
-                                .font(.title2)
-                        }
-                        Spacer()
-                        VStack {
-                            Text(coin.currentPrice.coinStringSymbol(currency: currency))
-                                .font(.title2)
-                            HStack {
-                                VStack {
-                                    Text("24H: \(coin.high24h?.coinStringSymbol(currency: currency) ?? "?")")
-                                    Text("24L: \(coin.low24h?.coinStringSymbol(currency: currency) ?? "?")")
-                                }
-                                VStack {
-                                    Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
-                                        .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? Color(.systemGreen):Color(.systemRed))
-                                    Text(coin.priceChange24h?.coinStringSymbol(currency: currency) ?? "?")
-                                        .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? Color(.systemGreen):Color(.systemRed))
-                                       
-                                }
-                            }.font(.subheadline).padding(.top, 5)
-                        }
-                        Spacer()
-                        CoinImageView(imageUrl: coin.image, coinName: coin.id)
-                            .frame(width: 50, height: 50)
-                    }
-                        .padding(.top, 10.0)
-                    HStack(alignment: .center) {
-                        VStack(alignment:.leading) {
-                            Text("ath: \(coin.ath?.coinStringSymbol(currency: currency) ?? "?")")
-                            Text("atl: \(coin.atl?.coinStringSymbol(currency: currency) ?? "?")")
-                        }
-                        Spacer()
-                        VStack(alignment: .trailing) {
-                            Text("circulating / total supply")
-                            Text(coin.circulatingSupply?.coinNumberString() ?? "?")
-                            Text(coin.totalSupply?.coinNumberString() ?? "?")
-                        }.font(.subheadline)
-                        .padding(.top, 10)
-                    }
-                    Spacer()
+        VStack {
+            HStack(alignment: .center) {
+                VStack(alignment:.leading) {
+                    Text("\(coin.marketCapRank ?? 0)")
+                        .font(.headline)
+                    Text("\(coin.symbol)")
+                        .font(.title2)
                 }
-                .padding([.leading, .trailing], 10.0)
-                //.foregroundColor(Color.white)
-            )
-    }
-    
-    // MARK: RECTANGLE
-    private var rectangle: some View {
-        RoundedRectangle(cornerRadius: 10)
-             .fill(
-                 LinearGradient(gradient: Gradient(colors: [Color(.systemGray), Color(.systemGray5)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-             )
-            .shadow(radius: 2)
+                Spacer()
+                VStack {
+                    Text(coin.currentPrice.coinStringSymbol(currency: currency))
+                        .font(.title2)
+                    HStack {
+                        VStack {
+                            Text("24H: \(coin.high24h?.coinStringSymbol(currency: currency) ?? "?")")
+                            Text("24L: \(coin.low24h?.coinStringSymbol(currency: currency) ?? "?")")
+                        }
+                        VStack {
+                            Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
+                                .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? Color(.systemGreen):Color(.systemRed))
+                            Text(coin.priceChange24h?.coinStringSymbol(currency: currency) ?? "?")
+                                .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? Color(.systemGreen):Color(.systemRed))
+                               
+                        }
+                    }.font(.subheadline).padding(.top, 5)
+                }
+                Spacer()
+                CoinImageView(imageUrl: coin.image, coinName: coin.id)
+                    .frame(width: 50, height: 50)
+            }
+                .padding(.top, 10.0)
+            HStack(alignment: .center) {
+                VStack(alignment:.leading) {
+                    Text("ath: \(coin.ath?.coinStringSymbol(currency: currency) ?? "?")")
+                    Text("atl: \(coin.atl?.coinStringSymbol(currency: currency) ?? "?")")
+                }
+                Spacer()
+                VStack(alignment: .trailing) {
+                    Text("circulating / total supply")
+                    Text(coin.circulatingSupply?.coinNumberString() ?? "?")
+                    Text(coin.totalSupply?.coinNumberString() ?? "?")
+                }.font(.subheadline)
+                .padding(.top, 10)
+            }
+            Spacer()
+        }.frame(width: cardSize.rawValue, height: 200).padding([.leading, .trailing], 10.0)
     }
 }
 
