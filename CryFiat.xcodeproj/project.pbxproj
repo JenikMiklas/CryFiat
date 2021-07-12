@@ -31,6 +31,8 @@
 		7F798CAC267A3D35001DD404 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F798CAB267A3D35001DD404 /* Assets.xcassets */; };
 		7F7AF44E2684B11600001925 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7AF44D2684B11500001925 /* ChartView.swift */; };
 		7F7AF4502684DC5800001925 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7AF44F2684DC5800001925 /* Date+Extension.swift */; };
+		7F7F4803269C86500030FE90 /* ChartDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7F4802269C86500030FE90 /* ChartDataService.swift */; };
+		7F7F4805269C87000030FE90 /* ChartVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7F4804269C87000030FE90 /* ChartVM.swift */; };
 		7F7FBA6F268A341700367917 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7FBA6E268A341700367917 /* Int+Extension.swift */; };
 		7F81262F267BD722006A96AD /* LocalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F81262E267BD722006A96AD /* LocalDataService.swift */; };
 		7F830B3526836C8500F247BF /* SelectCurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F830B3426836C8500F247BF /* SelectCurrencyView.swift */; };
@@ -66,6 +68,8 @@
 		7F798CAB267A3D35001DD404 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F7AF44D2684B11500001925 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7F7AF44F2684DC5800001925 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		7F7F4802269C86500030FE90 /* ChartDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataService.swift; sourceTree = "<group>"; };
+		7F7F4804269C87000030FE90 /* ChartVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartVM.swift; sourceTree = "<group>"; };
 		7F7FBA6E268A341700367917 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		7F81262E267BD722006A96AD /* LocalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataService.swift; sourceTree = "<group>"; };
 		7F830B3426836C8500F247BF /* SelectCurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyView.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 				7F7876BA2674FB2F00A2C54F /* CoinImageVM.swift */,
 				7F7876C026750AFF00A2C54F /* PreviewVM.swift */,
 				7F049617267E19D00045A6FB /* HomeVM.swift */,
+				7F7F4804269C87000030FE90 /* ChartVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				7F7876B12674C99900A2C54F /* CoinMarketService.swift */,
+				7F7F4802269C86500030FE90 /* ChartDataService.swift */,
 				7F7876BC2674FD9800A2C54F /* CoinImageService.swift */,
 				7F7876B32674DB5E00A2C54F /* DownloadService.swift */,
 				7F6CE3EF26769E08006E3FD2 /* FileService.swift */,
@@ -281,6 +287,7 @@
 				7F7876C126750AFF00A2C54F /* PreviewVM.swift in Sources */,
 				7F830B3526836C8500F247BF /* SelectCurrencyView.swift in Sources */,
 				7F6CE3F026769E08006E3FD2 /* FileService.swift in Sources */,
+				7F7F4805269C87000030FE90 /* ChartVM.swift in Sources */,
 				7F782F1326579EC700A358D2 /* CryFiatApp.swift in Sources */,
 				7F7865FB26792C8E00D74C1D /* CoinSizeCardView.swift in Sources */,
 				7F7876B42674DB5E00A2C54F /* DownloadService.swift in Sources */,
@@ -289,6 +296,7 @@
 				7F7FBA6F268A341700367917 /* Int+Extension.swift in Sources */,
 				7F66A241265E6A6800B891DD /* CoinSelectionView.swift in Sources */,
 				7F81262F267BD722006A96AD /* LocalDataService.swift in Sources */,
+				7F7F4803269C86500030FE90 /* ChartDataService.swift in Sources */,
 				7F7876BF2675090A00A2C54F /* CoinCardView.swift in Sources */,
 				7F7AF4502684DC5800001925 /* Date+Extension.swift in Sources */,
 				7F7AF44E2684B11600001925 /* ChartView.swift in Sources */,

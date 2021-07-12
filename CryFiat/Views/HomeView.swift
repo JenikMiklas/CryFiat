@@ -23,7 +23,7 @@ struct HomeView: View {
                     if let coin = homeVM.selectedCoin {
                         HStack {
                             NavigationLink(
-                                destination: CoinDetailView(coin: coin, currency: homeVM.selectedCurrency, chartData: homeVM.chartData ?? [Double]()),
+                                destination: CoinDetailView(coin: coin, currency: homeVM.selectedCurrency),
                                 label: {
                                     VStack(alignment: .leading) {
                                         Text(coin.name)

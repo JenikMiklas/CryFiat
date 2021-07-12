@@ -11,12 +11,13 @@ struct CoinDetailView: View {
     
     let coin: CoinsTokenMarket
     let currency: Currency
-    let chartData: [Double]
+    //let chartData: [Double]
     
     var body: some View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    if !chartData.isEmpty { chartView; Divider() }
+                    //if !chartData.isEmpty { chartView; Divider() }
+                    chartView; Divider()
                     overview
                     Divider()
                     lastDay
@@ -34,7 +35,7 @@ struct CoinDetailView: View {
 struct CoinDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CoinDetailView(coin: PreviewVM.coin, currency: Currency.eur, chartData: PreviewVM.chartData)
+            CoinDetailView(coin: PreviewVM.coin, currency: Currency.eur)
         }
     }
 }
@@ -67,7 +68,7 @@ extension CoinDetailView {
                     .foregroundColor(.secondary)
             }
             .padding()
-            ChartView(chartData: chartData, coin: coin)
+            ChartView(coin: coin, currency: currency)
                 .frame(height: 200)
         }.padding(.bottom)
     }

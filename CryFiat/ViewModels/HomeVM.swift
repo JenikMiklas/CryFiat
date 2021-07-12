@@ -21,7 +21,6 @@ class HomeVM: ObservableObject {
             }
         }
     }
-    @Published var chartData: [Double]?
     @Published var selectedCurrency = Currency.czk {
         didSet {
             storedCurrency = selectedCurrency
@@ -72,12 +71,6 @@ class HomeVM: ObservableObject {
                 }
             }
             .store(in: &cancellable)
-        
-        coinMarketService.$chartData
-            .sink { [unowned self] chartData in
-                self.chartData = chartData
-            }
-            .store(in: &cancellable)
     }
     
     private func generatePath(coins: [UserCoin]) -> String {
@@ -95,10 +88,6 @@ class HomeVM: ObservableObject {
         coinMarketService.getUserCoins(coins: coinsID, currency: selectedCurrency)
     }
     
-    private func getChartData(coin: String, currency: Currency) {
-        coinMarketService.getChartData(coin: coin, currency: currency)
-    }
-    
     func remove(coin: CoinsTokenMarket) {
         if let index = selectedCoins.firstIndex(where: { $0.id == coin.id }) {
             selectedCoins.remove(at: index)
@@ -111,7 +100,7 @@ class HomeVM: ObservableObject {
     
     func getCoinData(coin: CoinsTokenMarket, currency: Currency) {
         selectedCoin = coin
-        getChartData(coin: coin.id, currency: currency)
+        //getChartData(coin: coin.id, currency: currency)
     }
     
     func processCoin(address: String) {
