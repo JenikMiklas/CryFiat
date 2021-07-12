@@ -15,6 +15,7 @@ struct CoinCardView: View {
     // MARK: BODY
     var body: some View {
         getSizeCard(cardSize: cardSize)
+            .clipShape(Rectangle()).border(Color.secondary, width: 0.5).cornerRadius(10)
     }
 }
 
@@ -54,7 +55,7 @@ extension CoinCardView {
                 .frame(width: 50, height: 50)
             Text("\(coin.marketCapRank ?? 0)")
                 .font(.caption)
-            Text("\(coin.symbol)")
+            Text("\(coin.symbol.uppercased())")
         }.frame(width: cardSize.rawValue, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
     }
     
@@ -65,7 +66,7 @@ extension CoinCardView {
                 VStack(alignment:.leading) {
                     Text("\(coin.marketCapRank ?? 0)")
                         .font(.headline)
-                    Text("\(coin.symbol)")
+                    Text("\(coin.symbol.uppercased())")
                         .font(.title2)
                 }
                 Spacer()
@@ -75,11 +76,11 @@ extension CoinCardView {
             .padding(.top, 5)
             .padding(.trailing, 5)
             .padding(.leading, 5)
-            Text(coin.currentPrice.coinStringValue())
+            Text(coin.currentPrice.coinStringSymbol(currency: currency))
                 .font(.title2)
                 .padding(3)
-            HStack {
-                Text("24H: ")
+            HStack(alignment: .lastTextBaseline) {
+                Text("24h:").foregroundColor(.secondary).font(.caption)
                 Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
                     .foregroundColor((coin.priceChangePercentage24h ?? 0 > 0) ? .green:.red)
             } .font(.subheadline)
@@ -93,7 +94,7 @@ extension CoinCardView {
                 VStack(alignment:.leading) {
                     Text("\(coin.marketCapRank ?? 0)")
                         .font(.headline)
-                    Text("\(coin.symbol)")
+                    Text("\(coin.symbol.uppercased())")
                         .font(.title2)
                 }
                 Spacer()
@@ -102,8 +103,14 @@ extension CoinCardView {
                         .font(.title2)
                     HStack {
                         VStack {
-                            Text("24H: \(coin.high24h?.coinStringSymbol(currency: currency) ?? "?")")
-                            Text("24L: \(coin.low24h?.coinStringSymbol(currency: currency) ?? "?")")
+                            HStack {
+                                Text("24h:").foregroundColor(.secondary).font(.caption)
+                                Text(coin.high24h?.coinStringSymbol(currency: currency) ?? "?")
+                            }
+                            HStack {
+                                Text("24l:").foregroundColor(.secondary).font(.caption)
+                                Text(coin.low24h?.coinStringSymbol(currency: currency) ?? "?")
+                            }
                         }
                         VStack {
                             Text(coin.priceChangePercentage24h?.coinPercentString() ?? "?")
@@ -119,16 +126,19 @@ extension CoinCardView {
                     .frame(width: 50, height: 50)
             }
                 .padding(.top, 10.0)
+            Spacer()
             HStack(alignment: .center) {
-                VStack(alignment:.leading) {
-                    Text("ath: \(coin.ath?.coinStringSymbol(currency: currency) ?? "?")")
-                    Text("atl: \(coin.atl?.coinStringSymbol(currency: currency) ?? "?")")
+                VStack(alignment:.trailing) {
+                    Text("ath").foregroundColor(.secondary).font(.caption)
+                    Text(coin.ath?.coinStringSymbol(currency: currency) ?? "?")
+                    Text("atl").foregroundColor(.secondary).font(.caption)
+                    Text(coin.atl?.coinStringSymbol(currency: currency) ?? "?")
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
-                    Text("circulating / total supply")
-                    Text(coin.circulatingSupply?.coinNumberString() ?? "?")
-                    Text(coin.totalSupply?.coinNumberString() ?? "?")
+                    Text("circulating / total supply").foregroundColor(.secondary).font(.caption)
+                    Text(coin.circulatingSupply?.coinMarketCap() ?? "?")
+                    Text(coin.totalSupply?.coinMarketCap() ?? "?")
                 }.font(.subheadline)
                 .padding(.top, 10)
             }
