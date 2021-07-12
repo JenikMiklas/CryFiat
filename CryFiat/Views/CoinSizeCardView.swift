@@ -25,8 +25,15 @@ struct CoinSizeCardView: View {
                         cardSize = .small
                         chooseCardSize.toggle()
                     }, label: {
-                        RoundedRectangle(cornerRadius:10)
-                            .frame(width: 90/2, height: 100/2)
+                        VStack {
+                            Circle()
+                                .frame(width: 25, height: 25)
+                            Rectangle().frame(width: 10, height: 5)
+                            Rectangle().frame(width: 20, height: 5)
+                        }
+                        .frame(width: 90/2, height: 100/2)
+                        .padding(9)
+                        .border(Color.secondary, width: 1).cornerRadius(5)
                     })
                     Divider()
                         .frame(height: 75)
@@ -34,8 +41,26 @@ struct CoinSizeCardView: View {
                         cardSize = .medium
                         chooseCardSize.toggle()
                     }, label: {
-                        RoundedRectangle(cornerRadius:10)
-                            .frame(width: 135/2, height: 150/2)
+                        VStack {
+                            HStack(alignment: .center) {
+                                VStack(alignment:.leading) {
+                                    Rectangle().frame(width: 10, height: 5)
+                                    Rectangle().frame(width: 20, height: 5)
+                                }
+                                Spacer()
+                                Circle()
+                                    .frame(width: 25, height: 25)
+                            }
+                            .padding(.top, 2)
+                            .padding(.trailing, 2)
+                            .padding(.leading, 2)
+                            Rectangle().frame(width: 30, height: 5)
+                            Rectangle().frame(width: 30, height: 5)
+                        }
+                            
+                        .frame(width: 135/2, height: 150/2)
+                        .padding(3)
+                        .border(Color.secondary, width: 1).cornerRadius(5)
                     })
                     Divider()
                         .frame(height: 75)
@@ -43,8 +68,40 @@ struct CoinSizeCardView: View {
                         cardSize = .large
                         chooseCardSize.toggle()
                     }, label: {
-                        RoundedRectangle(cornerRadius:10)
-                            .frame(width: 320/2, height: 200/2)
+                        VStack {
+                            HStack(alignment: .center) {
+                                VStack(spacing: 3) {
+                                    Rectangle().frame(width: 20, height: 5)
+                                    Rectangle().frame(width: 30, height: 5)
+                                }
+                                Spacer()
+                                VStack(spacing: 3) {
+                                    Rectangle().frame(width: 30, height: 5)
+                                    Rectangle().frame(width: 50, height: 5)
+                                    Rectangle().frame(width: 50, height: 5)
+                                }
+                                Spacer()
+                                Circle()
+                                    .frame(width: 25, height: 25)
+                            }
+                            .padding([.top, .leading,. trailing], 8)
+                            Spacer()
+                            HStack(alignment: .center) {
+                                VStack(spacing: 3) {
+                                    Rectangle().frame(width: 50, height: 5)
+                                    Rectangle().frame(width: 50, height: 5)
+                                }
+                                Spacer()
+                                VStack(spacing: 3) {
+                                    Rectangle().frame(width: 50, height: 5)
+                                    Rectangle().frame(width: 50, height: 5)
+                                }
+                            }
+                            .padding([.top, .leading,. trailing], 8)
+                            Spacer()
+                        }
+                        .frame(width: 320/2, height: 200/2)
+                        .border(Color.secondary, width: 1).cornerRadius(5)
                     })
                 }
                 .foregroundColor(Color(.systemGray))
