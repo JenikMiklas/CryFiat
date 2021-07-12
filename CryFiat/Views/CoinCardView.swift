@@ -15,7 +15,7 @@ struct CoinCardView: View {
     // MARK: BODY
     var body: some View {
         getSizeCard(cardSize: cardSize)
-            .clipShape(Rectangle()).border(Color.secondary, width: 0.5).cornerRadius(10)
+            .border(Color.secondary, width: 1).cornerRadius(5)
     }
 }
 

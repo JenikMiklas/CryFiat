@@ -86,6 +86,7 @@ extension CoinSelectionView {
                         addCoin = true
                     }, label: {
                         CoinCardView(coin: coin, cardSize: cardSize, currency: coinSelection.currency)
+                            .padding(.bottom, 5)
                     })
                         .foregroundColor(.primary)
 
@@ -103,7 +104,7 @@ extension CoinSelectionView {
                             }
                         }
                 }
-            }.padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/, 5)
+            }.padding(.all, 5)
         }
     }
     // MARK: tabItems
