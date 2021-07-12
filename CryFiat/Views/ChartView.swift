@@ -25,12 +25,14 @@ struct ChartView: View {
                 .background(background)
                 .overlay(overlay, alignment: .leading)
             timeInterval
-            
         }
         .onAppear {
             chartVM.getChartData(coin: coin.id, currency: currency)
             lastUpdate = Date().dateFrom(string: coin.lastUpdated ?? "")
             startDate = lastUpdate.addingTimeInterval(-7*24*3600)
+        }
+        .onDisappear {
+            chartVM.chartData = []
         }
     }
 }

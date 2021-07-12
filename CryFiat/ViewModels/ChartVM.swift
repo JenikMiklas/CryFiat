@@ -11,13 +11,13 @@ import SwiftUI
 
 class ChartVM: ObservableObject {
     @Published var chartData: [Double] = []
+    @Published var trimValue: CGFloat = 0
     private var cancellable = Set<AnyCancellable>()
     private let chartDataService = ChartDataService.shared
     
     var maxVal: Double = 0
     var minVal: Double = 0
     var midVal: Double = 0
-    @Published var trimValue: CGFloat = 0
     
     init() {
         chartDataService.$chartData
