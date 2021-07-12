@@ -29,7 +29,6 @@ class ChartVM: ObservableObject {
     }
     
     private func setupChart() {
-        trimValue = 0.0
         maxVal = chartData.max() ?? 0
         minVal = chartData.min() ?? 0
         midVal = maxVal-minVal

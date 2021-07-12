@@ -21,18 +21,21 @@ struct ChartView: View {
     
     var body: some View {
         VStack {
-            chartView
-                .background(background)
-                .overlay(overlay, alignment: .leading)
-            timeInterval
+            if chartVM.chartData.isEmpty {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                chartView
+                    .background(background)
+                    .overlay(overlay, alignment: .leading)
+                timeInterval
+            }
         }
         .onAppear {
+            chartVM.chartData = []
             chartVM.getChartData(coin: coin.id, currency: currency)
             lastUpdate = Date().dateFrom(string: coin.lastUpdated ?? "")
             startDate = lastUpdate.addingTimeInterval(-7*24*3600)
-        }
-        .onDisappear {
-            chartVM.chartData = []
         }
     }
 }
