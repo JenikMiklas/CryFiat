@@ -25,6 +25,7 @@ struct HomeView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     coinList
+                    Divider()
                     if let coin = homeVM.selectedCoin {
                         HStack {
                             NavigationLink(
@@ -206,7 +207,7 @@ extension HomeView {
                 }
             }
             Toggle(isOn: $addressOnly, label: {
-                Text("generate address only")
+                Text("Generate address only").font(.callout)
             })
         }.padding([.leading, .trailing])
     }
