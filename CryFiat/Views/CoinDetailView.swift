@@ -63,7 +63,7 @@ extension CoinDetailView {
             HStack {
                 Text(coin.name.uppercased() )
                     .font(.title)
-                Text("week chart")
+                Text("chart")
                     .font(.title)
                     .foregroundColor(.secondary)
             }

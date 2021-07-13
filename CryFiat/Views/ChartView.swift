@@ -7,13 +7,21 @@
 
 import SwiftUI
 
+enum Days: String, CaseIterable {
+    case week = "7"
+    case twoWeeks = "14"
+    case month = "30"
+    case threeMonths = "90"
+    case year = "365"
+}
+
 struct ChartView: View {
     @StateObject var chartVM: ChartVM
     let coin: CoinsTokenMarket
     let currency: Currency
     @State private var lastUpdate: Date = Date()
     @State private var startDate: Date = Date ()
-    @State private var days: String = "7"
+    @State private var days: Days = .week
     
     init(coin: CoinsTokenMarket, currency: Currency) {
         self.coin = coin
@@ -32,12 +40,18 @@ struct ChartView: View {
                     .overlay(overlay, alignment: .leading)
                 timeInterval
             }
+            rangeSegment
         }
         .onAppear {
-            chartVM.chartData = []
-            chartVM.getChartData(coin: coin.id, currency: currency, days: days)
+            chartVM.getChartData(coin: coin.id, currency: currency, days: days.rawValue)
             lastUpdate = Date().dateFrom(string: coin.lastUpdated ?? "")
-            if let day = Double(days) {
+            if let day = Double(days.rawValue) {
+                startDate = lastUpdate.addingTimeInterval(-day*24*3600)
+            }
+        }
+        .onChange(of: days) { value in
+            chartVM.getChartData(coin: coin.id, currency: currency, days: days.rawValue)
+            if let day = Double(days.rawValue) {
                 startDate = lastUpdate.addingTimeInterval(-day*24*3600)
             }
         }
@@ -47,9 +61,10 @@ struct ChartView: View {
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
         ChartView(coin: PreviewVM.coin, currency: Currency.eur)
+            .frame(height: 200)
     }
 }
-
+// MARK: ChartView
 extension ChartView {
     private var chartView: some View {
         GeometryReader { geo in
@@ -71,6 +86,7 @@ extension ChartView {
             .shadow(color: .primary.opacity(0.5), radius: 10, x: 0.0, y: 10)
         }
     }
+    // MARK: background
     private var background: some View {
         VStack {
             Divider()
@@ -89,6 +105,7 @@ extension ChartView {
             Text(chartVM.minVal.coinNumberString())
     }.font(.subheadline).padding(.leading)
     }
+    // MARK: timeInterval
     private var timeInterval: some View {
         HStack {
             Text(startDate.shortDateString())
@@ -96,5 +113,22 @@ extension ChartView {
             Text(lastUpdate.shortDateString())
         }.font(.caption)
         .padding([.leading, .trailing])
+    }
+    // MARK: rangeSegment
+    private var rangeSegment: some View {
+        Picker("Range", selection: $days) {
+            ForEach(Days.allCases, id: \.self) {
+                switch $0 {
+                case .week, .twoWeeks:
+                    Text($0.rawValue) + Text(" d")
+                case .month:
+                    Text("1 m")
+                case .threeMonths:
+                   Text("3 m")
+                case .year:
+                    Text("1 y")
+                }
+            }
+        }.pickerStyle(SegmentedPickerStyle()).padding([.leading, .trailing, .top])
     }
 }

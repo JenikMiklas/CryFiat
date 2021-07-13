@@ -40,6 +40,8 @@ class ChartVM: ObservableObject {
     }
     
     func getChartData(coin: String, currency: Currency, days: String) {
+        chartData = []
+        trimValue = 0
         chartDataService.getChartData(coin: coin, currency: currency, days: days)
      }
 }
