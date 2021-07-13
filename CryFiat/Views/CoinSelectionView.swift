@@ -115,7 +115,7 @@ extension CoinSelectionView {
                     withAnimation(.easeInOut) { search.toggle() }
                     coinSelection.downloadAllCoins()
                 }, label: {
-                    Image(systemName: "magnifyingglass.circle.fill")
+                    Image(systemName: "magnifyingglass.circle")
                         .resizable()
                         .frame(width: 30, height: 30)
                 })
