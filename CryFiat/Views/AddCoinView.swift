@@ -27,7 +27,9 @@ struct AddCoinView: View {
                         coinSelection.saveUserCoin(coin: coinSelection.addCoin!)
                         addCoin.toggle()
                      }, label: {
-                        Text("Add \(coinSelection.addCoin!.name)")
+                        Group {
+                            Text("locAdd") +  Text(" \(coinSelection.addCoin!.name)")
+                        }
                              .padding()
                              .background(Capsule().fill(Color.blue))
                              .foregroundColor(.white)
@@ -36,7 +38,7 @@ struct AddCoinView: View {
                 Button(action: {
                     addCoin.toggle()
                 }, label: {
-                    Text("cancel")
+                    Text("locCancel")
                         .padding()
                         .foregroundColor(.primary)
                 })

@@ -41,7 +41,7 @@ struct CoinDetailView_Previews: PreviewProvider {
 }
 
 struct CoinInfo: View {
-    let title: String
+    let title: LocalizedStringKey
     let value: String
     
     var body: some View {
@@ -63,7 +63,7 @@ extension CoinDetailView {
             HStack {
                 Text(coin.name.uppercased() )
                     .font(.title)
-                Text("chart")
+                Text("locChart")
                     .font(.title)
                     .foregroundColor(.secondary)
             }
@@ -76,16 +76,16 @@ extension CoinDetailView {
     private var overview: some View {
         Group {
             HStack {
-                Text("Overview")
+                Text("locOverview")
                     .font(.title)
                     .foregroundColor(.secondary)
                 Spacer()
             }.padding(.leading)
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 10, pinnedViews: /*@START_MENU_TOKEN@*/[]/*@END_MENU_TOKEN@*/, content: {
-                CoinInfo(title: "Rank", value: coin.marketCapRank?.coinStringValue() ?? "?")
-                CoinInfo(title: "Price", value: coin.currentPrice.coinStringLongSymbol(currency: currency) )
-                CoinInfo(title: "Market cap", value: coin.marketCap?.coinMarketCap() ?? "?")
-                CoinInfo(title: "Volume 24H", value: coin.totalVolume?.coinMarketCap() ?? "?")
+                CoinInfo(title: "locRank", value: coin.marketCapRank?.coinStringValue() ?? "?")
+                CoinInfo(title: "locPrice", value: coin.currentPrice.coinStringLongSymbol(currency: currency) )
+                CoinInfo(title: "locMarketCap", value: coin.marketCap?.coinMarketCap() ?? "?")
+                CoinInfo(title: "locVolume24h", value: coin.totalVolume?.coinMarketCap() ?? "?")
             })
         }
     }
@@ -93,18 +93,18 @@ extension CoinDetailView {
     private var lastDay: some View {
         Group {
             HStack {
-                Text("Last 24h")
+                Text("locLast24h")
                     .font(.title)
                     .foregroundColor(.secondary)
                 Spacer()
             }.padding(.leading)
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 10, pinnedViews: /*@START_MENU_TOKEN@*/[]/*@END_MENU_TOKEN@*/, content: {
-                CoinInfo(title: "Price change", value: coin.priceChange24h?.coinStringValue() ?? "?")
-                CoinInfo(title: "Price change %", value: coin.priceChangePercentage24h?.coinStringValue() ?? "?" )
-                CoinInfo(title: "Low", value: coin.low24h?.coinStringValue() ?? "?")
-                CoinInfo(title: "High", value: coin.high24h?.coinStringValue() ?? "?")
-                CoinInfo(title: "Market cap change", value: coin.marketCapChange24h?.coinMarketCap() ?? "?")
-                CoinInfo(title: "Market cap change %", value: coin.marketCapChangePercentage24h?.coinStringValue() ?? "?")
+                CoinInfo(title: "locPriceChange", value: coin.priceChange24h?.coinStringLongSymbol(currency: currency) ?? "?")
+                CoinInfo(title: "locPricePercent", value: coin.priceChangePercentage24h?.coinStringValue() ?? "?" )
+                CoinInfo(title: "locLow", value: coin.low24h?.coinStringLongSymbol(currency: currency) ?? "?")
+                CoinInfo(title: "locHigh", value: coin.high24h?.coinStringLongSymbol(currency: currency) ?? "?")
+                CoinInfo(title: "locMarketCapChange", value: coin.marketCapChange24h?.coinMarketCap() ?? "?")
+                CoinInfo(title: "locMarketCapChangePerc", value: coin.marketCapChangePercentage24h?.coinStringValue() ?? "?")
             })
             .padding([.leading, .trailing])
         }
@@ -113,14 +113,14 @@ extension CoinDetailView {
     private var supply: some View {
         Group {
             HStack {
-                Text("Supply")
+                Text("locSupply")
                     .font(.title)
                     .foregroundColor(.secondary)
                 Spacer()
             }.padding(.leading)
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 10, pinnedViews: /*@START_MENU_TOKEN@*/[]/*@END_MENU_TOKEN@*/, content: {
-                CoinInfo(title: "Circulating", value: coin.circulatingSupply?.coinMarketCap() ?? "?")
-                CoinInfo(title: "Total", value: coin.totalSupply?.coinMarketCap() ?? "?" )
+                CoinInfo(title: "locCircul", value: coin.circulatingSupply?.coinMarketCap() ?? "?")
+                CoinInfo(title: "locTotal", value: coin.totalSupply?.coinMarketCap() ?? "?" )
             })
             .padding([.leading, .trailing])
         }
@@ -129,16 +129,16 @@ extension CoinDetailView {
     private var ath: some View {
         Group {
             HStack {
-                Text("All time high")
+                Text("locAllTime")
                     .font(.title)
                     .foregroundColor(.secondary)
                 Spacer()
             }.padding(.leading)
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 10, pinnedViews: /*@START_MENU_TOKEN@*/[]/*@END_MENU_TOKEN@*/, content: {
-                CoinInfo(title: "High", value: coin.ath?.coinStringValue() ?? "?")
-                CoinInfo(title: "Low", value: coin.atl?.coinStringValue() ?? "?" )
-                CoinInfo(title: "High date", value: Date().dateFrom(string: coin.athDate ?? "").shortDateString())
-                CoinInfo(title: "Low date", value: Date().dateFrom(string: coin.atlDate ?? "").shortDateString() )
+                CoinInfo(title: "locHigh", value: coin.ath?.coinStringLongSymbol(currency: currency) ?? "?")
+                CoinInfo(title: "locLow", value: coin.atl?.coinStringLongSymbol(currency: currency) ?? "?" )
+                CoinInfo(title: "locHighDate", value: Date().dateFrom(string: coin.athDate ?? "").shortDateString())
+                CoinInfo(title: "locLowDate", value: Date().dateFrom(string: coin.atlDate ?? "").shortDateString() )
             })
             .padding([.leading, .trailing])
         }

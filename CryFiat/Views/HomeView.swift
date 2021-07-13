@@ -103,6 +103,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environment(\.locale, .init(identifier: "cs"))
     }
 }
 
@@ -164,7 +165,7 @@ extension HomeView {
     // MARK: Coin Address
     private var coinAddress: some View {
         VStack(alignment: .leading) {
-            Text("address")
+            Text("locAddress")
                 .foregroundColor(.secondary)
             TextField("", text: $homeVM.address)
                 .padding()
@@ -207,7 +208,7 @@ extension HomeView {
                 }
             }
             Toggle(isOn: $addressOnly, label: {
-                Text("Generate address only").font(.callout)
+                Text("locAddressOnly").font(.callout)
             })
         }.padding([.leading, .trailing])
     }

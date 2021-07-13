@@ -21,7 +21,6 @@ struct CryFiatApp: App {
             /*ContentView()
                 .environmentObject(appVM)*/
             HomeView()
-        
         }
     }
 }

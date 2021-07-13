@@ -1,0 +1,35 @@
+/* 
+  Localizable.strings
+  CryFiat
+
+  Created by Jan Miklas on 13.07.2021.
+  
+*/
+"locAddress" = "adresa";
+"locCoinsSelection" = "Výběr tokenů";
+"locAdd" = "Přidat";
+"locCancel" = "Zrušit";
+"locCoinCardSize" = "Velikost karty";
+"locSearchToken" = "Hledat token";
+"locCirculating" = "v oběhu / celkový počet";
+"locSelectCurrency" = "Výběr měny";
+"locAddressOnly" = "Generování pouze adresy";
+"locChart" = "graf";
+"locOverview" = "Přehled";
+"locRank" = "Pořadí";
+"locPrice" = "Cena";
+"locMarketCap" = "Tržní kapitalizace";
+"locVolume24h" = "Objem 24h";
+"locLast24h" = "Posledních 24h";
+"locPriceChange" = "Vývoj ceny";
+"locPricePercent" = "Vývoj ceny %";
+"locLow" = "Min";
+"locHigh" = "Max";
+"locMarketCapChange" = "Změna tržní kapitalizace";
+"locMarketCapChangePerc" = "Změna tržní kapitalizace %";
+"locSupply" = "Množství";
+"locCircul" = "V oběhu";
+"locTotal" = "Celkem";
+"locAllTime" = "Nejvýše dosažené";
+"locHighDate" = "Datum maxima";
+"locLowDate" = "Datum minima";

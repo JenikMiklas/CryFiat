@@ -56,7 +56,7 @@ struct CoinSelectionView: View {
             }
         
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Coins selection")
+        .navigationTitle("locCoinsSelection")
     }
 }
 // MARK: PREVIEW

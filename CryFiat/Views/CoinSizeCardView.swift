@@ -18,7 +18,7 @@ struct CoinSizeCardView: View {
                 .frame(height: 200)
                 .cornerRadius(20)
             VStack {
-                Text("Coin card size")
+                Text("locCoinCardSize")
                     .font(.headline)
                 HStack {
                     Button(action: {

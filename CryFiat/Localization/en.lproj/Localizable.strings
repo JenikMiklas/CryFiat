@@ -1,0 +1,35 @@
+/* 
+  Localizable.strings
+  CryFiat
+
+  Created by Jan Miklas on 13.07.2021.
+  
+*/
+"locAddress" = "address";
+"locCoinsSelection" = "Coins selection";
+"locAdd" = "Add";
+"locCancel" = "Cancel";
+"locCoinCardSize" = "Coin card size";
+"locSearchToken" = "search token";
+"locCirculating" = "circulating / total supply";
+"locSelectCurrency" = "Select currency";
+"locAddressOnly" = "Generate address only";
+"locChart" = "chart";
+"locOverview" = "Overview";
+"locRank" = "Rank";
+"locPrice" = "Price";
+"locMarketCap" = "Market cap";
+"locVolume24h" = "Volume 24h";
+"locLast24h" = "Last 24h";
+"locPriceChange" = "Price change";
+"locPricePercent" = "Price change %";
+"locLow" = "Low";
+"locHigh" = "High";
+"locMarketCapChange" = "Market cap change";
+"locMarketCapChangePerc" = "Market cap change %";
+"locSupply" = "Supply";
+"locCircul" = "Circulating";
+"locTotal" = "Total";
+"locAllTime" = "All time high";
+"locHighDate" = "High date";
+"locLowDate" = "Low date";

@@ -136,7 +136,7 @@ extension CoinCardView {
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
-                    Text("circulating / total supply").foregroundColor(.secondary).font(.caption)
+                    Text("locCirculating").foregroundColor(.secondary).font(.caption)
                     Text(coin.circulatingSupply?.coinMarketCap() ?? "?")
                     Text(coin.totalSupply?.coinMarketCap() ?? "?")
                 }.font(.subheadline)

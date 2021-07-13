@@ -12,7 +12,7 @@ struct SearchBarView: View {
     @Binding var findToken: String
     
     var body: some View {
-            TextField("search token", text: $findToken)
+            TextField("locSearchToken", text: $findToken)
                 .textFieldStyle(PlainTextFieldStyle())
                 .disableAutocorrection(true)
                 .overlay(

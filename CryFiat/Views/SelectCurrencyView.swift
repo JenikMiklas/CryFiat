@@ -47,7 +47,7 @@ struct SelectCurrencyView: View {
             })
             .padding()
         }
-        .navigationTitle("Select currency")
+        .navigationTitle("locSelectCurrency")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             currency = homeVM.selectedCurrency
