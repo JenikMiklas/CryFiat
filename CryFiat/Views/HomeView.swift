@@ -56,13 +56,7 @@ struct HomeView: View {
                                     SelectCurrencyView(homeVM: homeVM),
                                 label: {
                                     Button(action: {  }, label: {
-                                        if homeVM.selectedCurrency.flag != "crypto" {
-                                            Text(homeVM.selectedCurrency.rawValue == "eur" ? "🇪🇺":homeVM.selectedCurrency.flag)
-                                        } else {
-                                            Image(homeVM.selectedCurrency.rawValue)
-                                                .resizable()
-                                                .frame(width: 20, height: 20)
-                                        }
+                                        Text(homeVM.selectedCurrency.rawValue.uppercased())
                                     })
                                 })
                         }
