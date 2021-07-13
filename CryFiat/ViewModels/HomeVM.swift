@@ -90,12 +90,15 @@ class HomeVM: ObservableObject {
     
     func remove(coin: CoinsTokenMarket) {
         if let index = selectedCoins.firstIndex(where: { $0.id == coin.id }) {
+            let isSelected = selectedCoin == selectedCoins[index]
             selectedCoins.remove(at: index)
+            if !selectedCoins.isEmpty {
+                if isSelected { selectedCoin = selectedCoins[index == 0 ? index:index-1] }
+            } else { selectedCoin = nil }
             if let coinToRemove = userCoins.first(where: { $0.coinID == coin.id }) {
                 localDataService.removeFromUserList(coin: coinToRemove)
             }
         }
-        if selectedCoins.isEmpty { selectedCoin = nil }
     }
     
     func getCoinData(coin: CoinsTokenMarket, currency: Currency) {
