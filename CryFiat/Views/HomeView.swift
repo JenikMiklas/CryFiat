@@ -15,6 +15,10 @@ struct HomeView: View {
     @State private var amountEditing = false
     @State private var priceEditing = false
     
+    init() {
+        UINavigationBar.appearance().tintColor = UIColor(Color.primary)
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -66,7 +70,7 @@ struct HomeView: View {
                             NavigationLink(
                                 destination: CoinSelectionView(currency: homeVM.storedCurrency),
                                 label: {
-                                    Image(systemName: "plus.circle.fill")
+                                    Image(systemName: "plus.circle")
                             })
                         }
                     }
@@ -78,7 +82,7 @@ struct HomeView: View {
                             }
                         }, label: {
                             if !updateCoinList {
-                                Image(systemName: "trash.circle.fill")
+                                Image(systemName: "trash.circle")
                             } else {
                                 Image(systemName: "xmark.circle")
                             }
