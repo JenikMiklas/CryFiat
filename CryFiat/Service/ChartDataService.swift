@@ -18,8 +18,8 @@ final class ChartDataService {
     
     private init() {}
     
-    func getChartData(coin: String, currency: Currency) {
-        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/\(coin)/market_chart?vs_currency=\(currency.rawValue)&days=7") else {
+    func getChartData(coin: String, currency: Currency, days: String) {
+        guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/\(coin)/market_chart?vs_currency=\(currency.rawValue)&days=\(days)") else {
              fatalError("Wrong URL to get Top Market Coins")
         }
         subscription = DownloadManager.downloadFrom(url: url)

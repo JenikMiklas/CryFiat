@@ -39,7 +39,7 @@ class ChartVM: ObservableObject {
         }
     }
     
-    func getChartData(coin: String, currency: Currency) {
-        chartDataService.getChartData(coin: coin, currency: currency)
+    func getChartData(coin: String, currency: Currency, days: String) {
+        chartDataService.getChartData(coin: coin, currency: currency, days: days)
      }
 }

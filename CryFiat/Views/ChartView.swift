@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct ChartView: View {
-    @StateObject var chartVM = ChartVM()
+    @StateObject var chartVM: ChartVM
     let coin: CoinsTokenMarket
     let currency: Currency
     @State private var lastUpdate: Date = Date()
     @State private var startDate: Date = Date ()
+    @State private var days: String = "7"
     
     init(coin: CoinsTokenMarket, currency: Currency) {
         self.coin = coin
         self.currency = currency
+        self._chartVM = StateObject(wrappedValue: ChartVM())
     }
     
     var body: some View {
@@ -33,9 +35,11 @@ struct ChartView: View {
         }
         .onAppear {
             chartVM.chartData = []
-            chartVM.getChartData(coin: coin.id, currency: currency)
+            chartVM.getChartData(coin: coin.id, currency: currency, days: days)
             lastUpdate = Date().dateFrom(string: coin.lastUpdated ?? "")
-            startDate = lastUpdate.addingTimeInterval(-7*24*3600)
+            if let day = Double(days) {
+                startDate = lastUpdate.addingTimeInterval(-day*24*3600)
+            }
         }
     }
 }
