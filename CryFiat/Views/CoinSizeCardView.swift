@@ -31,7 +31,7 @@ struct CoinSizeCardView: View {
                             Rectangle().frame(width: 10, height: 5)
                             Rectangle().frame(width: 20, height: 5)
                         }
-                        .frame(width: 90/2, height: 100/2)
+                        .frame(width: CoinCardSize.small.rawValue/2, height: 100/2)
                         .padding(9)
                         .border(Color.secondary, width: 1).cornerRadius(5)
                     })
@@ -58,7 +58,7 @@ struct CoinSizeCardView: View {
                             Rectangle().frame(width: 30, height: 5)
                         }
                             
-                        .frame(width: 135/2, height: 150/2)
+                        .frame(width: CoinCardSize.medium.rawValue/2, height: 150/2)
                         .padding(3)
                         .border(Color.secondary, width: 1).cornerRadius(5)
                     })
@@ -100,7 +100,7 @@ struct CoinSizeCardView: View {
                             .padding([.top, .leading,. trailing], 8)
                             Spacer()
                         }
-                        .frame(width: 320/2, height: 200/2)
+                        .frame(width: CoinCardSize.large.rawValue/2, height: 200/2)
                         .border(Color.secondary, width: 1).cornerRadius(5)
                     })
                 }

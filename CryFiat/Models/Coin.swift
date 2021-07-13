@@ -11,7 +11,7 @@ import SwiftUI
 enum CoinCardSize: CGFloat {
     case small = 90
     case medium = 135
-    case large = 320
+    case large = 290
 }
 
 enum Currency: String, Codable, CaseIterable {
