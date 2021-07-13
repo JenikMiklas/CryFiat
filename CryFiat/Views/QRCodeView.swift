@@ -14,10 +14,13 @@ struct QRCodeView: View {
     private let context = CIContext()
     private let filter = CIFilter.qrCodeGenerator()
     var body: some View {
-        Image(uiImage: generateQRCode(from: "\(address)"))
-            .interpolation(.none)
-            .resizable()
-            .scaledToFit()
+        VStack {
+            Text(address).foregroundColor(.secondary).font(.caption)
+            Image(uiImage: generateQRCode(from: "\(address)"))
+                .interpolation(.none)
+                .resizable()
+                .scaledToFit()
+        }.padding([.leading, .trailing])
     }
     
    private func generateQRCode(from string: String) -> UIImage {

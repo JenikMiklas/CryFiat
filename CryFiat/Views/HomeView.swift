@@ -14,6 +14,7 @@ struct HomeView: View {
     @State private var updateCoinList = false
     @State private var amountEditing = false
     @State private var priceEditing = false
+    @State private var addressOnly = false
     
     init() {
         UINavigationBar.appearance().tintColor = UIColor(Color.primary)
@@ -45,7 +46,7 @@ struct HomeView: View {
                             Spacer()
                         }
                         coinAddress
-                        QRCodeView(address: $homeVM.qrAddress)
+                        QRCodeView(address: addressOnly ? $homeVM.address : $homeVM.qrAddress)
                             .frame(minWidth: 100, idealWidth: 300, maxWidth: 600, minHeight: 100, idealHeight: 300, maxHeight: 600, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         
                     }
@@ -204,6 +205,9 @@ extension HomeView {
                     }
                 }
             }
+            Toggle(isOn: $addressOnly, label: {
+                Text("generate address only")
+            })
         }.padding([.leading, .trailing])
     }
 }
