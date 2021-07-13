@@ -31,6 +31,7 @@
 		7F798CAC267A3D35001DD404 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F798CAB267A3D35001DD404 /* Assets.xcassets */; };
 		7F7AF44E2684B11600001925 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7AF44D2684B11500001925 /* ChartView.swift */; };
 		7F7AF4502684DC5800001925 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7AF44F2684DC5800001925 /* Date+Extension.swift */; };
+		7F7D3C33269DA8FD0062CB42 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7D3C32269DA8FD0062CB42 /* QRCodeView.swift */; };
 		7F7F4803269C86500030FE90 /* ChartDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7F4802269C86500030FE90 /* ChartDataService.swift */; };
 		7F7F4805269C87000030FE90 /* ChartVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7F4804269C87000030FE90 /* ChartVM.swift */; };
 		7F7FBA6F268A341700367917 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7FBA6E268A341700367917 /* Int+Extension.swift */; };
@@ -68,6 +69,7 @@
 		7F798CAB267A3D35001DD404 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F7AF44D2684B11500001925 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7F7AF44F2684DC5800001925 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		7F7D3C32269DA8FD0062CB42 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		7F7F4802269C86500030FE90 /* ChartDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataService.swift; sourceTree = "<group>"; };
 		7F7F4804269C87000030FE90 /* ChartVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartVM.swift; sourceTree = "<group>"; };
 		7F7FBA6E268A341700367917 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				7F7865FA26792C8E00D74C1D /* CoinSizeCardView.swift */,
 				7F86942E2680DE2900A1FBAA /* AddCoinView.swift */,
 				7F049615267E14ED0045A6FB /* HomeView.swift */,
+				7F7D3C32269DA8FD0062CB42 /* QRCodeView.swift */,
 				7F8929BB268B7AF000CA5622 /* CoinDetailView.swift */,
 				7F830B3426836C8500F247BF /* SelectCurrencyView.swift */,
 				7F7AF44D2684B11500001925 /* ChartView.swift */,
@@ -289,6 +292,7 @@
 				7F6CE3F026769E08006E3FD2 /* FileService.swift in Sources */,
 				7F7F4805269C87000030FE90 /* ChartVM.swift in Sources */,
 				7F782F1326579EC700A358D2 /* CryFiatApp.swift in Sources */,
+				7F7D3C33269DA8FD0062CB42 /* QRCodeView.swift in Sources */,
 				7F7865FB26792C8E00D74C1D /* CoinSizeCardView.swift in Sources */,
 				7F7876B42674DB5E00A2C54F /* DownloadService.swift in Sources */,
 				7F8929BC268B7AF000CA5622 /* CoinDetailView.swift in Sources */,
