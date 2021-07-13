@@ -120,6 +120,16 @@ class HomeVM: ObservableObject {
     //"ripple:rUwYKnpcDr9PLfE9DzZ6r8P3qpKbqv4SyA?amount=10&message=New house"
     private func qrAddress(address: String, amount: String) -> String {
         if let coin = selectedCoin {
+            if coin.id.contains("-") {
+                var coindID = coin.id
+                for char in coin.id {
+                    if char == "-" {
+                        let index = coindID.firstIndex(of: char)!
+                        coindID.remove(at: index)
+                    }
+                }
+                return coindID + ":" + address + "?amount=" + amount
+            }
             return coin.id + ":" + address + "?amount=" + amount
         }
         return ""
@@ -136,6 +146,5 @@ class HomeVM: ObservableObject {
         let dAmount = (Double(price) ?? 1) / selectedCoin!.currentPrice
         amount = dAmount.priceFormat()
         qrAddress = qrAddress(address: address, amount: amount)
-        print(qrAddress)
     }
 }
