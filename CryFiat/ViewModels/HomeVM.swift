@@ -137,14 +137,14 @@ class HomeVM: ObservableObject {
     
     func updatePrice(amount: String) {
         let dPrice = (Double(amount) ?? 1) * selectedCoin!.currentPrice
-        price = dPrice.priceFormat()
+        price = (round(dPrice*100)/100).priceFormat()
         qrAddress = qrAddress(address: address, amount: amount)
         print(qrAddress)
     }
     
     func updateAmount(price: String) {
         let dAmount = (Double(price) ?? 1) / selectedCoin!.currentPrice
-        amount = dAmount.priceFormat()
+        amount = dAmount.priceCoinFormat()
         qrAddress = qrAddress(address: address, amount: amount)
     }
 }

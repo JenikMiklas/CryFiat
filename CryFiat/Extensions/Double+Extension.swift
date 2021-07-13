@@ -79,6 +79,10 @@ extension Double {
     }
     
     func priceFormat() -> String {
-        return String(format: "%.6f", self)
+        return String(format: "%.2f", self)
+    }
+    
+    func priceCoinFormat() -> String {
+        return String(format: "%.8f", self)
     }
 }
