@@ -25,8 +25,8 @@
 "locPricePercent" = "Preisänderung %";
 "locLow" = "Niedrig";
 "locHigh" = "Hoch";
-"locMarketCapChange" = "Änderung der Marktkapitalisierung";
-"locMarketCapChangePerc" = "Änderung der Marktkapitalisierung %";
+"locMarketCapChange" = "Marktkapitalisierung";
+"locMarketCapChangePerc" = "Marktkapitalisierung %";
 "locSupply" = "Liefern";
 "locCircul" = "Umlauf";
 "locTotal" = "Gesamt";
