@@ -178,13 +178,17 @@ extension HomeView {
                     TextField("", text: $homeVM.amount) { changed in
                         amountEditing = changed
                     }
-                    .keyboardType(.numbersAndPunctuation)
+                    .keyboardType(.decimalPad)
                     .padding()
                     .background(Color.secondary.opacity(0.2))
                     .cornerRadius(10)
                     .onChange(of: homeVM.amount, perform: { value in
-                        if amountEditing {
-                            homeVM.updatePrice(amount: value)
+                        if value.contains(",") {
+                            homeVM.amount = value.replacingOccurrences(of: ",", with: ".")
+                        } else {
+                            if amountEditing {
+                                homeVM.updatePrice(amount: value)
+                            }
                         }
                     })
                 }
@@ -195,13 +199,17 @@ extension HomeView {
                     TextField("", text: $homeVM.price) { changed in
                             priceEditing = changed
                         }
-                    .keyboardType(.numbersAndPunctuation)
+                    .keyboardType(.decimalPad)
                         .padding()
                         .background(Color.secondary.opacity(0.2))
                         .cornerRadius(10)
                         .onChange(of: homeVM.price, perform: { value in
-                            if priceEditing {
-                                homeVM.updateAmount(price: value)
+                            if value.contains(",") {
+                                homeVM.price = value.replacingOccurrences(of: ",", with: ".")
+                            } else {
+                                if priceEditing {
+                                    homeVM.updateAmount(price: value)
+                                }
                             }
                     })
                     }

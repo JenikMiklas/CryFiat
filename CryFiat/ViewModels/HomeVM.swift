@@ -16,7 +16,7 @@ class HomeVM: ObservableObject {
     @Published var selectedCoin: CoinsTokenMarket? {
         didSet {
             if let coin = selectedCoin {
-                price = String(coin.currentPrice * (Double(amount) ?? 1))
+                price = String(round(coin.currentPrice * (Double(amount) ?? 1)*100)/100)
                 address = getAddress()
             }
         }
@@ -142,7 +142,6 @@ class HomeVM: ObservableObject {
         let dPrice = (Double(amount) ?? 1) * selectedCoin!.currentPrice
         price = (round(dPrice*100)/100).priceFormat()
         qrAddress = qrAddress(address: address, amount: amount)
-        print(qrAddress)
     }
     
     func updateAmount(price: String) {
