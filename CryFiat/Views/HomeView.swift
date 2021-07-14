@@ -24,34 +24,39 @@ struct HomeView: View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    coinList
-                    Divider()
-                    if let coin = homeVM.selectedCoin {
-                        HStack {
-                            NavigationLink(
-                                destination: CoinDetailView(coin: coin, currency: homeVM.selectedCurrency),
-                                label: {
-                                    VStack(alignment: .leading) {
-                                        Text(coin.name)
-                                            .font(.title)
-                                        Text("\(coin.symbol.uppercased()) detail")
-                                            .padding()
-                                            .font(.headline)
-                                            .background(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(lineWidth: 2)
-                                                    .foregroundColor(.secondary)
-                                            )
-                                    }.padding().foregroundColor(.primary)
-                                })
-                            Spacer()
-                        }
-                        coinAddress
-                        QRCodeView(address: addressOnly ? $homeVM.address : $homeVM.qrAddress)
-                            .frame(minWidth: 100, idealWidth: 300, maxWidth: 600, minHeight: 100, idealHeight: 300, maxHeight: 600, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        
+                    if homeVM.selectedCoins.isEmpty {
+                        addCoins
                     }
-                    Spacer()
+                    else {
+                        coinList
+                        Divider()
+                        if let coin = homeVM.selectedCoin {
+                            HStack {
+                                NavigationLink(
+                                    destination: CoinDetailView(coin: coin, currency: homeVM.selectedCurrency),
+                                    label: {
+                                        VStack(alignment: .leading) {
+                                            Text(coin.name)
+                                                .font(.title)
+                                            Text("\(coin.symbol.uppercased()) detail")
+                                                .padding()
+                                                .font(.headline)
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(lineWidth: 2)
+                                                        .foregroundColor(.secondary)
+                                                )
+                                        }.padding().foregroundColor(.primary)
+                                    })
+                                Spacer()
+                            }
+                            coinAddress
+                            QRCodeView(address: addressOnly ? $homeVM.address : $homeVM.qrAddress)
+                                .frame(minWidth: 100, idealWidth: 300, maxWidth: 600, minHeight: 100, idealHeight: 300, maxHeight: 600, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            
+                        }
+                        Spacer()
+                    }
                 }
                 .navigationTitle("CryFiat")
                 .toolbar {
@@ -61,19 +66,19 @@ struct HomeView: View {
                                 destination:
                                     SelectCurrencyView(homeVM: homeVM),
                                 label: {
-                                    Button(action: {  }, label: {
-                                        Text(homeVM.selectedCurrency.rawValue.uppercased())
-                                    })
+                                    Text(homeVM.selectedCurrency.rawValue.uppercased())
                                 })
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
-                            NavigationLink(
-                                destination: CoinSelectionView(currency: homeVM.storedCurrency),
-                                label: {
-                                    Image(systemName: "plus.circle")
-                            })
+                            if !homeVM.selectedCoins.isEmpty {
+                                NavigationLink(
+                                    destination: CoinSelectionView(currency: homeVM.storedCurrency),
+                                    label: {
+                                        Image(systemName: "plus.circle")
+                                })
+                            }
                         }
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -219,5 +224,19 @@ extension HomeView {
                 Text("locAddressOnly").font(.callout)
             })
         }.padding([.leading, .trailing])
+    }
+    
+    private var addCoins: some View {
+        NavigationLink(
+            destination: CoinSelectionView(currency: homeVM.storedCurrency),
+            label: {
+                VStack {
+                    Image(systemName: "plus.circle")
+                        .resizable()
+                        .frame(width: 75, height: 75)
+                        .foregroundColor(.secondary)
+                    Text("locAdd").foregroundColor(.secondary).font(.title2)
+                }
+            })
     }
 }
