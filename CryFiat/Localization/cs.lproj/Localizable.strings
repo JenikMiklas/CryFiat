@@ -34,3 +34,8 @@
 "locHighDate" = "Datum maxima";
 "locLowDate" = "Datum minima";
 "locAdd" = "Přidat tokeny";
+"locWeek" = "týden";
+"loc2Weeks" = "2 týdny";
+"locMonth" = "měsíc";
+"loc3Month" = "3 měsíce";
+"locYear" = "rok";

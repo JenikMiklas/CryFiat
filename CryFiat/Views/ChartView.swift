@@ -119,14 +119,16 @@ extension ChartView {
         Picker("Range", selection: $days) {
             ForEach(Days.allCases, id: \.self) {
                 switch $0 {
-                case .week, .twoWeeks:
-                    Text($0.rawValue) + Text(" d")
+                case .week:
+                    Text("locWeek")
+                case .twoWeeks:
+                    Text("loc2Weeks")
                 case .month:
-                    Text("1 m")
+                    Text("locMonth")
                 case .threeMonths:
-                   Text("3 m")
+                   Text("loc3Month")
                 case .year:
-                    Text("1 y")
+                    Text("locYear")
                 }
             }
         }.pickerStyle(SegmentedPickerStyle()).padding([.leading, .trailing, .top])

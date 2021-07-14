@@ -34,3 +34,8 @@
 "locHighDate" = "Hohes Datum";
 "locLowDate" = "Niedriges Datum";
 "locAdd" = "Füge Münzen hinzu";
+"locWeek" = "Woche";
+"loc2Weeks" = "2 Wochen";
+"locMonth" = "Monat";
+"loc3Month" = "3 Monate";
+"locYear" = "Jahr";
