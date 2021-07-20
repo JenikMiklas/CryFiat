@@ -39,6 +39,7 @@
 		7F830B3526836C8500F247BF /* SelectCurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F830B3426836C8500F247BF /* SelectCurrencyView.swift */; };
 		7F86942F2680DE2900A1FBAA /* AddCoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F86942E2680DE2900A1FBAA /* AddCoinView.swift */; };
 		7F8929BC268B7AF000CA5622 /* CoinDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8929BB268B7AF000CA5622 /* CoinDetailView.swift */; };
+		7FDB5A9B26A6CFDA006A20DF /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDB5A9A26A6CFDA006A20DF /* LaunchView.swift */; };
 		7FF2B29F269DEFB30057F79B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7FF2B2A1269DEFB30057F79B /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		7F830B3426836C8500F247BF /* SelectCurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyView.swift; sourceTree = "<group>"; };
 		7F86942E2680DE2900A1FBAA /* AddCoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoinView.swift; sourceTree = "<group>"; };
 		7F8929BB268B7AF000CA5622 /* CoinDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailView.swift; sourceTree = "<group>"; };
+		7FDB5A9A26A6CFDA006A20DF /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		7FF2B2A0269DEFB30057F79B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7FF2B2A2269DF00E0057F79B /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,6 +181,7 @@
 				7F8929BB268B7AF000CA5622 /* CoinDetailView.swift */,
 				7F830B3426836C8500F247BF /* SelectCurrencyView.swift */,
 				7F7AF44D2684B11500001925 /* ChartView.swift */,
+				7FDB5A9A26A6CFDA006A20DF /* LaunchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				7F049616267E14ED0045A6FB /* HomeView.swift in Sources */,
 				7F7876B22674C99900A2C54F /* CoinMarketService.swift in Sources */,
 				7F6967E5267782DC0038E896 /* Coin.swift in Sources */,
+				7FDB5A9B26A6CFDA006A20DF /* LaunchView.swift in Sources */,
 				7F7876B92674FB1D00A2C54F /* CoinImageView.swift in Sources */,
 				7F7876C126750AFF00A2C54F /* PreviewVM.swift in Sources */,
 				7F830B3526836C8500F247BF /* SelectCurrencyView.swift in Sources */,
