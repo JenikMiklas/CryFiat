@@ -15,93 +15,103 @@ struct HomeView: View {
     @State private var amountEditing = false
     @State private var priceEditing = false
     @State private var addressOnly = false
+    @State private var showLaunchView = true
     
     init() {
         UINavigationBar.appearance().tintColor = UIColor(Color.primary)
     }
     
     var body: some View {
-        NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack {
-                    if homeVM.selectedCoins.isEmpty {
-                        addCoins
+        ZStack {
+            NavigationView {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack {
+                        if homeVM.selectedCoins.isEmpty {
+                            addCoins
+                        }
+                        else {
+                            coinList
+                            Divider()
+                            if let coin = homeVM.selectedCoin {
+                                HStack {
+                                    NavigationLink(
+                                        destination: CoinDetailView(coin: coin, currency: homeVM.selectedCurrency),
+                                        label: {
+                                            VStack(alignment: .leading) {
+                                                Text(coin.name)
+                                                    .font(.title)
+                                                Text("\(coin.symbol.uppercased()) detail")
+                                                    .padding()
+                                                    .font(.headline)
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .stroke(lineWidth: 2)
+                                                            .foregroundColor(.secondary)
+                                                    )
+                                            }.padding().foregroundColor(.primary)
+                                        })
+                                    Spacer()
+                                }
+                                coinAddress
+                                QRCodeView(address: addressOnly ? $homeVM.address : $homeVM.qrAddress)
+                                    .frame(minWidth: 100, idealWidth: 300, maxWidth: 600, minHeight: 100, idealHeight: 300, maxHeight: 600, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                
+                            }
+                            Spacer()
+                        }
                     }
-                    else {
-                        coinList
-                        Divider()
-                        if let coin = homeVM.selectedCoin {
+                    .navigationTitle("CryFiat")
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
                             HStack {
                                 NavigationLink(
-                                    destination: CoinDetailView(coin: coin, currency: homeVM.selectedCurrency),
+                                    destination:
+                                        SelectCurrencyView(homeVM: homeVM),
                                     label: {
-                                        VStack(alignment: .leading) {
-                                            Text(coin.name)
-                                                .font(.title)
-                                            Text("\(coin.symbol.uppercased()) detail")
-                                                .padding()
-                                                .font(.headline)
-                                                .background(
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .stroke(lineWidth: 2)
-                                                        .foregroundColor(.secondary)
-                                                )
-                                        }.padding().foregroundColor(.primary)
+                                        Text(homeVM.selectedCurrency.rawValue.uppercased())
                                     })
-                                Spacer()
                             }
-                            coinAddress
-                            QRCodeView(address: addressOnly ? $homeVM.address : $homeVM.qrAddress)
-                                .frame(minWidth: 100, idealWidth: 300, maxWidth: 600, minHeight: 100, idealHeight: 300, maxHeight: 600, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            
                         }
-                        Spacer()
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            HStack {
+                                if !homeVM.selectedCoins.isEmpty {
+                                    NavigationLink(
+                                        destination: CoinSelectionView(currency: homeVM.storedCurrency),
+                                        label: {
+                                            Image(systemName: "plus.circle")
+                                    })
+                                }
+                            }
+                        }
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            if !homeVM.userCoins.isEmpty {
+                            Button(action: {
+                                withAnimation {
+                                    updateCoinList.toggle()
+                                }
+                            }, label: {
+                                if !updateCoinList {
+                                    Image(systemName: "trash.circle")
+                                } else {
+                                    Image(systemName: "xmark.circle")
+                                }
+                            })
+                        }
+                        }
+                }
+                    .onTapGesture {
+                        UIApplication.shared.hideKeyboard()
                     }
                 }
-                .navigationTitle("CryFiat")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack {
-                            NavigationLink(
-                                destination:
-                                    SelectCurrencyView(homeVM: homeVM),
-                                label: {
-                                    Text(homeVM.selectedCurrency.rawValue.uppercased())
-                                })
-                        }
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack {
-                            if !homeVM.selectedCoins.isEmpty {
-                                NavigationLink(
-                                    destination: CoinSelectionView(currency: homeVM.storedCurrency),
-                                    label: {
-                                        Image(systemName: "plus.circle")
-                                })
-                            }
-                        }
-                    }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        if !homeVM.userCoins.isEmpty {
-                        Button(action: {
-                            withAnimation {
-                                updateCoinList.toggle()
-                            }
-                        }, label: {
-                            if !updateCoinList {
-                                Image(systemName: "trash.circle")
-                            } else {
-                                Image(systemName: "xmark.circle")
-                            }
-                        })
-                    }
-                    }
             }
-                .onTapGesture {
-                    UIApplication.shared.hideKeyboard()
+            .navigationViewStyle(StackNavigationViewStyle())
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    self.showLaunchView.toggle()
                 }
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+            if showLaunchView { LaunchView() }
+        }
     }
 }
 

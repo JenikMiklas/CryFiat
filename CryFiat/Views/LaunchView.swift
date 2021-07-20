@@ -13,22 +13,20 @@ struct LaunchView: View {
             Image("launchscreen")
                 .resizable()
                 .scaledToFit()
-            HStack {
-                Spacer()
+            VStack(alignment: .trailing, spacing: -20) {
                 Text("Powered by")
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    .padding(.trailing)
-            }.offset(y:30)
-            HStack {
-                Image("coingecko")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                Text("CoinGecko")
-                    .font(.system(size: 50, weight: .semibold, design: .default))
+                    .font(.system(size: 20, weight: .regular, design: .default))
+                HStack {
+                    Image("coingecko")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                    Text("CoinGecko")
+                        .font(.system(size: 40, weight: .semibold, design: .default))
+                }
             }
         }
         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-        .background(Color.secondary.opacity(0.5))
+        .background(Color.gray)
         .ignoresSafeArea()
     }
 }
@@ -36,6 +34,7 @@ struct LaunchView: View {
 struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
         LaunchView()
+            
             
     }
 }
