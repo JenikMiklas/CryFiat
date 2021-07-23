@@ -60,7 +60,7 @@ struct HomeView: View {
                             Spacer()
                         }
                     }
-                    .navigationTitle("CryFiat")
+                    .navigationTitle("MoneyCry")
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             HStack {
